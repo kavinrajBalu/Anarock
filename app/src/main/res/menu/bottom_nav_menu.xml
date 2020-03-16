@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:icon="@android:drawable/btn_star_big_on"
+        android:id="@+id/eventFragement"
+        android:title="Event" />
+    <item
+        android:icon="@drawable/ic_launcher_foreground"
+        android:id="@+id/cpFragment"
+        android:title="CP's" />
+    <item
+        android:icon="@android:drawable/ic_popup_reminder"
+        android:id="@+id/notification"
+        android:title="Notification" />
+    <item
+        android:icon="@android:drawable/ic_menu_more"
+        android:id="@+id/moreFragment"
+        android:title="More" />
+</menu>

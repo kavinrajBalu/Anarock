@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation_graph"
+    app:startDestination="@id/eventFragement">
+
+    <fragment
+        android:id="@+id/eventFragement"
+        android:name="com.anarock.cpsourcing.fragments.EventFragement"
+        android:label="fragement_event"
+        tools:layout="@layout/fragement_event">
+        <action
+            android:id="@+id/action_eventFragement_to_loginNavigation"
+            app:destination="@id/loginNavigation"
+            app:launchSingleTop="false"
+            app:popUpToInclusive="false" />
+        <deepLink
+            android:id="@+id/deepLink4"
+            app:uri="https://www.appAnarock.com/event" />
+    </fragment>
+    <fragment
+        android:id="@+id/cpFragment"
+        android:name="com.anarock.cpsourcing.fragments.CpFragment"
+        android:label="CPFragment"
+        tools:layout="@layout/fragment_cp">
+        <deepLink
+            android:id="@+id/deepLink"
+            app:uri="https://www.appAnarock.com/cp" />
+    </fragment>
+    <fragment
+        android:id="@+id/notification"
+        android:name="com.anarock.cpsourcing.fragments.Notification"
+        android:label="Nottification"
+        tools:layout="@layout/fragment_notification">
+        <deepLink
+            android:id="@+id/deepLink2"
+            app:uri="https://www.appAnarock.com/notification" />
+    </fragment>
+    <fragment
+        android:id="@+id/moreFragment"
+        android:name="com.anarock.cpsourcing.fragments.MoreFragment"
+        android:label="MoreFragment"
+        tools:layout="@layout/fragment_more">
+        <deepLink
+            android:id="@+id/deepLink3"
+            app:uri="https://www.appAnarock.com/more" />
+    </fragment>
+    <navigation
+        android:id="@+id/loginNavigation"
+        app:startDestination="@id/companyCode" >
+        <fragment
+            android:id="@+id/companyCode"
+            android:name="com.anarock.cpsourcing.fragments.CompanyCode"
+            android:label="CompanyCode"
+            tools:layout="@layout/fragment_company_code">
+            <action
+                android:id="@+id/action_companyCode_to_loginFragment"
+                app:destination="@id/loginFragment"
+                app:enterAnim="@android:anim/slide_in_left" />
+        </fragment>
+        <fragment
+            android:id="@+id/loginFragment"
+            android:name="com.anarock.cpsourcing.fragments.LoginFragment"
+            android:label="LoginFragment"
+            tools:layout="@layout/fragment_login">
+            <action
+                android:id="@+id/action_loginFragment_to_otpFragment"
+                app:destination="@id/otpFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/otpFragment"
+            android:name="com.anarock.cpsourcing.fragments.OtpFragment"
+            android:label="OTPFragment"
+            tools:layout="@layout/fragment_otp" />
+        <action
+            android:id="@+id/action_global_eventFragement"
+            app:destination="@id/eventFragement"
+            app:popUpTo="@id/main_navigation_graph"
+            app:popUpToInclusive="true" />
+    </navigation>
+</navigation>
