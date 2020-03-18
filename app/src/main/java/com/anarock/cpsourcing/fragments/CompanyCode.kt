@@ -40,7 +40,7 @@ class CompanyCode : Fragment() {
         // Inflate the layout for this fragment
         val binding : FragmentCompanyCodeBinding =  DataBindingUtil.inflate(inflater,R.layout.fragment_company_code,container,false)
 
-        binding.toLogin.setOnClickListener {
+        binding.nextImageButton.setOnClickListener {
             findNavController().navigate(R.id.action_companyCode_to_loginFragment)
         }
 

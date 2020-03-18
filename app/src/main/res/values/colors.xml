@@ -3,4 +3,10 @@
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
+    <color name="ccTitleColor">#334254</color>
+    <color name="login_editext_bg_color">#F7F8F9</color>
+    <color name="cc_subTitle_color">#8F9AA5</color>
+    <color name="cc_editText_hint_color">#AFB7BF</color>
+    <color name="next_button_color_blue">#143FFF</color>
+    <color name="view_separator_grey">#CFD4D9</color>
 </resources>

@@ -67,6 +67,9 @@
             <action
                 android:id="@+id/action_loginFragment_to_otpFragment"
                 app:destination="@id/otpFragment" />
+            <action
+                android:id="@+id/action_loginFragment_to_companyCode"
+                app:destination="@id/companyCode" />
         </fragment>
         <fragment
             android:id="@+id/otpFragment"

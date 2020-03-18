@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.Spinner
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -48,6 +50,24 @@ class LoginFragment : Fragment() {
         binding.login.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_otpFragment)
         }
+
+        val spinner: Spinner = binding.countryCodeSpinner
+// Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter.createFromResource(
+            requireContext(),
+            R.array.country_code_array,
+            android.R.layout.simple_spinner_item
+        ).also { adapter ->
+            // Specify the layout to use when the list of choices appears
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            // Apply the adapter to the spinner
+            spinner.adapter = adapter
+        }
+
+        binding.loginEditButton.setOnClickListener {
+            findNavController().navigate(R.id.action_loginFragment_to_companyCode)
+        }
+
         return binding.root
     }
 

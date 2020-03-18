@@ -1,9 +1,27 @@
 package com.anarock.cpsourcing.retrofit
 
+import com.anarock.cpsourcing.model.LoginResponseModel
+import com.anarock.cpsourcing.model.TenantDomainResponseModel
+import retrofit2.Call
+import retrofit2.http.Field
+import retrofit2.http.FormUrlEncoded
+import retrofit2.http.GET
+import retrofit2.http.POST
+
 interface ApiService
 {
-    //TODO: use the commented lines for reference
-   /* @GET("categories/")
+
+    @GET("tenant-config/")
+    fun getTenantDomain(@Field("tenant_name") tenant_name:String):Call<TenantDomainResponseModel>
+
+    @POST("api-token-auth/")
+    @FormUrlEncoded
+    fun loginUser(@Field("username") username:String,
+                  @Field("password") password:String): Call<LoginResponseModel>
+
+
+
+    /* @GET("categories/")
     fun getCategory(): Call<ArrayList<Category>>
 
     @POST("_search/")
@@ -24,10 +42,7 @@ interface ApiService
                @Field("isServiceProvider") isServiceProvider:Boolean,
                @Field("verifiedToken") verifiedToken:String):Call<SearchResult>
 
-    @POST("api-token-auth/")
-    @FormUrlEncoded
-    fun loginUser(@Field("username") username:String,
-              @Field("password") password:String):Call<LoginResponseModel>
+
 
     @POST("change-password/")
     fun reserPassword(@Field("verificationToken") verificationToken:String,

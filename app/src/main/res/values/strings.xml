@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">Anarock</string>
+    <string name="glad_to_see_you">Glad \nto see you!</string>
+    <string name="enter_your_company_code">Please enter your \ncompany code and continue.</string>
+    <string name="enter_company_code_here">Enter company code here</string>
+    <string name="get_support_text">Trouble logging in? <font color = "#3700B3">Get support</font></string>
+    <string name="enter_a_valid_phone_number">Please enter a valid phone \nnumber to continue.</string>
+
+    <string-array name="country_code_array">
+        <item>+91</item>
+        <item>+971</item>
+        <item>+61</item>
+        <item>+93</item>
+        <item>+49</item>
+    </string-array>
 </resources>

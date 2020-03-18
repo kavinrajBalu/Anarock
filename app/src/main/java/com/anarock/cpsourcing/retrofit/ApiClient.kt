@@ -8,7 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 class ApiClient {
     companion object {
         //TODO : Change end points to anarock.
-        private val BASE_URL = "http://tradenapp-env.us-east-1.elasticbeanstalk.com/api"
+        private val BASE_URL = "https://meta.anarock.com/api/v0/"
         private val API_VERSION = "/v1/"
         private  var retrofit: Retrofit? = null
         private fun getClient(): Retrofit? {
