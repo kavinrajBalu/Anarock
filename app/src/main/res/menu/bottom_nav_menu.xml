@@ -3,19 +3,19 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:icon="@android:drawable/btn_star_big_on"
+        android:icon="@drawable/ic_calendar"
         android:id="@+id/eventFragement"
         android:title="Event" />
     <item
-        android:icon="@drawable/ic_launcher_foreground"
+        android:icon="@drawable/ic_cpsgrey"
         android:id="@+id/cpFragment"
         android:title="CP's" />
     <item
-        android:icon="@android:drawable/ic_popup_reminder"
+        android:icon="@drawable/ic_bell_grey"
         android:id="@+id/notification"
         android:title="Notification" />
     <item
-        android:icon="@android:drawable/ic_menu_more"
+        android:icon="@drawable/ic_more"
         android:id="@+id/moreFragment"
         android:title="More" />
 </menu>

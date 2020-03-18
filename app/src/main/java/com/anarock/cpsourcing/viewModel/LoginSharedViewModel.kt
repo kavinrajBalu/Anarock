@@ -18,7 +18,7 @@ class LoginSharedViewModel : ViewModel()
 
      init {
 
-         loginState.value = LoginState.LOGIN_FAILED
+         loginState.value = LoginState.LOGIN_SUCCESS
      }
 
      fun  setBottomNavigationVisibility(state : Boolean)
