@@ -32,7 +32,7 @@ class LoginRepository(private val mContext: Context?){
                     response: Response<TenantDomainResponseModel>
                 ) {
                     if (response.code() === 200) {
-                        val loginResponseModel: TenantDomainResponseModel? = response.body()
+                        val tenantDomainResponseModel: TenantDomainResponseModel? = response.body()
                         /*     PreferenceUtil.getInstance(mContext!!).putString(AUTHORIZATION_KEY,loginResponseModel!!.authToken)
                     PreferenceUtil.getInstance(mContext).putString(USER_ID,loginResponseModel.userId)*/
                         loginResponseStatus.responseStatus(LoginSharedViewModel.LoginState.LOGIN_SUCCESS)
