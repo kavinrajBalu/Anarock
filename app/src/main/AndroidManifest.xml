@@ -21,7 +21,7 @@
             </intent-filter>
         </activity>
         <service
-            android:name=".callHandler.SuccessOvrlay"
+            android:name=".callHandler.FailedCallOverlay"
             android:enabled="true"
             android:exported="false"/>
     </application>

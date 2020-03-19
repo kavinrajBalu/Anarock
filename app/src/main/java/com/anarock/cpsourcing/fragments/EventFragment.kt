@@ -19,7 +19,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.anarock.cpsourcing.R
 import com.anarock.cpsourcing.callHandler.CallStateListener
-import com.anarock.cpsourcing.callHandler.SuccessOvrlay
+import com.anarock.cpsourcing.callHandler.FailedCallOverlay
 import com.anarock.cpsourcing.databinding.FragementEventBinding
 import com.anarock.cpsourcing.interfaces.PhoneCallStatusCallBack
 import com.anarock.cpsourcing.utilities.CommonUtilities
@@ -58,10 +58,9 @@ class EventFragment : Fragment() {
 
         val telephonyManager = requireActivity().getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
 
+        getAllRequiredPermission()
 
         binding.callCp.setOnClickListener {
-
-            getAllRequiredPermission()
 
             CommonUtilities.makeCall(requireContext(),"8903653203")
 
@@ -74,7 +73,7 @@ class EventFragment : Fragment() {
                 override fun onCallFailed() {
                     telephonyManager.listen(callStateListener,PhoneStateListener.LISTEN_NONE)
                     Log.d(CLASS_NAME,"Call failed")
-                    requireActivity().startService(Intent(requireContext(), SuccessOvrlay::class.java))
+                    requireActivity().startService(Intent(requireContext(), FailedCallOverlay::class.java))
 
                 }
 
