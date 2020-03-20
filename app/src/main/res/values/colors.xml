@@ -9,4 +9,5 @@
     <color name="cc_editText_hint_color">#AFB7BF</color>
     <color name="next_button_color_blue">#143FFF</color>
     <color name="view_separator_grey">#CFD4D9</color>
+    <color name="red">#DB4E4E</color>
 </resources>

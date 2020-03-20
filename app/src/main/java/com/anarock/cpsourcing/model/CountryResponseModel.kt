@@ -3,8 +3,8 @@ package com.anarock.cpsourcing.model
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-class TenantDomainModel {
-    @SerializedName("domain")
+class CountryResponseModel{
+    @SerializedName("countries")
     @Expose
-    var domain: String = ""
+    var countries = ArrayList<CountryCodeModel>()
 }

@@ -1,25 +1,27 @@
 package com.anarock.cpsourcing.retrofit
 
+import com.anarock.cpsourcing.model.CountryResponseModel
 import com.anarock.cpsourcing.model.LoginResponseModel
+import com.anarock.cpsourcing.model.OtpResponseModel
 import com.anarock.cpsourcing.model.TenantDomainResponseModel
+import okhttp3.RequestBody
 import retrofit2.Call
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.GET
-import retrofit2.http.POST
+import retrofit2.http.*
 
 interface ApiService
 {
 
     @GET("tenant-config/")
-    fun getTenantDomain(@Field("tenant_name") tenant_name:String):Call<TenantDomainResponseModel>
+    fun getTenantDomain(@Query("tenant_name") tenant_name:String):Call<TenantDomainResponseModel>
 
-    @POST("api-token-auth/")
-    @FormUrlEncoded
-    fun loginUser(@Field("username") username:String,
-                  @Field("password") password:String): Call<LoginResponseModel>
+    @GET("countries/")
+    fun getCountryCodes():Call<CountryResponseModel>
 
+    @POST("send/otp")
+    fun loginUser(@Body requestBody: RequestBody): Call<LoginResponseModel>
 
+    @POST("verify/otp/")
+    fun verifyOtp(@Body requestBody: RequestBody):Call<OtpResponseModel>
 
     /* @GET("categories/")
     fun getCategory(): Call<ArrayList<Category>>

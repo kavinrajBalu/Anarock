@@ -7,6 +7,6 @@
         android:left="1dp"
         android:right="1dp"
         android:top="1dp" />
-    <solid android:color="@color/next_button_color_blue" />
-    <corners android:radius="32dp" />
+    <solid android:color="@color/login_editext_bg_color" />
+    <corners android:radius="10dp" />
 </shape>

@@ -1,17 +1,25 @@
 package com.anarock.cpsourcing.viewModel
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import com.anarock.cpsourcing.model.CountryResponseModel
+import com.anarock.cpsourcing.model.LoginResponseModel
+import com.anarock.cpsourcing.model.OtpResponseModel
+import com.anarock.cpsourcing.model.TenantDomainResponseModel
 import com.anarock.cpsourcing.repository.LoginRepository
+import com.google.gson.Gson
+import okhttp3.RequestBody
 
-class LoginSharedViewModel : ViewModel()
+class LoginSharedViewModel : AndroidViewModel
  {
+
+     public constructor(application: Application) : super(application)
 
      private var bottomNavigationVisibility : MutableLiveData<Boolean>  = MutableLiveData()
      private var loginState : MutableLiveData<LoginState>  = MutableLiveData()
      private var mLoginRepository: LoginRepository? = null
-
 
      enum class LoginState
      {
@@ -24,23 +32,27 @@ class LoginSharedViewModel : ViewModel()
          loginState.value = LoginState.LOGIN_FAILED
      }
 
-     private fun fetchTenantDomain() {
-             getLoginRepository().fetchTenantConfig("Anarock", object : LoginRepository.LoginResponseStatus {
-                     override fun responseStatus(loginstate: LoginState) {
-                         if (loginstate == LoginState.LOGIN_SUCCESS) {
-
-                         } else {
-
-                         }
-                     }
-                 })
+     fun fetchTenantDomain(tenantName : String) : LiveData<TenantDomainResponseModel>{
+           return LoginRepository.fetchTenantConfig(getApplication(), tenantName)
      }
 
+     fun fetchCountryCodes() : LiveData<CountryResponseModel>{
+         return LoginRepository.fetchCountryCodes(getApplication())
+     }
+
+     fun loginTriggerOTP(countryId: Int, phoneNo : String) : LiveData<LoginResponseModel>{
+         return LoginRepository.triggerOTP(getApplication(), countryId, phoneNo)
+     }
+
+     fun verifyOTP(otp: String, countryId: Int, phoneNo : String) : LiveData<OtpResponseModel>{
+         return LoginRepository.verifyOTP(getApplication(), countryId, phoneNo, otp)
+     }
 
      fun  setBottomNavigationVisibility(state : Boolean)
      {
         bottomNavigationVisibility.value = state
      }
+
 
      fun getBottomNavigationVisibility():LiveData<Boolean>
      {
@@ -55,12 +67,6 @@ class LoginSharedViewModel : ViewModel()
      fun getLoginState():LiveData<LoginState>
      {
          return loginState
-     }
-     private fun getLoginRepository(): LoginRepository {
-         if(mLoginRepository == null){
-             mLoginRepository = LoginRepository(mActivity!!.get())
-         }
-         return mLoginRepository as LoginRepository
      }
 
  }

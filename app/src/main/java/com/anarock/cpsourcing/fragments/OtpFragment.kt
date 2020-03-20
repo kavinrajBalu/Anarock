@@ -1,16 +1,25 @@
 package com.anarock.cpsourcing.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
+import android.widget.EditText
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.anarock.cpsourcing.R
 import com.anarock.cpsourcing.databinding.FragmentOtpBinding
+import com.anarock.cpsourcing.utilities.CommonUtilities
 import com.anarock.cpsourcing.viewModel.LoginSharedViewModel
+import com.google.android.material.snackbar.Snackbar
+import com.google.gson.JsonObject
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -23,10 +32,19 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class OtpFragment : Fragment() {
+    private var otp: String = ""
+    var phoneNo: String = ""
+    var countryId: Int = 0
+
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-    private val loginSharedViewModel : LoginSharedViewModel by activityViewModels()
+    private val loginSharedViewModel: LoginSharedViewModel by activityViewModels()
+    lateinit var mOTPOne: EditText
+    lateinit var mOTPTwo: EditText
+    lateinit var mOTPThree: EditText
+    lateinit var mOTPFour: EditText
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,14 +59,174 @@ class OtpFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val binding : FragmentOtpBinding = DataBindingUtil.inflate(inflater,
-            R.layout.fragment_otp,container,false)
-        binding.toEventPage.setOnClickListener {
-            findNavController().navigate(R.id.action_global_eventFragement)
-            loginSharedViewModel.setBottomNavigationVisibility(true)
-            loginSharedViewModel.setLoginState(LoginSharedViewModel.LoginState.LOGIN_SUCCESS)
+        val binding: FragmentOtpBinding = DataBindingUtil.inflate(
+            inflater,
+            R.layout.fragment_otp, container, false
+        )
+        mOTPOne = binding.otpOne
+        mOTPTwo = binding.otpTwo
+        mOTPThree = binding.otpThree
+        mOTPFour = binding.otpFour
+
+        phoneNo = arguments?.getString("phone")!!
+        countryId = arguments?.getInt("countryId")!!
+        binding.otpPhoneNo.text = phoneNo
+
+        binding.verifyOtpButton.setOnClickListener {
+            validateOTP()
+//            findNavController().navigate(R.id.action_global_eventFragement)
+//            loginSharedViewModel.setBottomNavigationVisibility(true)
+//            loginSharedViewModel.setLoginState(LoginSharedViewModel.LoginState.LOGIN_SUCCESS)
         }
+        binding.resendButton.setOnClickListener {
+            if (CommonUtilities.notnull(phoneNo)) {
+                loginSharedViewModel.loginTriggerOTP(countryId, phoneNo)
+                    .observe(viewLifecycleOwner, Observer {
+
+                    })
+            }
+        }
+
+        binding.otpEditButton.setOnClickListener {
+                        findNavController().navigate(R.id.action_otpFragment_to_loginFragment)
+        }
+
+
+        setUpOtpTextListeners()
+
         return binding.root
+    }
+
+    private fun setUpOtpTextListeners() {
+//        mOTPOne.requestFocus()
+        mOTPOne.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(
+                s: CharSequence,
+                start: Int,
+                count: Int,
+                after: Int
+            ) {
+            }
+
+            override fun onTextChanged(
+                s: CharSequence,
+                start: Int,
+                before: Int,
+                count: Int
+            ) {
+                if (count == 1) {
+                    mOTPTwo.requestFocus()
+                }
+            }
+
+            override fun afterTextChanged(s: Editable) {}
+        })
+        mOTPTwo.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(
+                s: CharSequence,
+                start: Int,
+                count: Int,
+                after: Int
+            ) {
+            }
+
+            override fun onTextChanged(
+                s: CharSequence,
+                start: Int,
+                before: Int,
+                count: Int
+            ) {
+                if (count == 1) {
+                    mOTPThree.requestFocus()
+                } else if (count == 0) {
+                    mOTPOne.requestFocus()
+                }
+            }
+
+            override fun afterTextChanged(s: Editable) {}
+        })
+        mOTPThree.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(
+                s: CharSequence,
+                start: Int,
+                count: Int,
+                after: Int
+            ) {
+            }
+
+            override fun onTextChanged(
+                s: CharSequence,
+                start: Int,
+                before: Int,
+                count: Int
+            ) {
+                if (count == 1) {
+                    mOTPFour.requestFocus()
+                } else if (count == 0) {
+                    mOTPTwo.requestFocus()
+                }
+            }
+
+            override fun afterTextChanged(s: Editable) {}
+        })
+        mOTPFour.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(
+                s: CharSequence,
+                start: Int,
+                count: Int,
+                after: Int
+            ) {
+            }
+
+            override fun onTextChanged(
+                s: CharSequence,
+                start: Int,
+                before: Int,
+                count: Int
+            ) {
+                if (count == 1) {
+                    validateOTP()
+                } else if (count == 0) {
+                    mOTPThree.requestFocus()
+                }
+            }
+
+            override fun afterTextChanged(s: Editable) {}
+        })
+    }
+
+    private fun validateOTP() {
+        mOTPOne.clearFocus()
+        mOTPTwo.clearFocus()
+        mOTPThree.clearFocus()
+        mOTPFour.clearFocus()
+        val one = mOTPOne.text.toString()
+        val two = mOTPTwo.text.toString()
+        val three = mOTPThree.text.toString()
+        val four = mOTPFour.text.toString()
+        val vibrate =
+            AnimationUtils.loadAnimation(context, R.anim.vibrate)
+        if (!CommonUtilities.notnull(one) || !CommonUtilities.notnull(two) || !CommonUtilities.notnull(
+                three
+            ) || !CommonUtilities.notnull(four)
+        ) {
+            mOTPOne.startAnimation(vibrate)
+            mOTPTwo.startAnimation(vibrate)
+            mOTPThree.startAnimation(vibrate)
+            mOTPFour.startAnimation(vibrate)
+        } else {
+            otp = one + two + three + four
+
+            if (CommonUtilities.notnull(otp)) {
+                loginSharedViewModel.verifyOTP(otp, countryId, phoneNo)
+                    .observe(viewLifecycleOwner, Observer {
+                        findNavController().navigate(R.id.action_global_eventFragement)
+                        loginSharedViewModel.setBottomNavigationVisibility(true)
+                        loginSharedViewModel.setLoginState(LoginSharedViewModel.LoginState.LOGIN_SUCCESS)
+                    })
+            }
+
+        }
     }
 
     companion object {

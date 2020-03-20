@@ -3,14 +3,12 @@
     <string name="glad_to_see_you">Glad \nto see you!</string>
     <string name="enter_your_company_code">Please enter your \ncompany code and continue.</string>
     <string name="enter_company_code_here">Enter company code here</string>
-    <string name="get_support_text">Trouble logging in? <font color = "#3700B3">Get support</font></string>
+    <string name="get_support_text">Trouble logging in? <font color = "#143FFF">Get support</font></string>
     <string name="enter_a_valid_phone_number">Please enter a valid phone \nnumber to continue.</string>
-
-    <string-array name="country_code_array">
-        <item>+91</item>
-        <item>+971</item>
-        <item>+61</item>
-        <item>+93</item>
-        <item>+49</item>
-    </string-array>
+    <string name="request_type">application/json; charset=utf-8</string>
+    <string name="Success">Success</string>
+    <string name="enter_verification_code">Please enter the verification code \nsent to your number.</string>
+    <string name="didn_t_receive_code">Didn\'t receive code?</string>
+    <string name="resend_code">Resend code</string>
+    <string name="valid_num_error_msg">Enter a valid phone number</string>
 </resources>

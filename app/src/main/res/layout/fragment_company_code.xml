@@ -16,17 +16,6 @@
         android:paddingBottom="40dp"
         tools:context=".fragments.CompanyCode">
 
-      <!--  <Button
-            android:id="@+id/toLogin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Take to login"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />-->
-
         <TextView
             android:id="@+id/cc_title_text"
             android:layout_width="wrap_content"
