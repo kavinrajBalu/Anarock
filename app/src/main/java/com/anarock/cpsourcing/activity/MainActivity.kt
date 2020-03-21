@@ -1,8 +1,8 @@
 package com.anarock.cpsourcing.activity
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.Observer
@@ -18,12 +18,15 @@ import com.anarock.cpsourcing.databinding.ActivityMainBinding
 import com.anarock.cpsourcing.viewModel.LoginSharedViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
+
 class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration : AppBarConfiguration
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding : ActivityMainBinding = DataBindingUtil.setContentView(this,R.layout.activity_main)
+         binding  = DataBindingUtil.setContentView(this,R.layout.activity_main)
+
         setSupportActionBar(binding.toolbar)
 
         val host: NavHostFragment = supportFragmentManager
@@ -55,12 +58,16 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-        setUpBottomNaviagtionMenu(navController)
+        setUpBottomNavigationMenu(navController,binding.bottomNavView)
     }
 
-    private fun setUpBottomNaviagtionMenu(navController: NavController) {
-        val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_nav_view)
-        bottomNav?.setupWithNavController(navController)
+    private fun setUpBottomNavigationMenu(
+        navController: NavController,
+        bottomNavView: BottomNavigationView
+    ) {
+        /*val badge: BadgeDrawable = bottomNavView.getOrCreateBadge(binding.bottomNavView.menu[2].itemId)
+        badge.number = 10*/
+        bottomNavView.setupWithNavController(navController)
     }
 
     private fun setupActionBar(navController: NavController,

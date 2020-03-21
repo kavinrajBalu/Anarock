@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="346dp"
+        android:layout_height="336dp"
+        android:layout_marginLeft="@dimen/_20dp"
+        android:layout_marginRight="@dimen/_20dp"
+        android:background="@drawable/rounder_edges"
+        android:elevation="@dimen/_16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.442">
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="@dimen/_24dp"
+            android:layout_height="@dimen/_24dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/ic_back"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.019" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:fontFamily="@font/muli_regular"
+            android:text="Reschedule Follow Up"
+            android:textColor="@color/dark_blue_back"
+            app:layout_constraintBottom_toBottomOf="@+id/back"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/back"
+            app:layout_constraintTop_toTopOf="@+id/back"
+            app:layout_constraintVertical_bias="0.2" />
+
+        <View
+            android:id="@+id/divider4"
+            android:layout_width="344dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="24dp"
+            android:background="?android:attr/listDivider"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+        <View
+            android:id="@+id/divider5"
+            android:layout_width="344dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="44dp"
+            android:background="?android:attr/listDivider"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/chipGroup" />
+
+        <TextView
+            android:id="@+id/conform_schedule"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Conform Follow Up"
+            android:textColor="@color/blue"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/divider5"
+            android:fontFamily="@font/muli_regular" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chipGroup"
+            android:layout_width="341dp"
+            android:layout_height="147dp"
+            android:layout_marginTop="24dp"
+            android:paddingLeft="@dimen/_30dp"
+            android:paddingTop="@dimen/_10dp"
+            app:chipSpacing="@dimen/_10dp"
+            app:singleSelection="true"
+            app:checkedChip="@+id/alternate_time_one"
+            app:chipSpacingVertical="@dimen/_15dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/divider4">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/alternate_time_one"
+                style="@style/Widget.MaterialComponents.Chip.Choice.style"
+                app:chipBackgroundColor="@color/time_picker_chip_background"
+                android:text="In 20 mins" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/alternate_time_two"
+                app:chipBackgroundColor="@color/time_picker_chip_background"
+                style="@style/Widget.MaterialComponents.Chip.Choice.style"
+                android:text="In 1 hour" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/alternate_time_three"
+                app:chipBackgroundColor="@color/time_picker_chip_background"
+                style="@style/Widget.MaterialComponents.Chip.Choice.style"
+                android:text="At 5:00 PM" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/alternate_time_four"
+                app:chipBackgroundColor="@color/time_picker_chip_background"
+                style="@style/Widget.MaterialComponents.Chip.Choice.style"
+                android:text="At 5:00 PM" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/alternate_time_five"
+                app:chipBackgroundColor="@color/time_picker_chip_background"
+                style="@style/Widget.MaterialComponents.Chip.Choice.style"
+                android:text="At 11:00 Am Tomorrow" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/alternate_time_six"
+                app:chipBackgroundColor="@color/time_picker_chip_background"
+                style="@style/Widget.MaterialComponents.Chip.Choice.style"
+                android:text="Set custom time" />
+        </com.google.android.material.chip.ChipGroup>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

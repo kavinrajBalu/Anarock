@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#6200EE</color>
+        <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
-    <color name="colorAccent">#03DAC5</color>
+    <color name="colorAccent">#143FFF</color>
     <color name="ccTitleColor">#334254</color>
     <color name="login_editext_bg_color">#F7F8F9</color>
     <color name="cc_subTitle_color">#8F9AA5</color>
@@ -10,4 +10,14 @@
     <color name="next_button_color_blue">#143FFF</color>
     <color name="view_separator_grey">#CFD4D9</color>
     <color name="red">#DB4E4E</color>
+    <color name="light_sandal">#FCEFD9</color>
+    <color name="dark_sandal">#B27900</color>
+    <color name="light_green">#00BF65</color>
+    <color name="dark_blue_back">#334254</color>
+    <color name="light_blue_black">#5F6F7F</color>
+    <color name="blue">#143FFF</color>
+    <color name="light_grey">#EFF1F2</color>
+    <color name="visit_proposed_indicator">#EA9400</color>
+    <color name="follow_up_indicator">#00BF65</color>
+    <color name="face_to_face_indicator">#009EED</color>
 </resources>

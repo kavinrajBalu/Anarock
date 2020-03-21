@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/eventFragement"
-        android:name="com.anarock.cpsourcing.fragments.EventFragement"
+        android:name="com.anarock.cpsourcing.fragments.EventFragment"
         android:label="fragement_event"
         tools:layout="@layout/fragement_event">
         <action

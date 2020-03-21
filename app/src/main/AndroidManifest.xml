@@ -3,10 +3,11 @@
     package="com.anarock.cpsourcing">
 
 <!--     Phone state permission is used to track the call state-->
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"></uses-permission>
+    <uses-permission android:name="android.permission.CALL_PHONE"></uses-permission>
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET"/>
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -24,6 +25,19 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+        <service
+            android:name=".callHandler.EventFailedCallOverlay"
+            android:enabled="true"
+            android:exported="false"/>
+        <service
+            android:name=".callHandler.EventSuccessCallOverlay"
+            android:enabled="true"
+            android:exported="false"/>
+
+        <service
+            android:name=".callHandler.FaceToFaceSuccessCallOverlay"
+            android:enabled="true"
+            android:exported="false"/>
     </application>
 
 </manifest>

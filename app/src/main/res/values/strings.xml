@@ -12,4 +12,5 @@
     <string name="resend_code">Resend code</string>
     <string name="valid_num_error_msg">Enter a valid phone number</string>
     <string name="time_format_string">0:</string>
+    <string name="date_format_after_call_module">hh:mm a</string>
 </resources>

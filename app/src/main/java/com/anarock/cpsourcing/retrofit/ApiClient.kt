@@ -17,7 +17,7 @@ class ApiClient {
         var EMPLOYEE_DOMAIN = "employee"
         var DOMAIN_NAME = "$META_DOMAIN.$DOMAIN_ANAROCK"
         private  var retrofit: Retrofit? = null
-        private fun getClient(): Retrofit? {
+        fun getClient(): Retrofit? {
             if (retrofit == null) {
 
                 val interceptor = HttpLoggingInterceptor()

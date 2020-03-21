@@ -1,11 +1,19 @@
 package com.anarock.cpsourcing.utilities
 
-import android.content.Context
 import android.util.Log
-import android.util.Patterns
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import android.Manifest
+import android.annotation.SuppressLint
+import android.content.Context
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.net.Uri
+import android.util.Patterns
+import androidx.core.app.ActivityCompat
+import java.text.SimpleDateFormat
+import java.util.*
 import java.util.regex.Pattern
 
 class CommonUtilities{
@@ -37,23 +45,20 @@ class CommonUtilities{
                 .isEmpty() || data == "null" || data == "")
         }
 
-       /* fun hideKeyboard(mContext: Context) {
-            // Check if no view has focus:
-            try {
-                val view: View = mContext.getCurrentFocus()
-                if (view != null) {
-                    val inputManager =
-                        mContext.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-                    inputManager.hideSoftInputFromWindow(
-                        view.windowToken,
-                        InputMethodManager.HIDE_NOT_ALWAYS
-                    )
-                }
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-        }*/
+        fun getSecondsDifference(startTime : Date, endtime : Date):Long
+        {
+            val diff: Long = endtime.time - startTime.time
+            return  (diff/1000) % 60
+        }
+
+        @SuppressLint("MissingPermission")
+        fun makeCall(context: Context, phoneNumber : String)
+        {
+            val uri = "tel:" + phoneNumber.trim()
+            val intent = Intent(Intent.ACTION_CALL)
+            intent.data = Uri.parse(uri)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            context.startActivity(intent)
+        }
     }
-
-
 }
