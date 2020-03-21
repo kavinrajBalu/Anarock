@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Anarock</string>
+    <string name="date_format_after_call_module">hh:mm a</string>
 </resources>

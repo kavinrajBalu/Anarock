@@ -14,12 +14,20 @@ import android.widget.TextView
 import com.anarock.cpsourcing.R
 import com.anarock.cpsourcing.interfaces.PhoneCallStatusCallBack
 import com.anarock.cpsourcing.utilities.CommonUtilities
+import com.anarock.cpsourcing.utilities.TimeUtils.getCustomDateFormat
+import com.anarock.cpsourcing.utilities.TimeUtils.getTimeEightHourAhead
+import com.anarock.cpsourcing.utilities.TimeUtils.getTimeFiveHourAhead
+import com.anarock.cpsourcing.utilities.TimeUtils.getTimeOneHourAhead
+import com.anarock.cpsourcing.utilities.TimeUtils.getTimeTwentyMinutesAhead
+import com.anarock.cpsourcing.utilities.TimeUtils.isItAfterWorkingTime
+import com.anarock.cpsourcing.utilities.TimeUtils.isItElevenAM
+import com.anarock.cpsourcing.utilities.TimeUtils.isItWorkingTime
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
-import org.w3c.dom.Text
+import java.util.*
 
 
-class FailedCallOverlay : Service() {
+class EventFailedCallOverlay : Service() {
 
     private lateinit var failedCallWindowManager: WindowManager
     private lateinit var failedCallOverlayView: View
@@ -27,16 +35,19 @@ class FailedCallOverlay : Service() {
     private lateinit var reScheduleCallOverlayView: View
     lateinit var callStateListener : CallStateListener
     lateinit var  params: WindowManager.LayoutParams
+    lateinit var currentTime : Calendar
     // schedule screen
-    /*private lateinit var alternateTimeOne  : Chip
+    private lateinit var alternateTimeOne  : Chip
     private lateinit var alternateTimeTwo  : Chip
     private lateinit var alternateTimeThree  : Chip
     private lateinit var alternateTimeFour  : Chip
     private lateinit var alternateTimeFive  : Chip
-    private lateinit var alternateTimeSix  : Chip*/
+    private lateinit var alternateTimeSix  : Chip
     private lateinit var timePickerGroup : ChipGroup
     private lateinit var confirmRescheduleTime  : TextView
     private lateinit var reScheduleBack : ImageView
+    private lateinit var autoScheduleTime : TextView
+    private val DATE_FORMAT = "hh:mm a"
 
     //call failed screen
     private lateinit var close : ImageView
@@ -51,9 +62,10 @@ class FailedCallOverlay : Service() {
 
     override fun onCreate() {
         super.onCreate()
-        failedCallOverlayView = View.inflate(ContextThemeWrapper(this, R.style.AppTheme), R.layout.failed_call_view,null)
+        failedCallOverlayView = View.inflate(ContextThemeWrapper(this, R.style.AppTheme), R.layout.event_failed_overlay,null)
         reScheduleCallOverlayView = View.inflate(ContextThemeWrapper(this, R.style.AppTheme), R.layout.reschedule_call_view,null)
         getAllViewReferences()
+        initView()
             params  = WindowManager.LayoutParams(
             WindowManager.LayoutParams.MATCH_PARENT,
             WindowManager.LayoutParams.MATCH_PARENT,
@@ -91,6 +103,7 @@ class FailedCallOverlay : Service() {
                 override fun onCallFailed() {
                     telephonyManager.listen(callStateListener, PhoneStateListener.LISTEN_NONE)
                     failedCallWindowManager.addView(failedCallOverlayView, params)
+                    initView()
                 }
             })
             telephonyManager.listen(callStateListener, PhoneStateListener.LISTEN_CALL_STATE)
@@ -119,6 +132,18 @@ class FailedCallOverlay : Service() {
 
     }
 
+    private fun initView() {
+        currentTime = Calendar.getInstance()
+        if(isItWorkingTime(getTimeTwentyMinutesAhead(currentTime)))
+        {
+            autoScheduleTime.text= "Auto-scheduled call at ${getCustomDateFormat(DATE_FORMAT, getTimeTwentyMinutesAhead(currentTime))}"
+        }
+        else
+        {
+
+        }
+    }
+
     private fun getAllViewReferences() {
 
         //Failed call screen views
@@ -126,13 +151,14 @@ class FailedCallOverlay : Service() {
         confirmSchedule = failedCallOverlayView.findViewById(R.id.done)
         callAgain = failedCallOverlayView.findViewById(R.id.call_again)
         rescheduleTime = failedCallOverlayView.findViewById(R.id.re_schedule)
+        autoScheduleTime  = failedCallOverlayView.findViewById(R.id.auto_schedule_message)
         // Reschedule screen views
-       /* alternateTimeOne = reScheduleCallOverlayView.findViewById(R.id.alternate_time_one)
+        alternateTimeOne = reScheduleCallOverlayView.findViewById(R.id.alternate_time_one)
         alternateTimeTwo = reScheduleCallOverlayView.findViewById(R.id.alternate_time_two)
         alternateTimeThree = reScheduleCallOverlayView.findViewById(R.id.alternate_time_three)
         alternateTimeFour = reScheduleCallOverlayView.findViewById(R.id.alternate_time_four)
         alternateTimeFive = reScheduleCallOverlayView.findViewById(R.id.alternate_time_five)
-        alternateTimeSix = reScheduleCallOverlayView.findViewById(R.id.alternate_time_six)*/
+        alternateTimeSix = reScheduleCallOverlayView.findViewById(R.id.alternate_time_six)
         timePickerGroup = reScheduleCallOverlayView.findViewById(R.id.chipGroup)
         reScheduleBack = reScheduleCallOverlayView.findViewById(R.id.back)
         confirmRescheduleTime = reScheduleCallOverlayView.findViewById(R.id.conform_schedule)
@@ -146,17 +172,64 @@ class FailedCallOverlay : Service() {
     private fun showRescheduleScreen() {
         failedCallWindowManager.removeView(failedCallOverlayView)
         reScheduleCallWindowManager.addView(reScheduleCallOverlayView, params)
-        //Alternate time one will be default.
-        //setViewSelectedBlueBackground(alternateTimeOne)
+        showViewBasedOnWorkingTime()
+        alternateTimeFour.text = "At ${getCustomDateFormat(DATE_FORMAT,getTimeEightHourAhead(currentTime))}"
+    }
+
+    private fun showViewBasedOnWorkingTime() {
+
+        if(isItAfterWorkingTime(getTimeTwentyMinutesAhead(currentTime)))
+        {
+            alternateTimeOne.visibility = View.GONE
+        }
+        else
+        {
+            alternateTimeOne.visibility = View.VISIBLE
+        }
+        if(isItAfterWorkingTime(getTimeOneHourAhead(currentTime)))
+        {
+            alternateTimeTwo.visibility = View.GONE
+        }
+        else
+        {
+            alternateTimeTwo.visibility = View.VISIBLE
+        }
+        if(isItWorkingTime(getTimeFiveHourAhead(currentTime)))
+        {
+            showScheduleTime(alternateTimeThree,getTimeFiveHourAhead(currentTime))
+        }
+        else
+        {
+            alternateTimeThree.visibility = View.GONE
+        }
+
+        if(isItWorkingTime(getTimeEightHourAhead(currentTime)))
+        {
+
+            showScheduleTime(alternateTimeFour, getTimeEightHourAhead(currentTime))
+        }
+        else
+        {
+            alternateTimeFour.visibility = View.GONE
+        }
 
     }
 
-    private fun setViewSelectedBlueBackground(view: TextView?) {
-        view?.background = getDrawable(R.drawable.blue_button_shape)
-        view?.setPadding(resources.getDimension(R.dimen._20dp).toInt(),view.paddingTop,resources.getDimension(R.dimen._20dp).toInt(),view.paddingBottom)
+    private fun showScheduleTime(
+        view: Chip,
+        calendar: Calendar
+    ) {
+
+        if(isItElevenAM(calendar))
+        {
+            view.visibility = View.GONE
+        }
+        else
+        {
+            view.text = "At ${getCustomDateFormat(DATE_FORMAT,getTimeFiveHourAhead(currentTime))}"
+        }
 
     }
-
 
     override fun onDestroy() {
         super.onDestroy()

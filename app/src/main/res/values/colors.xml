@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#6200EE</color>
+        <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#143FFF</color>
     <color name="light_sandal">#FCEFD9</color>
@@ -10,4 +10,7 @@
     <color name="light_blue_black">#5F6F7F</color>
     <color name="blue">#143FFF</color>
     <color name="light_grey">#EFF1F2</color>
+    <color name="visit_proposed_indicator">#EA9400</color>
+    <color name="follow_up_indicator">#00BF65</color>
+    <color name="face_to_face_indicator">#009EED</color>
 </resources>
