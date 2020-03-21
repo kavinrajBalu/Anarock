@@ -1,9 +1,29 @@
 package com.anarock.cpsourcing.retrofit
 
+import com.anarock.cpsourcing.model.CountryResponseModel
+import com.anarock.cpsourcing.model.LoginResponseModel
+import com.anarock.cpsourcing.model.OtpResponseModel
+import com.anarock.cpsourcing.model.TenantDomainResponseModel
+import okhttp3.RequestBody
+import retrofit2.Call
+import retrofit2.http.*
+
 interface ApiService
 {
-    //TODO: use the commented lines for reference
-   /* @GET("categories/")
+
+    @GET("tenant-config/")
+    fun getTenantDomain(@Query("tenant_name") tenant_name:String):Call<TenantDomainResponseModel>
+
+    @GET("countries/")
+    fun getCountryCodes():Call<CountryResponseModel>
+
+    @POST("send/otp")
+    fun loginUser(@Body requestBody: RequestBody): Call<LoginResponseModel>
+
+    @POST("verify/otp/")
+    fun verifyOtp(@Body requestBody: RequestBody):Call<OtpResponseModel>
+
+    /* @GET("categories/")
     fun getCategory(): Call<ArrayList<Category>>
 
     @POST("_search/")
@@ -24,10 +44,7 @@ interface ApiService
                @Field("isServiceProvider") isServiceProvider:Boolean,
                @Field("verifiedToken") verifiedToken:String):Call<SearchResult>
 
-    @POST("api-token-auth/")
-    @FormUrlEncoded
-    fun loginUser(@Field("username") username:String,
-              @Field("password") password:String):Call<LoginResponseModel>
+
 
     @POST("change-password/")
     fun reserPassword(@Field("verificationToken") verificationToken:String,
