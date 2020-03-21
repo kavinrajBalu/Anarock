@@ -34,11 +34,11 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="32dp"
             android:fontFamily="@font/muli_bold"
-            tools:text="9876543210"
             android:textColor="@color/ccTitleColor"
             android:textSize="32sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="9876543210" />
 
         <ImageView
             android:id="@+id/otp_edit_button"
@@ -66,11 +66,11 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="80dp"
             android:layout_marginEnd="33dp"
-            android:paddingLeft="32dp"
             android:gravity="left"
+            android:orientation="horizontal"
+            android:paddingLeft="32dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/otp_sub_title"
-            android:orientation="horizontal">
+            app:layout_constraintTop_toBottomOf="@+id/otp_sub_title">
 
             <EditText
                 android:id="@+id/otp_one"
@@ -79,13 +79,12 @@
                 android:background="@drawable/rounded_rectangle_bg_grey"
                 android:fontFamily="@font/muli"
                 android:gravity="center"
+                android:hint="0"
                 android:inputType="number"
                 android:maxLength="1"
-                android:hint="0"
-                android:textSize="15sp"
-                android:textColorHint="@color/cc_editText_hint_color"
                 android:textColor="@color/ccTitleColor"
-                 />
+                android:textColorHint="@color/cc_editText_hint_color"
+                android:textSize="15sp" />
 
             <EditText
                 android:id="@+id/otp_two"
@@ -95,12 +94,12 @@
                 android:background="@drawable/rounded_rectangle_bg_grey"
                 android:fontFamily="@font/muli"
                 android:gravity="center"
+                android:hint="0"
                 android:inputType="number"
                 android:maxLength="1"
-                android:hint="0"
-                android:textSize="15sp"
+                android:textColor="@color/ccTitleColor"
                 android:textColorHint="@color/cc_editText_hint_color"
-                android:textColor="@color/ccTitleColor" />
+                android:textSize="15sp" />
 
             <EditText
                 android:id="@+id/otp_three"
@@ -110,12 +109,12 @@
                 android:background="@drawable/rounded_rectangle_bg_grey"
                 android:fontFamily="@font/muli"
                 android:gravity="center"
+                android:hint="0"
                 android:inputType="number"
                 android:maxLength="1"
-                android:hint="0"
-                android:textSize="15sp"
+                android:textColor="@color/ccTitleColor"
                 android:textColorHint="@color/cc_editText_hint_color"
-                android:textColor="@color/ccTitleColor" />
+                android:textSize="15sp" />
 
             <EditText
                 android:id="@+id/otp_four"
@@ -125,12 +124,12 @@
                 android:background="@drawable/rounded_rectangle_bg_grey"
                 android:fontFamily="@font/muli"
                 android:gravity="center"
+                android:hint="0"
                 android:inputType="number"
                 android:maxLength="1"
-                android:hint="0"
-                android:textSize="15sp"
+                android:textColor="@color/ccTitleColor"
                 android:textColorHint="@color/cc_editText_hint_color"
-                android:textColor="@color/ccTitleColor" />
+                android:textSize="15sp" />
 
         </LinearLayout>
 
@@ -138,40 +137,54 @@
             android:id="@+id/verifyOtpButton"
             android:layout_width="56dp"
             android:layout_height="48dp"
-            android:background="@drawable/oval_bg_blue"
-            android:src="@drawable/ic_arrow_forward_24px"
-            android:elevation="5dp"
-            android:visibility="visible"
             android:layout_marginEnd="5dp"
+            android:background="@drawable/oval_bg_blue"
+            android:elevation="5dp"
+            android:src="@drawable/ic_arrow_forward_24px"
+            android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="@+id/editText_parent_ll"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/editText_parent_ll" />
 
-            <TextView
-                android:id="@+id/resent_otp_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="28dp"
-                android:fontFamily="@font/muli"
-                android:gravity="center"
-                android:text="@string/didn_t_receive_code"
-                android:textColor="@color/ccTitleColor"
-                android:textSize="13sp"
-                app:layout_constraintStart_toStartOf="@+id/otp_phone_no"
-                app:layout_constraintTop_toBottomOf="@id/editText_parent_ll"/>
+        <TextView
+            android:id="@+id/resent_otp_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:fontFamily="@font/muli"
+            android:gravity="center"
+            android:text="@string/didn_t_receive_code"
+            android:textColor="@color/ccTitleColor"
+            android:textSize="13sp"
+            app:layout_constraintStart_toStartOf="@+id/otp_phone_no"
+            app:layout_constraintTop_toBottomOf="@id/editText_parent_ll" />
 
-            <TextView
-                android:id="@+id/resend_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="2dp"
-                android:fontFamily="@font/muli"
-                android:gravity="center"
-                android:text="@string/resend_code"
-                app:layout_constraintTop_toTopOf="@+id/resent_otp_text"
-                app:layout_constraintLeft_toRightOf="@+id/resent_otp_text"
-                android:textColor="@color/next_button_color_blue"
-                android:textSize="13sp"/>
+        <TextView
+            android:id="@+id/resend_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:fontFamily="@font/muli"
+            android:gravity="center"
+            android:text="@string/resend_code"
+            android:textColor="@color/next_button_color_blue"
+            android:textSize="13sp"
+            app:layout_constraintLeft_toRightOf="@+id/resent_otp_text"
+            app:layout_constraintTop_toTopOf="@+id/resent_otp_text" />
+
+        <TextView
+            android:id="@+id/counttime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:fontFamily="@font/muli"
+            android:gravity="center"
+            android:text="30:00"
+            android:textSize="13sp"
+            android:visibility="gone"
+            android:textColor="@color/ccTitleColor"
+            app:layout_constraintLeft_toRightOf="@+id/resent_otp_text"
+            app:layout_constraintTop_toTopOf="@+id/resent_otp_text" />
 
         <TextView
             android:id="@+id/otp_get_support_textView"

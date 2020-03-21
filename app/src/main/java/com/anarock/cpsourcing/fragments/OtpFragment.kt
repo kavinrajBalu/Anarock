@@ -1,6 +1,7 @@
 package com.anarock.cpsourcing.fragments
 
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
@@ -8,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.widget.EditText
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -18,8 +18,8 @@ import com.anarock.cpsourcing.R
 import com.anarock.cpsourcing.databinding.FragmentOtpBinding
 import com.anarock.cpsourcing.utilities.CommonUtilities
 import com.anarock.cpsourcing.viewModel.LoginSharedViewModel
-import com.google.android.material.snackbar.Snackbar
-import com.google.gson.JsonObject
+import kotlinx.android.synthetic.main.fragment_otp.*
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -74,9 +74,6 @@ class OtpFragment : Fragment() {
 
         binding.verifyOtpButton.setOnClickListener {
             validateOTP()
-//            findNavController().navigate(R.id.action_global_eventFragement)
-//            loginSharedViewModel.setBottomNavigationVisibility(true)
-//            loginSharedViewModel.setLoginState(LoginSharedViewModel.LoginState.LOGIN_SUCCESS)
         }
         binding.resendButton.setOnClickListener {
             if (CommonUtilities.notnull(phoneNo)) {
@@ -85,10 +82,11 @@ class OtpFragment : Fragment() {
 
                     })
             }
+            setUpCountDownTimer(it)
         }
 
         binding.otpEditButton.setOnClickListener {
-                        findNavController().navigate(R.id.action_otpFragment_to_loginFragment)
+            findNavController().navigate(R.id.action_otpFragment_to_loginFragment)
         }
 
 
@@ -97,8 +95,24 @@ class OtpFragment : Fragment() {
         return binding.root
     }
 
+    private fun setUpCountDownTimer(resendButton: View) {
+        var counter = 30
+        resendButton.visibility = View.GONE
+        counttime.visibility = View.VISIBLE
+        object : CountDownTimer(30000, 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+                counttime.text = getString(R.string.time_format_string) + String.format("%02d", counter)
+                counter--
+            }
+
+            override fun onFinish() {
+                resendButton.visibility = View.VISIBLE
+                counttime.visibility = View.GONE
+            }
+        }.start()    }
+
     private fun setUpOtpTextListeners() {
-//        mOTPOne.requestFocus()
+
         mOTPOne.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(
                 s: CharSequence,

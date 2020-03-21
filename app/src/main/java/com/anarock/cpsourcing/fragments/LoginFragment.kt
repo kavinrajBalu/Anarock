@@ -71,8 +71,6 @@ class LoginFragment : Fragment() {
         companyNameTv.text = arguments?.getString("tenantName")
 
         if (spinner != null) {
-            countryCodeList
-
             spinner.adapter = adapter
             spinner.onItemSelectedListener = object :
                 AdapterView.OnItemSelectedListener {
@@ -143,7 +141,7 @@ class LoginFragment : Fragment() {
                     })
             } else {
                 Toast.makeText(context, "Please enter a valid phone number", Toast.LENGTH_LONG)
-                binding.loginErrorMsg.text = "Enter a valid phone number"
+                binding.loginErrorMsg.text = getString(R.string.valid_num_error_msg)
             }
 
         }

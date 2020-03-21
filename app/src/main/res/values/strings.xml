@@ -11,4 +11,5 @@
     <string name="didn_t_receive_code">Didn\'t receive code?</string>
     <string name="resend_code">Resend code</string>
     <string name="valid_num_error_msg">Enter a valid phone number</string>
+    <string name="time_format_string">0:</string>
 </resources>
