@@ -13,4 +13,10 @@
     <string name="valid_num_error_msg">Enter a valid phone number</string>
     <string name="time_format_string">0:</string>
     <string name="date_format_after_call_module">hh:mm a</string>
+    <string name="email_support_template"> Hi Ravina Jain,
+        \n\nVersion : 1.0\nDo not delete the above info
+        \n\nI am unable to login, my registered email id and phone are as follows.
+        \nRegistered email id :
+        \nRegistered phone no :
+    </string>
 </resources>

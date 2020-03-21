@@ -89,6 +89,9 @@ class OtpFragment : Fragment() {
             findNavController().navigate(R.id.action_otpFragment_to_loginFragment)
         }
 
+        binding.otpGetSupportTextView.setOnClickListener {
+            CommonUtilities.getEmailSupport(requireContext())
+        }
 
         setUpOtpTextListeners()
 

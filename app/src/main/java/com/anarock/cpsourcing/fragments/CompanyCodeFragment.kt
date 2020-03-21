@@ -14,6 +14,7 @@ import androidx.navigation.fragment.findNavController
 import com.anarock.cpsourcing.R
 import com.anarock.cpsourcing.databinding.FragmentCompanyCodeBinding
 import com.anarock.cpsourcing.retrofit.ApiClient
+import com.anarock.cpsourcing.utilities.CommonUtilities
 import com.anarock.cpsourcing.viewModel.LoginSharedViewModel
 
 // TODO: Rename parameter arguments, choose names that match
@@ -64,6 +65,10 @@ class CompanyCode : Fragment() {
             } else {
                 Toast.makeText(context, "Please enter a valid company code", Toast.LENGTH_LONG)
             }
+        }
+
+        binding.ccGetSupportTextView.setOnClickListener {
+            CommonUtilities.getEmailSupport(requireContext())
         }
 
 

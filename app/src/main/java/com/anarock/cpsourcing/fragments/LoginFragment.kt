@@ -146,6 +146,10 @@ class LoginFragment : Fragment() {
 
         }
 
+        binding.loginGetSupportTextView.setOnClickListener {
+            CommonUtilities.getEmailSupport(requireContext())
+        }
+
         return binding.root
     }
 
