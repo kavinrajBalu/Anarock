@@ -10,17 +10,89 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@android:color/white"
+        android:paddingTop="70dp"
+        android:paddingEnd="30dp"
+        android:paddingBottom="40dp"
         tools:context=".fragments.CompanyCode">
 
-
-        <Button
-            android:id="@+id/toLogin"
+        <TextView
+            android:id="@+id/cc_title_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Take to login"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginLeft="32dp"
+            android:fontFamily="@font/muli_bold"
+            android:text="@string/glad_to_see_you"
+            android:textColor="@color/ccTitleColor"
+            android:textSize="32sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/cc_sub_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/muli"
+            android:text="@string/enter_your_company_code"
+            android:textColor="@color/cc_subTitle_color"
+            android:textSize="15sp"
+            app:layout_constraintStart_toStartOf="@+id/cc_title_text"
+            app:layout_constraintTop_toBottomOf="@id/cc_title_text" />
+
+        <EditText
+            android:id="@+id/cc_editText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="80dp"
+            android:layout_marginEnd="33dp"
+            android:background="@drawable/edittext_bg_round_edge"
+            android:fontFamily="@font/muli"
+            android:hint="@string/enter_company_code_here"
+            android:inputType="textCapWords"
+            android:textColor="@color/ccTitleColor"
+            android:textColorHint="@color/cc_editText_hint_color"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cc_sub_title" />
+
+        <ImageButton
+            android:id="@+id/nextImageButton"
+            android:layout_width="56dp"
+            android:layout_height="48dp"
+            android:background="@drawable/oval_bg_blue"
+            android:src="@drawable/ic_arrow_forward_24px"
+            android:elevation="5dp"
+            android:visibility="visible"
+            android:layout_marginEnd="5dp"
+            app:layout_constraintBottom_toBottomOf="@+id/cc_editText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/cc_editText" />
+
+        <TextView
+            android:id="@+id/cc_get_support_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/muli"
+            android:text="@string/get_support_text"
+            android:textColor="@color/ccTitleColor"
+            android:textSize="13sp"
+            app:layout_constraintStart_toStartOf="@+id/cc_title_text"
+            app:layout_constraintTop_toBottomOf="@id/cc_editText" />
+
+        <TextView
+            android:id="@+id/cc_bottom_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/muli"
+            android:text="By signing in the app you accept the \nTerms of Service and Privacy Policy."
+            android:textColor="@color/cc_subTitle_color"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/cc_title_text" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

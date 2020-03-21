@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/eventFragement"
-        android:name="com.anarock.cpsourcing.fragments.EventFragement"
+        android:name="com.anarock.cpsourcing.fragments.EventFragment"
         android:label="fragement_event"
         tools:layout="@layout/fragement_event">
         <action
@@ -67,12 +67,30 @@
             <action
                 android:id="@+id/action_loginFragment_to_otpFragment"
                 app:destination="@id/otpFragment" />
+            <action
+                android:id="@+id/action_loginFragment_to_companyCode"
+                app:destination="@id/companyCode" />
+            <argument
+                android:name="tenantName"
+                app:argType="string"
+                android:defaultValue="Anarock" />
         </fragment>
         <fragment
             android:id="@+id/otpFragment"
             android:name="com.anarock.cpsourcing.fragments.OtpFragment"
             android:label="OTPFragment"
-            tools:layout="@layout/fragment_otp" />
+            tools:layout="@layout/fragment_otp" >
+            <argument
+                android:name="phone"
+                app:argType="string" />
+            <argument
+                android:name="countryId"
+                app:argType="integer"
+                android:defaultValue="0" />
+            <action
+                android:id="@+id/action_otpFragment_to_loginFragment"
+                app:destination="@id/loginFragment" />
+        </fragment>
         <action
             android:id="@+id/action_global_eventFragement"
             app:destination="@id/eventFragement"

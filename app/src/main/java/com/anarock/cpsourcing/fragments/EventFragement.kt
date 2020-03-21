@@ -53,7 +53,6 @@ class EventFragement : Fragment() {
             }
         })
 
-
         return  binding.root
 
     }
