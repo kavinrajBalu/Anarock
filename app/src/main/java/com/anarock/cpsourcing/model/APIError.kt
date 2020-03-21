@@ -1,4 +1,4 @@
-package com.anarock.cpsourcing.objects
+package com.anarock.cpsourcing.model
 
 import com.google.gson.annotations.SerializedName
 

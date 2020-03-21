@@ -1,6 +1,6 @@
 package com.anarock.cpsourcing.utilities
 
-import com.anarock.cpsourcing.objects.APIError
+import com.anarock.cpsourcing.model.APIError
 import com.anarock.cpsourcing.retrofit.ApiClient
 import retrofit2.Response
 
