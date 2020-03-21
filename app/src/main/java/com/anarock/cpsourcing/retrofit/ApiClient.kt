@@ -11,7 +11,7 @@ class ApiClient {
         private val BASE_URL = "http://tradenapp-env.us-east-1.elasticbeanstalk.com/api"
         private val API_VERSION = "/v1/"
         private  var retrofit: Retrofit? = null
-        private fun getClient(): Retrofit? {
+        fun getClient(): Retrofit? {
             if (retrofit == null) {
                 retrofit = Retrofit.Builder().baseUrl(BASE_URL + API_VERSION)
                     .addConverterFactory(GsonConverterFactory.create(GsonBuilder().setLenient().create()))
