@@ -1,5 +1,7 @@
 package com.anarock.cpsourcing.fragments
 
+import android.content.Context
+import android.content.IntentFilter
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -18,9 +20,14 @@ import androidx.navigation.fragment.findNavController
 import com.anarock.cpsourcing.R
 import com.anarock.cpsourcing.databinding.FragmentLoginBinding
 import com.anarock.cpsourcing.model.CountryCodeModel
+import com.anarock.cpsourcing.model.ToolBarTheme
+import com.anarock.cpsourcing.receiver.MySMSBroadcastReceiver
 import com.anarock.cpsourcing.retrofit.ApiClient
 import com.anarock.cpsourcing.utilities.CommonUtilities
+import com.anarock.cpsourcing.utilities.SMSRetrieverClient
+import com.anarock.cpsourcing.utilities.SMSRetrieverClient.Companion.startSMSRetriever
 import com.anarock.cpsourcing.viewModel.LoginSharedViewModel
+import com.google.android.gms.auth.api.phone.SmsRetriever
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -67,8 +74,11 @@ class LoginFragment : Fragment() {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         var countryId = 49
 
-
         companyNameTv.text = arguments?.getString("tenantName")
+
+        startSMSRetriever(requireContext())
+
+        loginSharedViewModel.setToolbarTheme(ToolBarTheme(true, false))
 
         if (spinner != null) {
             spinner.adapter = adapter
@@ -76,13 +86,12 @@ class LoginFragment : Fragment() {
                 AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(
                     parent: AdapterView<*>,
-                    view: View, position: Int, id: Long
+                    view: View?, position: Int, id: Long
                 ) {
                     countryId = countriesList[position].id
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>) {
-                    // write code to perform some action
                 }
             }
         }
@@ -98,8 +107,6 @@ class LoginFragment : Fragment() {
         })
 
         binding.loginEditButton.setOnClickListener {
-            ApiClient.resetRetrofit()
-            ApiClient.setDomainName(ApiClient.META_DOMAIN, ApiClient.DOMAIN_ANAROCK);
             findNavController().navigate(R.id.action_loginFragment_to_companyCode)
         }
 
@@ -140,7 +147,7 @@ class LoginFragment : Fragment() {
                         findNavController().navigate(R.id.action_loginFragment_to_otpFragment, bundle)
                     })
             } else {
-                Toast.makeText(context, "Please enter a valid phone number", Toast.LENGTH_LONG)
+                Toast.makeText(context, "Please enter a valid phone number", Toast.LENGTH_LONG).show()
                 binding.loginErrorMsg.text = getString(R.string.valid_num_error_msg)
             }
 
@@ -149,6 +156,7 @@ class LoginFragment : Fragment() {
         binding.loginGetSupportTextView.setOnClickListener {
             CommonUtilities.getEmailSupport(requireContext())
         }
+
 
         return binding.root
     }
@@ -172,4 +180,26 @@ class LoginFragment : Fragment() {
                 }
             }
     }
+
+   /* fun startSMSRetriever() {
+        var client = SmsRetriever.getClient(requireContext())
+
+        // Starts SmsRetriever, which waits for ONE matching SMS message until timeout
+        // (5 minutes). The matching SMS message will be sent via a Broadcast Intent with
+        // action SmsRetriever#SMS_RETRIEVED_ACTION.
+        val task = client.startSmsRetriever()
+
+        task.addOnSuccessListener {
+            // Successfully started retriever, expect broadcast intent
+            val filter = IntentFilter()
+            filter.addAction(SmsRetriever.SMS_RETRIEVED_ACTION)
+            val receiver =  MySMSBroadcastReceiver()
+            context?.registerReceiver(receiver, filter)
+        }
+        task.addOnFailureListener {
+            // Failed to start retriever, inspect Exception for more details
+            // ...
+        }
+
+    }*/
 }

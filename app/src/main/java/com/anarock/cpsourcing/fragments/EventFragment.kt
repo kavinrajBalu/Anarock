@@ -22,6 +22,7 @@ import com.anarock.cpsourcing.callHandler.CallStateListener
 import com.anarock.cpsourcing.callHandler.FaceToFaceSuccessCallOverlay
 import com.anarock.cpsourcing.databinding.FragementEventBinding
 import com.anarock.cpsourcing.interfaces.PhoneCallStatusCallBack
+import com.anarock.cpsourcing.model.ToolBarTheme
 import com.anarock.cpsourcing.utilities.CommonUtilities
 import com.anarock.cpsourcing.viewModel.LoginSharedViewModel
 
@@ -55,6 +56,7 @@ class EventFragment : Fragment() {
                 findNavController().navigate(R.id.action_eventFragement_to_loginNavigation)
             }
         })
+        loginSharedViewModel.setToolbarTheme(ToolBarTheme(true, false))
 
         val telephonyManager = requireActivity().getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
 

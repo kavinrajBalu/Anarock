@@ -1,20 +1,14 @@
 package com.anarock.cpsourcing.utilities
 
-import android.util.Log
-import android.view.View
-import android.view.inputmethod.InputMethodManager
-import android.widget.Toast
-import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.net.Uri
+import android.util.Log
 import android.util.Patterns
-import androidx.core.app.ActivityCompat
+import android.widget.Toast
 import androidx.core.content.ContextCompat.startActivity
 import com.anarock.cpsourcing.R
-import java.text.SimpleDateFormat
 import java.util.*
 import java.util.regex.Pattern
 
@@ -32,10 +26,14 @@ class CommonUtilities {
             return Patterns.EMAIL_ADDRESS.toRegex().matches(email);
         }
 
-        fun isValidPhoneNumber(number: String): Boolean {
+        /*fun isValidPhoneNumber(number: String): Boolean {
             //TODO : Make condition to validate based on the country
             var pattern: Pattern = Pattern.compile(mobilePattern)
             return pattern.matcher(number).find()
+        }*/
+
+        fun isValidPhoneNumber(num: String): Boolean {
+            return num.trim().length in 7..10
         }
 
         fun isNetworkConnected(mContext: Context): Boolean {

@@ -5,7 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
 import android.widget.Toast
+import androidx.activity.addCallback
 import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
@@ -13,9 +15,11 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.anarock.cpsourcing.R
 import com.anarock.cpsourcing.databinding.FragmentCompanyCodeBinding
+import com.anarock.cpsourcing.model.ToolBarTheme
 import com.anarock.cpsourcing.retrofit.ApiClient
 import com.anarock.cpsourcing.utilities.CommonUtilities
 import com.anarock.cpsourcing.viewModel.LoginSharedViewModel
+import com.google.android.gms.common.Feature
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -24,10 +28,10 @@ private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
- * Use the [CompanyCode.newInstance] factory method to
+ * Use the [CompanyCodeFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class CompanyCode : Fragment() {
+class CompanyCodeFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -50,20 +54,30 @@ class CompanyCode : Fragment() {
         val binding: FragmentCompanyCodeBinding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_company_code, container, false)
 
+//        requireContext.reqWindow.FEATURE_NO_TITLE);
+
+        viewModel.setToolbarTheme(ToolBarTheme(true, true))
+
         binding.nextImageButton.setOnClickListener {
             var companyName: String = binding.ccEditText.text.toString()
-            if (companyName!=null && companyName.isNotEmpty()) {
+            if (companyName != null && companyName.isNotEmpty()) {
+                ApiClient.resetRetrofit()
+                ApiClient.setDomainName(ApiClient.META_DOMAIN, ApiClient.DOMAIN_ANAROCK);
                 viewModel.fetchTenantDomain(companyName).observe(viewLifecycleOwner, Observer {
                     if (it.message.equals("Success", ignoreCase = true)) {
                         val domain = it.response!!.domain
                         ApiClient.setDomainName(ApiClient.EMPLOYEE_DOMAIN, domain);
                         ApiClient.resetRetrofit()
                         var bundle = bundleOf("tenantName" to companyName)
-                        findNavController().navigate(R.id.action_companyCode_to_loginFragment, bundle)
+                        findNavController().navigate(
+                            R.id.action_companyCode_to_loginFragment,
+                            bundle
+                        )
                     }
                 })
             } else {
                 Toast.makeText(context, "Please enter a valid company code", Toast.LENGTH_LONG)
+                    .show()
             }
         }
 
@@ -71,7 +85,9 @@ class CompanyCode : Fragment() {
             CommonUtilities.getEmailSupport(requireContext())
         }
 
-
+        val callback  = requireActivity().onBackPressedDispatcher.addCallback(this) {
+            requireActivity().finish()
+        }
 
         return binding.root
     }
@@ -88,7 +104,7 @@ class CompanyCode : Fragment() {
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            CompanyCode().apply {
+            CompanyCodeFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)

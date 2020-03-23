@@ -51,7 +51,7 @@
         app:startDestination="@id/companyCode" >
         <fragment
             android:id="@+id/companyCode"
-            android:name="com.anarock.cpsourcing.fragments.CompanyCode"
+            android:name="com.anarock.cpsourcing.fragments.CompanyCodeFragment"
             android:label="CompanyCode"
             tools:layout="@layout/fragment_company_code">
             <action
@@ -69,7 +69,8 @@
                 app:destination="@id/otpFragment" />
             <action
                 android:id="@+id/action_loginFragment_to_companyCode"
-                app:destination="@id/companyCode" />
+                app:popUpTo="@id/companyCode"
+                />
             <argument
                 android:name="tenantName"
                 app:argType="string"
@@ -89,7 +90,7 @@
                 android:defaultValue="0" />
             <action
                 android:id="@+id/action_otpFragment_to_loginFragment"
-                app:destination="@id/loginFragment" />
+                app:popUpTo="@id/loginFragment" />
         </fragment>
         <action
             android:id="@+id/action_global_eventFragement"
