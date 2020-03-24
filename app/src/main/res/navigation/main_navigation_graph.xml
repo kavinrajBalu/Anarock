@@ -18,6 +18,9 @@
         <deepLink
             android:id="@+id/deepLink4"
             app:uri="https://www.appAnarock.com/event" />
+        <action
+            android:id="@+id/action_eventFragement_to_addNewEvent"
+            app:destination="@id/addNewEvent" />
     </fragment>
     <fragment
         android:id="@+id/cpFragment"
@@ -52,7 +55,6 @@
         <fragment
             android:id="@+id/companyCode"
             android:name="com.anarock.cpsourcing.fragments.CompanyCode"
-            android:label="CompanyCode"
             tools:layout="@layout/fragment_company_code">
             <action
                 android:id="@+id/action_companyCode_to_loginFragment"
@@ -97,4 +99,23 @@
             app:popUpTo="@id/main_navigation_graph"
             app:popUpToInclusive="true" />
     </navigation>
+    <fragment
+        android:id="@+id/addNewEvent"
+        android:name="com.anarock.cpsourcing.AddNewEvent"
+        android:label="fragment_add_new_event"
+        tools:layout="@layout/fragment_add_new_event" >
+        <action
+            android:id="@+id/action_addNewEvent_to_eventFragement"
+            app:destination="@id/eventFragement"
+            app:popUpTo="@id/main_navigation_graph"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_addNewEvent_to_addNewEventProposedFragment"
+            app:destination="@id/addNewEventProposedFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addNewEventProposedFragment"
+        android:name="com.anarock.cpsourcing.AddNewEventProposedFragment"
+        android:label="@string/add_new_event"
+        tools:layout="@layout/fragment_add_new_event_proposed" />
 </navigation>

@@ -1,0 +1,17 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.anarock.callrecord">
+<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+<uses-permission android:name="android.permission.RECORD_AUDIO" />
+<uses-permission android:name="android.permission.PROCESS_OUTGOING_CALLS" />
+<uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
+<application
+android:allowBackup="true"
+android:supportsRtl="true">
+
+<service
+    android:name=".service.CallRecordService"
+    android:exported="false" />
+</application>
+</manifest>
+

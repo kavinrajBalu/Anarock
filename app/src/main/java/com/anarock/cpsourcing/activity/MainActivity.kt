@@ -3,6 +3,7 @@ package com.anarock.cpsourcing.activity
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.Observer
@@ -15,7 +16,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.anarock.cpsourcing.R
 import com.anarock.cpsourcing.databinding.ActivityMainBinding
-import com.anarock.cpsourcing.viewModel.LoginSharedViewModel
+import com.anarock.cpsourcing.viewModel.SharedUtilityViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
@@ -25,10 +26,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-         binding  = DataBindingUtil.setContentView(this,R.layout.activity_main)
-
+        binding  = DataBindingUtil.setContentView(this,R.layout.activity_main)
         setSupportActionBar(binding.toolbar)
-
         val host: NavHostFragment = supportFragmentManager
             .findFragmentById(R.id.nav_host_fragment_container) as NavHostFragment? ?: return
 
@@ -45,7 +44,7 @@ class MainActivity : AppCompatActivity() {
         setupActionBar(navController, appBarConfiguration)
 
 
-        val sharedViewModel = ViewModelProvider(this).get(LoginSharedViewModel::class.java)
+        val sharedViewModel = ViewModelProvider(this).get(SharedUtilityViewModel::class.java)
 
         sharedViewModel.getBottomNavigationVisibility().observe(this, Observer {
             if(it)
@@ -56,6 +55,35 @@ class MainActivity : AppCompatActivity() {
             {
                 binding.bottomNavView.visibility = View.GONE
             }
+        })
+
+        sharedViewModel.getToolBarVisibility().observe(this, Observer {
+            if(it)
+            {
+                supportActionBar?.show()
+            }
+            else
+            {
+                supportActionBar?.hide()
+            }
+
+        })
+
+        sharedViewModel.getCustomToolBar().observe(this, Observer {
+            binding.toolbar.background = ContextCompat.getDrawable(this,it.background)
+            binding.toolbar.setTitleTextColor(ContextCompat.getColor(this, it.titleColor))
+        })
+
+        sharedViewModel.getCustomStatusBar().observe(this, Observer {
+            if(it == android.R.color.white)
+            {
+                window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+            }
+            else
+            {
+                window.decorView.systemUiVisibility = 0
+            }
+            window.statusBarColor = ContextCompat.getColor(this, it);
         })
 
         setUpBottomNavigationMenu(navController,binding.bottomNavView)

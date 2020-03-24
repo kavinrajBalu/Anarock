@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".AddNewEvent">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="36dp"
+            android:layout_marginTop="32dp"
+            android:fontFamily="@font/muli_bold"
+            android:text="@string/add_new_event"
+            android:textColor="@color/dark_blue_back"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_close"
+            app:layout_constraintBottom_toBottomOf="@+id/title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.87"
+            app:layout_constraintStart_toEndOf="@+id/title"
+            app:layout_constraintTop_toTopOf="@+id/title"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <View
+            android:id="@+id/divider7"
+            android:layout_width="409dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="28dp"
+            android:background="?android:attr/listDivider"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title" />
+
+        <TextView
+            android:id="@+id/event_title"
+            android:text="@string/choose_event"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/title"
+            app:layout_constraintTop_toBottomOf="@+id/divider7"
+            style="@style/title_bold_style" />
+
+        <Button
+            android:id="@+id/visit_proposed"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton.addNewEvent"
+            android:layout_height="@dimen/_60dp"
+            android:gravity="left|center"
+            android:paddingLeft="@dimen/_20dp"
+            android:text="Visit Proposed"
+            android:textAllCaps="false"
+            app:cornerRadius="@dimen/_25dp"
+            app:icon="@drawable/schedule_indicator"
+            app:iconTint="@color/visit_proposed_indicator"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/event_title"
+            app:layout_constraintTop_toBottomOf="@+id/event_title" />
+
+
+        <Button
+            android:id="@+id/follow_up"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton.addNewEvent"
+            android:layout_height="@dimen/_60dp"
+            android:text="@string/follow_up"
+            app:cornerRadius="@dimen/_25dp"
+            app:icon="@drawable/schedule_indicator"
+            app:iconTint="@color/follow_up_indicator"
+            app:layout_constraintEnd_toEndOf="@+id/visit_proposed"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/visit_proposed"
+            app:layout_constraintTop_toBottomOf="@+id/visit_proposed" />
+
+        <Button
+            android:id="@+id/face_to_face"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton.addNewEvent"
+            android:layout_height="@dimen/_60dp"
+            android:text="@string/face_2_face"
+            app:cornerRadius="@dimen/_25dp"
+            app:icon="@drawable/schedule_indicator"
+            app:iconTint="@color/face_to_face_indicator"
+            app:layout_constraintEnd_toEndOf="@+id/follow_up"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/follow_up"
+            app:layout_constraintTop_toBottomOf="@+id/follow_up" />
+
+        <ImageView
+            android:id="@+id/imageView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="12dp"
+            android:src="@drawable/ic_tick"
+            app:layout_constraintBottom_toBottomOf="@+id/visit_proposed"
+            app:layout_constraintEnd_toEndOf="@+id/visit_proposed"
+            app:layout_constraintTop_toTopOf="@+id/visit_proposed" />
+
+        <ImageView
+            android:id="@+id/imageView9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="12dp"
+            android:src="@drawable/ic_tick"
+            app:layout_constraintBottom_toBottomOf="@+id/follow_up"
+            app:layout_constraintEnd_toEndOf="@+id/follow_up"
+            app:layout_constraintTop_toTopOf="@+id/follow_up" />
+
+        <ImageView
+            android:id="@+id/imageView10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="12dp"
+            android:src="@drawable/ic_tick"
+            app:layout_constraintBottom_toBottomOf="@+id/face_to_face"
+            app:layout_constraintEnd_toEndOf="@+id/face_to_face"
+            app:layout_constraintTop_toTopOf="@+id/face_to_face" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

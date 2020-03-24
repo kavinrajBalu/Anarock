@@ -18,6 +18,7 @@ import com.anarock.cpsourcing.R
 import com.anarock.cpsourcing.databinding.FragmentOtpBinding
 import com.anarock.cpsourcing.utilities.CommonUtilities
 import com.anarock.cpsourcing.viewModel.LoginSharedViewModel
+import com.anarock.cpsourcing.viewModel.SharedUtilityViewModel
 import kotlinx.android.synthetic.main.fragment_otp.*
 
 
@@ -40,6 +41,7 @@ class OtpFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
     private val loginSharedViewModel: LoginSharedViewModel by activityViewModels()
+    private val sharedUtilityViewModel : SharedUtilityViewModel by activityViewModels()
     lateinit var mOTPOne: EditText
     lateinit var mOTPTwo: EditText
     lateinit var mOTPThree: EditText
@@ -235,7 +237,7 @@ class OtpFragment : Fragment() {
                 loginSharedViewModel.verifyOTP(otp, countryId, phoneNo)
                     .observe(viewLifecycleOwner, Observer {
                         findNavController().navigate(R.id.action_global_eventFragement)
-                        loginSharedViewModel.setBottomNavigationVisibility(true)
+                        sharedUtilityViewModel.setBottomNavigationVisibility(true)
                         loginSharedViewModel.setLoginState(LoginSharedViewModel.LoginState.LOGIN_SUCCESS)
                     })
             }

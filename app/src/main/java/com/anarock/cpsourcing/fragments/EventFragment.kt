@@ -4,6 +4,7 @@ import android.Manifest
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.media.MediaRecorder
 import android.os.Bundle
 import android.telephony.PhoneStateListener
 import android.telephony.TelephonyManager
@@ -17,13 +18,17 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import com.anarock.callrecord.CallRecord
 import com.anarock.cpsourcing.R
 import com.anarock.cpsourcing.callHandler.CallStateListener
-import com.anarock.cpsourcing.callHandler.FaceToFaceSuccessCallOverlay
+import com.anarock.cpsourcing.callHandler.EventSuccessCallOverlay
 import com.anarock.cpsourcing.databinding.FragementEventBinding
 import com.anarock.cpsourcing.interfaces.PhoneCallStatusCallBack
+import com.anarock.cpsourcing.model.CustomAppBar
 import com.anarock.cpsourcing.utilities.CommonUtilities
+import com.anarock.cpsourcing.utilities.CommonUtilities.Companion.playCall
 import com.anarock.cpsourcing.viewModel.LoginSharedViewModel
+import com.anarock.cpsourcing.viewModel.SharedUtilityViewModel
 
 
 /**
@@ -34,6 +39,7 @@ import com.anarock.cpsourcing.viewModel.LoginSharedViewModel
 class EventFragment : Fragment() {
 
     private val loginSharedViewModel : LoginSharedViewModel by activityViewModels()
+    private val sharedUtilityViewModel: SharedUtilityViewModel by activityViewModels()
 
     //TODO : All runtime permission goes here
     private  var permissions : Array<String?>  = arrayOfNulls(3)
@@ -47,11 +53,12 @@ class EventFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val binding : FragementEventBinding =  DataBindingUtil.inflate(inflater, R.layout.fragement_event,container,false)
-
+        sharedUtilityViewModel.setToolBarVisibility(false)
+        sharedUtilityViewModel.setCustomStatusBar(R.color.anarock_blue)
         // TODO : For understanding purpose managing login state using viewModel. Use preference to maintain login/logout state.
         loginSharedViewModel.getLoginState().observe(viewLifecycleOwner, Observer {
             if(it == LoginSharedViewModel.LoginState.LOGIN_FAILED) {
-                loginSharedViewModel.setBottomNavigationVisibility(false)
+                sharedUtilityViewModel.setBottomNavigationVisibility(false)
                 findNavController().navigate(R.id.action_eventFragement_to_loginNavigation)
             }
         })
@@ -60,21 +67,34 @@ class EventFragment : Fragment() {
 
         getAllRequiredPermission()
 
-        binding.callCp.setOnClickListener {
+        binding.addEvent.setOnClickListener {
+            findNavController().navigate(R.id.action_eventFragement_to_addNewEvent)
+        }
 
+        binding.callCp.setOnClickListener {
             CommonUtilities.makeCall(requireContext(),"8903653203")
+
+            val callRecord = CallRecord.Builder(requireContext())
+                .setLogEnable(true)
+                .setRecordFileName("sample")
+                .setRecordDirName("8903653203")
+                .setRecordDirPath(requireContext().getExternalFilesDir(null)?.absolutePath)
+                .setAudioSource(MediaRecorder.AudioSource.VOICE_COMMUNICATION)
+                .build()
+            callRecord.startCallReceiver()
 
              callStateListener = CallStateListener(object :PhoneCallStatusCallBack{
                 override fun onCallSuccess() {
                     telephonyManager.listen(callStateListener,PhoneStateListener.LISTEN_NONE)
                     Log.d(CLASS_NAME,"Call success")
+                    callRecord.stopCallReceiver()
+                    playCall(callRecord)
                 }
 
                 override fun onCallFailed() {
                     telephonyManager.listen(callStateListener,PhoneStateListener.LISTEN_NONE)
                     Log.d(CLASS_NAME,"Call failed")
-                    requireActivity().startService(Intent(requireContext(), FaceToFaceSuccessCallOverlay::class.java))
-
+                    requireActivity().startService(Intent(requireContext(), EventSuccessCallOverlay::class.java))
                 }
 
             })
@@ -93,6 +113,10 @@ class EventFragment : Fragment() {
             ActivityCompat.checkSelfPermission(requireContext(),Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED ->
             {
                 permissions[1] = Manifest.permission.CALL_PHONE
+            }
+            ActivityCompat.checkSelfPermission(requireContext(),Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED ->
+            {
+                permissions[1] = Manifest.permission.RECORD_AUDIO
             }
             else -> {
 

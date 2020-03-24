@@ -12,12 +12,8 @@ import com.anarock.cpsourcing.repository.LoginRepository
 import com.google.gson.Gson
 import okhttp3.RequestBody
 
-class LoginSharedViewModel : AndroidViewModel
+class LoginSharedViewModel(application: Application) : AndroidViewModel(application)
  {
-
-     public constructor(application: Application) : super(application)
-
-     private var bottomNavigationVisibility : MutableLiveData<Boolean>  = MutableLiveData()
      private var loginState : MutableLiveData<LoginState>  = MutableLiveData()
      private var mLoginRepository: LoginRepository? = null
 
@@ -46,17 +42,6 @@ class LoginSharedViewModel : AndroidViewModel
 
      fun verifyOTP(otp: String, countryId: Int, phoneNo : String) : LiveData<OtpResponseModel>{
          return LoginRepository.verifyOTP(getApplication(), countryId, phoneNo, otp)
-     }
-
-     fun  setBottomNavigationVisibility(state : Boolean)
-     {
-        bottomNavigationVisibility.value = state
-     }
-
-
-     fun getBottomNavigationVisibility():LiveData<Boolean>
-     {
-         return  bottomNavigationVisibility
      }
 
      fun setLoginState(loginstate : LoginState)
