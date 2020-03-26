@@ -110,12 +110,60 @@
             app:popUpTo="@id/main_navigation_graph"
             app:popUpToInclusive="true" />
         <action
-            android:id="@+id/action_addNewEvent_to_addNewEventProposedFragment"
-            app:destination="@id/addNewEventProposedFragment" />
+            android:id="@+id/action_addNewEvent_to_addNewEventFollowUpFragment"
+            app:destination="@id/addNewEventFollowUpFragment" />
+        <action
+            android:id="@+id/action_addNewEvent_to_addNewEventFaceToFace"
+            app:destination="@id/addNewEventFaceToFace" />
+        <action
+            android:id="@+id/action_addNewEvent_to_leadSearchFragment"
+            app:destination="@id/leadSearchFragment" />
     </fragment>
     <fragment
         android:id="@+id/addNewEventProposedFragment"
         android:name="com.anarock.cpsourcing.AddNewEventProposedFragment"
         android:label="@string/add_new_event"
-        tools:layout="@layout/fragment_add_new_event_proposed" />
+        tools:layout="@layout/fragment_add_new_event_proposed" >
+        <action
+            android:id="@+id/action_addNewEventProposedFragment_to_addNewEvent"
+            app:destination="@id/addNewEvent"
+            app:popUpTo="@id/addNewEvent"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/addNewEventFollowUpFragment"
+        android:name="com.anarock.cpsourcing.AddNewEventFollowUpFragment"
+        android:label="@string/add_new_event"
+        tools:layout="@layout/fragment_add_new_event_follow_up">
+        <action
+            android:id="@+id/action_addNewEventFollowUpFragment_to_addNewEvent"
+            app:destination="@id/addNewEvent"
+            app:popUpTo="@id/addNewEvent"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/addNewEventFaceToFace"
+        android:name="com.anarock.cpsourcing.AddNewEventFaceToFaceFragment"
+        android:label="@string/add_new_event"
+        tools:layout="@layout/fragment_add_new_event_face_to_face">
+        <action
+            android:id="@+id/action_addNewEventFaceToFace_to_addNewEvent"
+            app:destination="@id/addNewEvent"
+            app:popUpTo="@id/addNewEvent"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/leadSearchFragment"
+        android:name="com.anarock.cpsourcing.LeadSearchFragment"
+        android:label="fragment_lead_search"
+        tools:layout="@layout/fragment_lead_search" >
+        <action
+            android:id="@+id/action_leadSearchFragment_to_addNewEventProposedFragment"
+            app:destination="@id/addNewEventProposedFragment" />
+        <action
+            android:id="@+id/action_leadSearchFragment_to_addNewEvent"
+            app:destination="@id/addNewEvent"
+            app:popUpTo="@id/addNewEvent"
+            app:popUpToInclusive="true" />
+    </fragment>
 </navigation>

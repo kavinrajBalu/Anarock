@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".AddNewEventFaceToFaceFragment">
+
+
+        <View
+            android:id="@+id/divider11"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="1dp"
+            android:background="?android:attr/listDivider"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView16"
+            style="@style/sub_title_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="12dp"
+            android:text="@string/event_type"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/divider11" />
+
+        <Button
+            android:id="@+id/event_type"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton.addNewEvent"
+            android:layout_width="378dp"
+            android:layout_height="63dp"
+            android:layout_marginTop="12dp"
+            android:text="@string/face_2_face"
+            app:cornerRadius="@dimen/_25dp"
+            app:icon="@drawable/schedule_indicator"
+            app:iconTint="@color/face_to_face_indicator"
+            app:layout_constraintEnd_toEndOf="@+id/textView17"
+            app:layout_constraintStart_toStartOf="@+id/textView16"
+            app:layout_constraintTop_toBottomOf="@+id/textView16"
+            app:strokeColor="@color/blue" />
+
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/ic_tick_blue"
+            app:layout_constraintBottom_toBottomOf="@+id/event_type"
+            app:layout_constraintEnd_toEndOf="@+id/event_type"
+            app:layout_constraintTop_toTopOf="@+id/event_type"
+            app:layout_constraintVertical_bias="0.512" />
+
+        <TextView
+            android:id="@+id/textView17"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/muli_regular"
+            android:text="Clear"
+            android:textColor="@color/blue"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView18"
+            style="@style/sub_title_style"
+            android:layout_width="32dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            android:drawableRight="@drawable/ic_red"
+            android:text="@string/cp"
+            app:layout_constraintStart_toStartOf="@+id/event_type"
+            app:layout_constraintTop_toBottomOf="@+id/event_type" />
+
+        <include
+            android:id="@+id/include"
+            layout="@layout/custom_search_field"
+            android:layout_width="378dp"
+            android:layout_height="59dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="@+id/event_type"
+            app:layout_constraintHorizontal_bias="0.515"
+            app:layout_constraintStart_toStartOf="@+id/textView18"
+            app:layout_constraintTop_toBottomOf="@+id/textView18" />
+
+        <TextView
+            android:id="@+id/textView19"
+            style="@style/sub_title_style"
+            android:layout_width="100dp"
+            android:layout_height="18dp"
+            android:layout_marginTop="20dp"
+            android:drawableRight="@drawable/ic_red"
+            android:text="@string/date_time_text"
+            app:layout_constraintStart_toStartOf="@+id/include"
+            app:layout_constraintTop_toBottomOf="@+id/include" />
+
+        <include
+            android:id="@+id/include2"
+            layout="@layout/custom_spinner"
+            android:layout_width="378dp"
+            android:layout_height="59dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="@+id/include"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/textView19"
+            app:layout_constraintTop_toBottomOf="@+id/textView19" />
+
+        <TextView
+            android:id="@+id/textView20"
+            style="@style/sub_title_style"
+            android:layout_width="115dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/set_reminder"
+            app:layout_constraintStart_toStartOf="@+id/include2"
+            app:layout_constraintTop_toBottomOf="@+id/include2" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/reminder_chip_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:chipSpacing="@dimen/_10dp"
+            app:layout_constraintEnd_toEndOf="@+id/include2"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/textView20"
+            app:layout_constraintTop_toBottomOf="@+id/textView20"
+            app:singleLine="true"
+            app:singleSelection="true">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/thirty_min"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:clickable="true"
+                android:fontFamily="@font/muli_regular"
+                android:padding="@dimen/_30dp"
+                android:text="@string/thirty_mins"
+                android:textColor="@color/chip_dark_blue_text_color_selector"
+                android:textSize="18sp"
+                app:chipBackgroundColor="@android:color/white"
+                app:chipEndPadding="@dimen/_10dp"
+                app:chipMinHeight="@dimen/_40dp"
+                app:chipStartPadding="@dimen/_10dp"
+                app:chipStrokeColor="@color/chip_blue_grey_stroke_selector"
+                app:chipStrokeWidth="@dimen/_1dp"
+                app:chipSurfaceColor="@color/blue"
+                app:rippleColor="@color/light_grey" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/one_hour"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:fontFamily="@font/muli_regular"
+                android:padding="@dimen/_30dp"
+                android:text="@string/one_hour"
+                android:textColor="@color/chip_dark_blue_text_color_selector"
+                android:textSize="18sp"
+                app:chipBackgroundColor="@android:color/white"
+                app:chipEndPadding="@dimen/_10dp"
+                app:chipMinHeight="@dimen/_40dp"
+                app:chipStartPadding="@dimen/_10dp"
+                app:chipStrokeColor="@color/chip_blue_grey_stroke_selector"
+                app:chipStrokeWidth="@dimen/_1dp"
+                app:rippleColor="@color/light_grey" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/two_hour"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/muli_regular"
+                android:padding="@dimen/_30dp"
+                android:text="@string/two_hours"
+                android:textColor="@color/chip_dark_blue_text_color_selector"
+                android:textSize="18sp"
+                app:chipBackgroundColor="@android:color/white"
+                app:chipEndPadding="@dimen/_10dp"
+                app:chipMinHeight="@dimen/_40dp"
+                app:chipStartPadding="@dimen/_10dp"
+                app:chipStrokeColor="@color/chip_blue_grey_stroke_selector"
+                app:chipStrokeWidth="@dimen/_1dp"
+                app:rippleColor="@color/light_grey" />
+        </com.google.android.material.chip.ChipGroup>
+
+        <EditText
+            android:id="@+id/notes"
+            style="@style/add_note_style"
+            android:layout_width="379dp"
+            android:layout_height="109dp"
+            android:layout_marginTop="12dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/reminder_chip_group"
+            app:layout_constraintTop_toBottomOf="@+id/reminder_chip_group" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button"
+            android:layout_width="146dp"
+            android:layout_height="63dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="@dimen/_20dp"
+            android:fontFamily="@font/muli_regular"
+            android:paddingLeft="@dimen/_30dp"
+            android:paddingRight="@dimen/_30dp"
+            android:text="Add event"
+            app:elevation="@dimen/_10dp"
+            android:background="@color/anarock_blue"
+            android:textAllCaps="false"
+            app:cornerRadius="@dimen/_30dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/notes"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/notes"
+            app:layout_constraintVertical_bias="0.0" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

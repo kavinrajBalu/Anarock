@@ -42,6 +42,11 @@ class ApiClient {
             return getClient()?.create(ApiService::class.java)
         }
 
+        fun getEventApiService():EventAPIService?
+        {
+            return getClient()?.create(EventAPIService::class.java)
+        }
+
         fun setDomainName(domainType:String, domainName : String){
             DOMAIN_NAME = "$domainType.$domainName"
             println("domainName:$DOMAIN_NAME")

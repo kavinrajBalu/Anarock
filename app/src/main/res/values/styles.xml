@@ -3,8 +3,8 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimary">@color/blue</item>
+        <item name="colorPrimaryDark">@color/blue</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
@@ -101,6 +101,17 @@
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/dark_blue_back</item>
         <item name="android:textSize">@dimen/_12dp</item>
+    </style>
+
+    <style name="sub_title_style" parent="title_bold_style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/_14dp</item>
+    </style>
+
+    <style name="DialogTheme" parent="ThemeOverlay.MaterialComponents.Dialog" >
+        <item name="colorAccent">@color/blue</item>
+        <item name="colorPrimary">@color/blue</item>
     </style>
 
 </resources>

@@ -14,6 +14,7 @@
 
         <TextView
             android:id="@+id/title"
+            style="@style/sub_title_style"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="36dp"
@@ -21,6 +22,7 @@
             android:fontFamily="@font/muli_bold"
             android:text="@string/add_new_event"
             android:textColor="@color/dark_blue_back"
+            android:textSize="@dimen/_16dp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -49,22 +51,26 @@
 
         <TextView
             android:id="@+id/event_title"
-            android:text="@string/choose_event"
+            style="@style/title_bold_style"
+            android:fontFamily="@font/muli_bold"
+            android:text="@string/choose_event_type"
+            android:textSize="@dimen/_16dp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/title"
-            app:layout_constraintTop_toBottomOf="@+id/divider7"
-            style="@style/title_bold_style" />
+            app:layout_constraintTop_toBottomOf="@+id/divider7" />
 
         <Button
             android:id="@+id/visit_proposed"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton.addNewEvent"
-            android:layout_height="@dimen/_60dp"
+            android:layout_width="343dp"
+            android:layout_height="67dp"
             android:gravity="left|center"
             android:paddingLeft="@dimen/_20dp"
             android:text="Visit Proposed"
             android:textAllCaps="false"
-            app:cornerRadius="@dimen/_25dp"
+            app:cornerRadius="@dimen/_30dp"
             app:icon="@drawable/schedule_indicator"
             app:iconTint="@color/visit_proposed_indicator"
             app:layout_constraintEnd_toEndOf="parent"
@@ -76,9 +82,9 @@
         <Button
             android:id="@+id/follow_up"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton.addNewEvent"
-            android:layout_height="@dimen/_60dp"
+            android:layout_height="67dp"
             android:text="@string/follow_up"
-            app:cornerRadius="@dimen/_25dp"
+            app:cornerRadius="@dimen/_30dp"
             app:icon="@drawable/schedule_indicator"
             app:iconTint="@color/follow_up_indicator"
             app:layout_constraintEnd_toEndOf="@+id/visit_proposed"
@@ -89,9 +95,9 @@
         <Button
             android:id="@+id/face_to_face"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton.addNewEvent"
-            android:layout_height="@dimen/_60dp"
+            android:layout_height="67dp"
             android:text="@string/face_2_face"
-            app:cornerRadius="@dimen/_25dp"
+            app:cornerRadius="@dimen/_30dp"
             app:icon="@drawable/schedule_indicator"
             app:iconTint="@color/face_to_face_indicator"
             app:layout_constraintEnd_toEndOf="@+id/follow_up"
@@ -100,33 +106,37 @@
             app:layout_constraintTop_toBottomOf="@+id/follow_up" />
 
         <ImageView
-            android:id="@+id/imageView6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="12dp"
-            android:src="@drawable/ic_tick"
-            app:layout_constraintBottom_toBottomOf="@+id/visit_proposed"
-            app:layout_constraintEnd_toEndOf="@+id/visit_proposed"
-            app:layout_constraintTop_toTopOf="@+id/visit_proposed" />
-
-        <ImageView
             android:id="@+id/imageView9"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="12dp"
+            android:layout_marginEnd="20dp"
             android:src="@drawable/ic_tick"
             app:layout_constraintBottom_toBottomOf="@+id/follow_up"
             app:layout_constraintEnd_toEndOf="@+id/follow_up"
-            app:layout_constraintTop_toTopOf="@+id/follow_up" />
+            app:layout_constraintTop_toTopOf="@+id/follow_up"
+            app:layout_constraintVertical_bias="0.488" />
+
+        <ImageView
+            android:id="@+id/imageView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:src="@drawable/ic_tick"
+            app:layout_constraintBottom_toBottomOf="@+id/visit_proposed"
+            app:layout_constraintEnd_toEndOf="@+id/visit_proposed"
+            app:layout_constraintTop_toTopOf="@+id/visit_proposed"
+            app:layout_constraintVertical_bias="0.488" />
 
         <ImageView
             android:id="@+id/imageView10"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="12dp"
+            android:layout_marginEnd="20dp"
             android:src="@drawable/ic_tick"
             app:layout_constraintBottom_toBottomOf="@+id/face_to_face"
             app:layout_constraintEnd_toEndOf="@+id/face_to_face"
-            app:layout_constraintTop_toTopOf="@+id/face_to_face" />
+            app:layout_constraintTop_toTopOf="@+id/face_to_face"
+            app:layout_constraintVertical_bias="0.488" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

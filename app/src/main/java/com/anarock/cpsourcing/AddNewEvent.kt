@@ -33,7 +33,15 @@ class AddNewEvent : Fragment() {
             gotoEventScreen()
         }
         binding.visitProposed.setOnClickListener {
-            findNavController().navigate(R.id.action_addNewEvent_to_addNewEventProposedFragment)
+            findNavController().navigate(R.id.action_addNewEvent_to_leadSearchFragment)
+        }
+
+        binding.followUp.setOnClickListener {
+            findNavController().navigate(R.id.action_addNewEvent_to_addNewEventFollowUpFragment)
+        }
+
+        binding.faceToFace.setOnClickListener {
+            findNavController().navigate(R.id.action_addNewEvent_to_addNewEventFaceToFace)
         }
         return binding.root
     }

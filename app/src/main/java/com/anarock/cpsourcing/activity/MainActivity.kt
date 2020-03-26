@@ -1,9 +1,11 @@
 package com.anarock.cpsourcing.activity
 
+import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.view.get
 import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.Observer
@@ -17,6 +19,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.anarock.cpsourcing.R
 import com.anarock.cpsourcing.databinding.ActivityMainBinding
 import com.anarock.cpsourcing.viewModel.SharedUtilityViewModel
+import com.google.android.material.badge.BadgeDrawable
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
@@ -27,6 +30,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding  = DataBindingUtil.setContentView(this,R.layout.activity_main)
+        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         setSupportActionBar(binding.toolbar)
         val host: NavHostFragment = supportFragmentManager
             .findFragmentById(R.id.nav_host_fragment_container) as NavHostFragment? ?: return
@@ -93,8 +97,8 @@ class MainActivity : AppCompatActivity() {
         navController: NavController,
         bottomNavView: BottomNavigationView
     ) {
-        /*val badge: BadgeDrawable = bottomNavView.getOrCreateBadge(binding.bottomNavView.menu[2].itemId)
-        badge.number = 10*/
+        val badge: BadgeDrawable = bottomNavView.getOrCreateBadge(binding.bottomNavView.menu[2].itemId)
+        badge.number = 10
         bottomNavView.setupWithNavController(navController)
     }
 
