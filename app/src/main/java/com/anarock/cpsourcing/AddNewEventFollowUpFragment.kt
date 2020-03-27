@@ -87,8 +87,31 @@ class AddNewEventFollowUpFragment : Fragment() {
         binding.clear.setOnClickListener {
             clearAllFields()
         }
+        binding.addEvent.setOnClickListener {
+            if(isMandatoryFieldFilled())
+            {
+
+            }
+        }
         // Inflate the layout for this fragment
         return binding.root
+    }
+
+    private fun isMandatoryFieldFilled(): Boolean {
+        var isSuccess = true
+        if( binding.cpSpinner.field.spinner.text.isEmpty())
+        {
+            binding.cpSpinner.field.error = "CP required"
+            isSuccess= false
+        }
+
+        if(binding.dateTime.field.spinner.text.isEmpty())
+        {
+            binding.dateTime.field.error = "Date time required"
+            isSuccess= false
+        }
+
+        return isSuccess
     }
 
     private fun clearAllFields() {
