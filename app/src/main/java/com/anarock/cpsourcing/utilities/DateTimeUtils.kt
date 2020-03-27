@@ -3,7 +3,7 @@ package com.anarock.cpsourcing.utilities
 import java.text.SimpleDateFormat
 import java.util.*
 
-object TimeUtils {
+object DateTimeUtils {
 
     fun getTimeTwentyMinutesAhead(calendar: Calendar): Calendar {
         val temp = Calendar.getInstance()
@@ -84,6 +84,12 @@ object TimeUtils {
         scheduleTime.set(Calendar.SECOND,0)
         scheduleTime.set(Calendar.MILLISECOND,0)
         return scheduleTime == elevenAm
+    }
+
+    fun customDateTimeString(pattern : String ,calendar: Calendar):String
+    {
+        val format = SimpleDateFormat(pattern)
+        return format.format(calendar.time)
     }
 
 }

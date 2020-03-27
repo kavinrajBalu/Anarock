@@ -1,6 +1,10 @@
 package com.anarock.cpsourcing
 
+import android.app.DatePickerDialog
+import android.app.DatePickerDialog.OnDateSetListener
+import android.app.TimePickerDialog
 import android.os.Bundle
+import android.text.InputType
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +14,11 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.anarock.cpsourcing.databinding.FragmentAddNewEventFollowUpBinding
 import com.anarock.cpsourcing.model.CustomAppBar
+import com.anarock.cpsourcing.utilities.DateTimeUtils
 import com.anarock.cpsourcing.viewModel.SharedUtilityViewModel
+import kotlinx.android.synthetic.main.custom_spinner.view.*
+import kotlinx.android.synthetic.main.custom_text_field.view.*
+import java.util.*
 
 /**
  * A simple [Fragment] subclass.
@@ -22,6 +30,9 @@ class AddNewEventFollowUpFragment : Fragment() {
     private val sharedUtilityViewModel : SharedUtilityViewModel by activityViewModels()
 
     private lateinit var binding : FragmentAddNewEventFollowUpBinding
+    private lateinit var datePickerDialog: DatePickerDialog
+    private val DATE_FORMAT = "EE, MMM dd - hh:ssaa"
+    val myCalendar = Calendar.getInstance()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -30,11 +41,66 @@ class AddNewEventFollowUpFragment : Fragment() {
         sharedUtilityViewModel.setToolBarVisibility(true)
         sharedUtilityViewModel.setCustomToolBar(CustomAppBar(android.R.color.white,R.color.anarock_blue))
         sharedUtilityViewModel.setCustomStatusBar(android.R.color.white)
+        initViews()
         binding.eventType.setOnClickListener {
             findNavController().navigate(R.id.action_addNewEventFollowUpFragment_to_addNewEvent)
         }
+        binding.dateTime.setOnClickListener {
+            if(datePickerDialog.isShowing)
+            {
+                datePickerDialog.dismiss()
+            }
+            datePickerDialog.show()
+        }
+
+        binding.dateTime.field.spinner.setOnClickListener {
+            if(datePickerDialog.isShowing)
+            {
+                datePickerDialog.dismiss()
+            }
+            datePickerDialog.show()
+        }
+
+        val time = TimePickerDialog.OnTimeSetListener { view, hourOfDay, minute ->
+            myCalendar[Calendar.HOUR_OF_DAY] = hourOfDay
+            myCalendar[Calendar.MINUTE] = minute
+            binding.dateTime.field.spinner.setText(DateTimeUtils.customDateTimeString(DATE_FORMAT,myCalendar))
+        }
+
+        val timePickerDialog  = TimePickerDialog(requireContext(),R.style.DialogTheme,time,
+            Calendar.HOUR_OF_DAY,
+            Calendar.MINUTE,false)
+        val date =
+            OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+                myCalendar[Calendar.YEAR] = year
+                myCalendar[Calendar.MONTH] = monthOfYear
+                myCalendar[Calendar.DAY_OF_MONTH] = dayOfMonth
+                timePickerDialog.show()
+                //updateLabel()
+            }
+
+        datePickerDialog = DatePickerDialog(
+            requireContext(),R.style.DialogTheme ,date, myCalendar
+                .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+            myCalendar.get(Calendar.DAY_OF_MONTH)
+        )
+        binding.clear.setOnClickListener {
+            clearAllFields()
+        }
         // Inflate the layout for this fragment
         return binding.root
+    }
+
+    private fun clearAllFields() {
+        binding.cpSpinner.field.spinner.text.clear()
+        binding.dateTime.field.spinner.text.clear()
+        binding.reminderChipGroup.clearCheck()
+        binding.notes.text.clear()
+    }
+
+    private fun initViews() {
+        binding.cpSpinner.field.spinner.hint = getString(R.string.select_cp)
+        binding.dateTime.field.spinner.hint = getString(R.string.date_time_hint)
     }
 
 }

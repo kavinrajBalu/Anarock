@@ -21,6 +21,7 @@ import androidx.lifecycle.ViewModel
 import androidx.navigation.fragment.findNavController
 import com.anarock.cpsourcing.databinding.FragmentAddNewEventProposedBinding
 import com.anarock.cpsourcing.model.CustomAppBar
+import com.anarock.cpsourcing.utilities.DateTimeUtils
 import com.anarock.cpsourcing.viewModel.CreateEventProposedViewModel
 import com.anarock.cpsourcing.viewModel.SharedUtilityViewModel
 import com.google.android.material.chip.Chip
@@ -39,6 +40,7 @@ class AddNewEventProposedFragment : Fragment() {
     private lateinit var binding : FragmentAddNewEventProposedBinding
     private lateinit var projectSpinner : Spinner
     private lateinit var datePickerDialog: DatePickerDialog
+    private val DATE_FORMAT = "EE, MMM dd - hh:ssaa"
     val myCalendar = Calendar.getInstance()
         override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -66,7 +68,7 @@ class AddNewEventProposedFragment : Fragment() {
             val time = TimePickerDialog.OnTimeSetListener { view, hourOfDay, minute ->
                      myCalendar[Calendar.HOUR_OF_DAY] = hourOfDay
                      myCalendar[Calendar.MINUTE] = minute
-                binding.dateTime.field.spinner.setText(myCalendar.time.toString())
+                binding.dateTime.field.spinner.setText(DateTimeUtils.customDateTimeString(DATE_FORMAT,myCalendar))
             }
 
             val timePickerDialog  = TimePickerDialog(requireContext(),R.style.DialogTheme,time,Calendar.HOUR_OF_DAY,Calendar.MINUTE,false)
@@ -97,7 +99,48 @@ class AddNewEventProposedFragment : Fragment() {
             binding.clear.setOnClickListener {
                    clearAllFields()
             }
+
+            binding.addEvent.setOnClickListener {
+                if(isMandatoryFieldFilled())
+                {
+
+                }
+            }
             return binding.root
+    }
+
+    private fun isMandatoryFieldFilled(): Boolean {
+        var isSuccess = true
+        if(binding.projectSpinner.field.spinner.text.isEmpty())
+        {
+            binding.projectSpinner.field.error = "Project required"
+            isSuccess= false
+        }
+
+        if( binding.cpSpinner.field.spinner.text.isEmpty())
+        {
+            binding.cpSpinner.field.error = "CP required"
+            isSuccess= false
+        }
+
+        if(binding.leadName.field.spinner.text.isEmpty())
+        {
+            binding.leadName.field.error = "Lead name required"
+            isSuccess= false
+        }
+
+        if(binding.leadPhoneNumber.customTextInput.editText?.text?.isEmpty() == true)
+        {
+            binding.leadPhoneNumber.customTextInput.error = "Phone number required"
+            isSuccess= false
+        }
+
+        if(binding.dateTime.field.spinner.text.isEmpty())
+        {
+            binding.dateTime.field.error = "Date time required"
+            isSuccess= false
+        }
+     return isSuccess
     }
 
     private fun clearAllFields() {

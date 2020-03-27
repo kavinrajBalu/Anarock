@@ -94,7 +94,7 @@
                android:id="@+id/project_spinner"
                layout="@layout/custom_spinner"
                android:layout_width="377dp"
-               android:layout_height="60dp"
+               android:layout_height="wrap_content"
                android:layout_marginTop="4dp"
                app:layout_constraintEnd_toEndOf="@+id/event_type"
                app:layout_constraintHorizontal_bias="0.0"
@@ -116,7 +116,7 @@
                android:id="@+id/cp_spinner"
                layout="@layout/custom_search_field"
                android:layout_width="378dp"
-               android:layout_height="59dp"
+               android:layout_height="wrap_content"
                android:layout_marginTop="8dp"
                app:layout_constraintEnd_toEndOf="@+id/project_spinner"
                app:layout_constraintHorizontal_bias="0.0"
@@ -149,7 +149,7 @@
                android:id="@+id/lead_name"
                layout="@layout/custom_search_field"
                android:layout_width="378dp"
-               android:layout_height="59dp"
+               android:layout_height="wrap_content"
                app:layout_constraintBottom_toBottomOf="parent"
                app:layout_constraintEnd_toEndOf="@+id/cp_spinner"
                app:layout_constraintHorizontal_bias="0.0"
@@ -161,7 +161,7 @@
                android:id="@+id/lead_phone_number"
                layout="@layout/custom_text_field"
                android:layout_width="378dp"
-               android:layout_height="59dp"
+               android:layout_height="wrap_content"
                app:layout_constraintEnd_toEndOf="@+id/lead_name"
                app:layout_constraintHorizontal_bias="0.0"
                app:layout_constraintStart_toStartOf="@+id/textView13"
@@ -182,8 +182,9 @@
                android:id="@+id/date_time"
                layout="@layout/custom_spinner"
                android:layout_width="378dp"
-               android:layout_height="59dp"
+               android:layout_height="wrap_content"
                app:layout_constraintEnd_toEndOf="@+id/lead_phone_number"
+               app:layout_constraintHorizontal_bias="0.0"
                app:layout_constraintStart_toStartOf="@+id/lead_phone_number"
                app:layout_constraintTop_toBottomOf="@+id/textView15" />
 
@@ -281,7 +282,7 @@
                app:layout_constraintTop_toBottomOf="@+id/reminder_chip_group" />
 
            <com.google.android.material.button.MaterialButton
-               android:id="@+id/button"
+               android:id="@+id/add_event"
                android:layout_width="146dp"
                android:layout_height="63dp"
                android:layout_marginTop="20dp"
