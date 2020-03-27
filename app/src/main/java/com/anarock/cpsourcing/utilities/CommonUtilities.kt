@@ -1,12 +1,15 @@
 package com.anarock.cpsourcing.utilities
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.media.MediaPlayer
 import android.net.Uri
 import android.util.Log
 import android.util.Patterns
+import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import com.anarock.callrecord.CallRecord
 import java.io.File
@@ -75,6 +78,28 @@ class CommonUtilities{
             }
 
             return  mp
+        }
+
+        fun hideKeyboard(activity: Activity) {
+            val imm =
+                activity.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+            //Find the currently focused view, so we can grab the correct window token from it.
+            var view = activity.currentFocus
+            //If no view currently has focus, create a new one, just so we can grab a window token from it
+            if (view == null) {
+                view = View(activity)
+            }
+            imm.hideSoftInputFromWindow(view.windowToken, 0)
+        }
+
+        fun showKeyBoard(context: Context)
+        {
+            val inputMethodManager =
+                context!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            inputMethodManager.toggleSoftInput(
+                InputMethodManager.SHOW_FORCED,
+                0
+            )
         }
     }
 }

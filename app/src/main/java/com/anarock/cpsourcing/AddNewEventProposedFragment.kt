@@ -103,7 +103,7 @@ class AddNewEventProposedFragment : Fragment() {
     private fun clearAllFields() {
         binding.projectSpinner.field.spinner.text.clear()
         binding.cpSpinner.field.spinner.text.clear()
-        binding.leadName.customTextInput.editText?.text?.clear()
+        binding.leadName.field.spinner.text?.clear()
         binding.leadPhoneNumber.customTextInput.editText?.text?.clear()
         binding.dateTime.field.spinner.text.clear()
         binding.reminderChipGroup.clearCheck()
@@ -112,8 +112,8 @@ class AddNewEventProposedFragment : Fragment() {
 
     private fun initViews() {
         binding.projectSpinner.field.spinner.hint = getString(R.string.select_project)
-       // binding.cpSpinner.field.spinner.hint = getString(R.string.select_cp)
-        binding.leadName.customTextInput.editText?.hint = getString(R.string.enter_lead_name)
+        binding.cpSpinner.field.spinner.hint = getString(R.string.select_cp)
+        binding.leadName.field.spinner.hint = getString(R.string.enter_lead_name)
         binding.leadPhoneNumber.customTextInput.editText?.inputType = InputType.TYPE_CLASS_PHONE
         binding.leadPhoneNumber.customTextInput.editText?.hint = getString(R.string.lead_phone_number)
         binding.dateTime.field.spinner.hint = getString(R.string.date_time_hint)

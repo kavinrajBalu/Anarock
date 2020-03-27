@@ -116,8 +116,8 @@
             android:id="@+id/action_addNewEvent_to_addNewEventFaceToFace"
             app:destination="@id/addNewEventFaceToFace" />
         <action
-            android:id="@+id/action_addNewEvent_to_leadSearchFragment"
-            app:destination="@id/leadSearchFragment" />
+            android:id="@+id/action_addNewEvent_to_addNewEventProposedFragment"
+            app:destination="@id/addNewEventProposedFragment" />
     </fragment>
     <fragment
         android:id="@+id/addNewEventProposedFragment"
@@ -156,14 +156,5 @@
         android:id="@+id/leadSearchFragment"
         android:name="com.anarock.cpsourcing.LeadSearchFragment"
         android:label="fragment_lead_search"
-        tools:layout="@layout/fragment_lead_search" >
-        <action
-            android:id="@+id/action_leadSearchFragment_to_addNewEventProposedFragment"
-            app:destination="@id/addNewEventProposedFragment" />
-        <action
-            android:id="@+id/action_leadSearchFragment_to_addNewEvent"
-            app:destination="@id/addNewEvent"
-            app:popUpTo="@id/addNewEvent"
-            app:popUpToInclusive="true" />
-    </fragment>
+        tools:layout="@layout/fragment_lead_search" />
 </navigation>

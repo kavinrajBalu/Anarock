@@ -147,7 +147,7 @@
 
            <include
                android:id="@+id/lead_name"
-               layout="@layout/custom_text_field"
+               layout="@layout/custom_search_field"
                android:layout_width="378dp"
                android:layout_height="59dp"
                app:layout_constraintBottom_toBottomOf="parent"
