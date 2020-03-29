@@ -18,7 +18,7 @@ import java.io.FileInputStream
 import java.util.*
 import java.util.regex.Pattern
 
-class CommonUtilities{
+class CommonUtilities {
     companion object {
         private const val indiaMobilePattern: String =
             "^(?:(?:\\+|0{0,2})91(\\s*[\\-]\\s*)?|[0]?)?[789]\\d{9}$"
@@ -42,8 +42,8 @@ class CommonUtilities{
             return num.trim().length in 7..10
         }
 
-        fun isNetworkConnected(mContext: Context) : Boolean{
-            return if (NetworkUtil.isInternetConnected(mContext)){
+        fun isNetworkConnected(mContext: Context): Boolean {
+            return if (NetworkUtil.isInternetConnected(mContext)) {
                 true
             } else {
                 Log.e("NetworkConnected", "Check your internet connection!");
@@ -57,15 +57,13 @@ class CommonUtilities{
                 .isEmpty() || data == "null" || data == "")
         }
 
-        fun getSecondsDifference(startTime : Date, endtime : Date):Long
-        {
+        fun getSecondsDifference(startTime: Date, endtime: Date): Long {
             val diff: Long = endtime.time - startTime.time
-            return  (diff/1000) % 60
+            return (diff / 1000) % 60
         }
 
         @SuppressLint("MissingPermission")
-        fun makeCall(context: Context, phoneNumber : String)
-        {
+        fun makeCall(context: Context, phoneNumber: String) {
             val uri = "tel:" + phoneNumber.trim()
             val intent = Intent(Intent.ACTION_CALL)
             intent.data = Uri.parse(uri)

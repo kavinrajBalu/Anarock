@@ -5,6 +5,7 @@ import android.content.Context
 import android.os.Bundle
 import android.os.PowerManager
 import android.view.View
+import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.get
@@ -26,7 +27,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var appBarConfiguration : AppBarConfiguration
+    private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,11 +42,12 @@ class MainActivity : AppCompatActivity() {
 
         appBarConfiguration = AppBarConfiguration(navController.graph)
 
-        val drawerLayout : DrawerLayout? = findViewById(R.id.drawer_layout)
+        val drawerLayout: DrawerLayout? = findViewById(R.id.drawer_layout)
 
         appBarConfiguration = AppBarConfiguration(
-            setOf(R.id.eventFragement,R.id.companyCode),
-            drawerLayout)
+            setOf(R.id.eventFragement, R.id.companyCode),
+            drawerLayout
+        )
 
         setupActionBar(navController, appBarConfiguration)
 
@@ -53,14 +55,42 @@ class MainActivity : AppCompatActivity() {
         val sharedViewModel = ViewModelProvider(this).get(SharedUtilityViewModel::class.java)
 
         sharedViewModel.getBottomNavigationVisibility().observe(this, Observer {
-            if(it)
-            {
+            if (it) {
                 binding.bottomNavView.visibility = View.VISIBLE
-            }
-            else
-            {
+            } else {
                 binding.bottomNavView.visibility = View.GONE
+
             }
+        })
+      /*  Observer {
+            if(it){
+                binding.toolbar.navigationIcon= getDrawable(R.drawable.ic_back_black)
+                binding.toolbar.background = ContextCompat.getDrawable(this, android.R.color.white)
+                binding.toolbar.title = " "
+            }else{
+                binding.toolbar.navigationIcon= getDrawable(R.drawable.ic_back)
+                binding.toolbar.background = ContextCompat.getDrawable(this, R.color.colorPrimary)
+            }
+        }
+*/
+        sharedViewModel.getToolbarTheme().observe(this, Observer {
+            if(!it.isFirstFragment)
+                binding.toolbar.navigationIcon= getDrawable(R.drawable.ic_back_black)
+            else
+                binding.toolbar.navigationIcon= null
+
+            if(it.isLightTheme){
+                binding.toolbar.background = ContextCompat.getDrawable(this, android.R.color.white)
+                binding.toolbar.title = " "
+
+                window.setStatusBarColor(ContextCompat.getColor(this, android.R.color.white));
+
+            }else{
+                binding.toolbar.navigationIcon= getDrawable(R.drawable.ic_back)
+                binding.toolbar.background = ContextCompat.getDrawable(this, R.color.colorPrimary)
+                window.setStatusBarColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
+            }
+
         })
 
         sharedViewModel.getToolBarVisibility().observe(this, Observer {
@@ -104,8 +134,9 @@ class MainActivity : AppCompatActivity() {
         bottomNavView.setupWithNavController(navController)
     }
 
-    private fun setupActionBar(navController: NavController,
-                               appBarConfig : AppBarConfiguration
+    private fun setupActionBar(
+        navController: NavController,
+        appBarConfig: AppBarConfiguration
     ) {
         setupActionBarWithNavController(navController, appBarConfig)
     }

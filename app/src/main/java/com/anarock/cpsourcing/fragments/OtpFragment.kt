@@ -16,19 +16,19 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.anarock.cpsourcing.R
 import com.anarock.cpsourcing.databinding.FragmentOtpBinding
+import com.anarock.cpsourcing.model.ToolBarTheme
 import com.anarock.cpsourcing.utilities.CommonUtilities
 import com.anarock.cpsourcing.utilities.Constants
 import com.anarock.cpsourcing.utilities.SharedPreferenceUtil
 import com.anarock.cpsourcing.viewModel.LoginSharedViewModel
-import com.anarock.cpsourcing.viewModel.SharedUtilityViewModel
 import kotlinx.android.synthetic.main.fragment_otp.*
+import com.anarock.cpsourcing.utilities.SMSRetrieverClient
 
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
-
 /**
  * A simple [Fragment] subclass.
  * Use the [OtpFragment.newInstance] factory method to
@@ -48,7 +48,6 @@ class OtpFragment : Fragment() {
     lateinit var mOTPTwo: EditText
     lateinit var mOTPThree: EditText
     lateinit var mOTPFour: EditText
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -262,6 +261,7 @@ class OtpFragment : Fragment() {
             }
 
         }
+
     }
 
     companion object {
@@ -282,5 +282,7 @@ class OtpFragment : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
+
+
     }
 }

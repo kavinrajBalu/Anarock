@@ -14,7 +14,7 @@
         android:paddingTop="70dp"
         android:paddingEnd="30dp"
         android:paddingBottom="40dp"
-        tools:context=".fragments.CompanyCode">
+        tools:context=".fragments.CompanyCodeFragment">
 
         <TextView
             android:id="@+id/cc_title_text"

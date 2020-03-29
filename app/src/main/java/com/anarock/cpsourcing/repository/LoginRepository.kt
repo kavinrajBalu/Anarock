@@ -9,6 +9,7 @@ import com.anarock.cpsourcing.model.*
 import com.anarock.cpsourcing.retrofit.ApiClient
 import com.anarock.cpsourcing.retrofit.ApiService
 import com.anarock.cpsourcing.utilities.CommonUtilities
+import com.anarock.cpsourcing.utilities.ErrorUtils
 import com.google.gson.Gson
 import okhttp3.RequestBody
 import retrofit2.Call
@@ -39,7 +40,8 @@ class LoginRepository {
                             tenantDomainResponseModel.value = response.body()
 
                         } else{
-                            Toast.makeText(mContext, "Invalid company name", Toast.LENGTH_LONG)
+                            var apiError : APIError? = ErrorUtils.parseError(response)
+                            Toast.makeText(mContext,  apiError?.message, Toast.LENGTH_LONG).show()
                         }
                     }
                     override fun onFailure(call: Call<TenantDomainResponseModel>, t: Throwable) {
@@ -66,7 +68,9 @@ class LoginRepository {
                             countryCodeResponseModel.value = response.body()
 
                         } else{
-                            Toast.makeText(mContext, "Failed to fetch country codes", Toast.LENGTH_LONG)
+                            Toast.makeText(mContext, "Failed to fetch country codes", Toast.LENGTH_LONG).show()
+                            var apiError : APIError? = ErrorUtils.parseError(response)
+                            Toast.makeText(mContext,  apiError?.message, Toast.LENGTH_LONG).show()
                         }
                     }
                     override fun onFailure(call: Call<CountryResponseModel>, t: Throwable) {
@@ -108,7 +112,9 @@ class LoginRepository {
                             loginResponseModel.value = response.body()
 
                         } else{
-                            Toast.makeText(mContext, "Invalid phone number", Toast.LENGTH_LONG)
+                            Toast.makeText(mContext, "Invalid phone number", Toast.LENGTH_LONG).show()
+                            var apiError : APIError? = ErrorUtils.parseError(response)
+                            Toast.makeText(mContext,  apiError?.message, Toast.LENGTH_LONG).show()
                         }
                     }
                     override fun onFailure(call: Call<LoginResponseModel>, t: Throwable) {
@@ -149,7 +155,9 @@ class LoginRepository {
                             otpResponseModel.value = response.body()
 
                         } else{
-                            Toast.makeText(mContext, "Invalid OTP", Toast.LENGTH_LONG)
+                            Toast.makeText(mContext, "Invalid OTP", Toast.LENGTH_LONG).show()
+                            var apiError : APIError? = ErrorUtils.parseError(response)
+                            Toast.makeText(mContext,  apiError?.message, Toast.LENGTH_LONG).show()
                         }
                     }
                     override fun onFailure(call: Call<OtpResponseModel>, t: Throwable) {
