@@ -101,7 +101,7 @@
     </navigation>
     <fragment
         android:id="@+id/addNewEvent"
-        android:name="com.anarock.cpsourcing.AddNewEvent"
+        android:name="com.anarock.cpsourcing.fragments.AddNewEvent"
         android:label="fragment_add_new_event"
         tools:layout="@layout/fragment_add_new_event" >
         <action
@@ -121,7 +121,7 @@
     </fragment>
     <fragment
         android:id="@+id/addNewEventProposedFragment"
-        android:name="com.anarock.cpsourcing.AddNewEventProposedFragment"
+        android:name="com.anarock.cpsourcing.fragments.AddNewEventProposedFragment"
         android:label="@string/add_new_event"
         tools:layout="@layout/fragment_add_new_event_proposed" >
         <action
@@ -132,7 +132,7 @@
     </fragment>
     <fragment
         android:id="@+id/addNewEventFollowUpFragment"
-        android:name="com.anarock.cpsourcing.AddNewEventFollowUpFragment"
+        android:name="com.anarock.cpsourcing.fragments.AddNewEventFollowUpFragment"
         android:label="@string/add_new_event"
         tools:layout="@layout/fragment_add_new_event_follow_up">
         <action
@@ -143,7 +143,7 @@
     </fragment>
     <fragment
         android:id="@+id/addNewEventFaceToFace"
-        android:name="com.anarock.cpsourcing.AddNewEventFaceToFaceFragment"
+        android:name="com.anarock.cpsourcing.fragments.AddNewEventFaceToFaceFragment"
         android:label="@string/add_new_event"
         tools:layout="@layout/fragment_add_new_event_face_to_face">
         <action
@@ -154,7 +154,7 @@
     </fragment>
     <fragment
         android:id="@+id/leadSearchFragment"
-        android:name="com.anarock.cpsourcing.LeadSearchFragment"
+        android:name="com.anarock.cpsourcing.fragments.LeadSearchFragment"
         android:label="fragment_lead_search"
         tools:layout="@layout/fragment_lead_search" />
 </navigation>

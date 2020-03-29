@@ -1,4 +1,4 @@
-package com.anarock.cpsourcing
+package com.anarock.cpsourcing.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,6 +9,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.anarock.cpsourcing.R
 import com.anarock.cpsourcing.databinding.FragmentAddNewEventBinding
 import com.anarock.cpsourcing.viewModel.SharedUtilityViewModel
 
@@ -20,7 +21,8 @@ class AddNewEvent : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_add_new_event, container, false)
+         binding = DataBindingUtil.inflate(inflater,
+             R.layout.fragment_add_new_event, container, false)
         sharedUtilityViewModel.setBottomNavigationVisibility(false)
         val callback = requireActivity().onBackPressedDispatcher.addCallback(this) {
             gotoEventScreen()

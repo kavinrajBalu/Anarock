@@ -1,10 +1,8 @@
-package com.anarock.cpsourcing
+package com.anarock.cpsourcing.fragments
 
 import android.app.DatePickerDialog
 import android.app.DatePickerDialog.OnDateSetListener
 import android.app.TimePickerDialog
-import android.content.res.ColorStateList
-import android.graphics.Color
 import android.os.Bundle
 import android.text.InputType
 import android.view.LayoutInflater
@@ -12,13 +10,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Spinner
-import android.widget.TimePicker
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModel
 import androidx.navigation.fragment.findNavController
+import com.anarock.cpsourcing.R
 import com.anarock.cpsourcing.databinding.FragmentAddNewEventProposedBinding
 import com.anarock.cpsourcing.model.CustomAppBar
 import com.anarock.cpsourcing.utilities.DateTimeUtils
@@ -27,10 +24,7 @@ import com.anarock.cpsourcing.viewModel.SharedUtilityViewModel
 import com.google.android.material.chip.Chip
 import kotlinx.android.synthetic.main.custom_spinner.view.*
 import kotlinx.android.synthetic.main.custom_text_field.view.*
-import kotlinx.android.synthetic.main.fragment_add_new_event_proposed.view.*
 import java.util.*
-import kotlin.math.min
-import kotlin.text.clear
 
 
 class AddNewEventProposedFragment : Fragment() {
@@ -47,9 +41,12 @@ class AddNewEventProposedFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-            binding = DataBindingUtil.inflate(inflater,R.layout.fragment_add_new_event_proposed, container, false)
+            binding = DataBindingUtil.inflate(inflater,
+                R.layout.fragment_add_new_event_proposed, container, false)
             sharedUtilityViewModel.setToolBarVisibility(true)
-            sharedUtilityViewModel.setCustomToolBar(CustomAppBar(android.R.color.white,R.color.anarock_blue))
+            sharedUtilityViewModel.setCustomToolBar(CustomAppBar(android.R.color.white,
+                R.color.anarock_blue
+            ))
             sharedUtilityViewModel.setCustomStatusBar(android.R.color.white)
             val items = arrayOf("NMas", "NaasY", "NasaC", "NasaD")
             val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, items)
@@ -71,7 +68,8 @@ class AddNewEventProposedFragment : Fragment() {
                 binding.dateTime.field.spinner.setText(DateTimeUtils.customDateTimeString(DATE_FORMAT,myCalendar))
             }
 
-            val timePickerDialog  = TimePickerDialog(requireContext(),R.style.DialogTheme,time,Calendar.HOUR_OF_DAY,Calendar.MINUTE,false)
+            val timePickerDialog  = TimePickerDialog(requireContext(),
+                R.style.DialogTheme,time,Calendar.HOUR_OF_DAY,Calendar.MINUTE,false)
             val date =
                 OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
                     myCalendar[Calendar.YEAR] = year
@@ -82,7 +80,8 @@ class AddNewEventProposedFragment : Fragment() {
                 }
 
             datePickerDialog = DatePickerDialog(
-                requireContext(),R.style.DialogTheme ,date, myCalendar
+                requireContext(),
+                R.style.DialogTheme,date, myCalendar
                     .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
                 myCalendar.get(Calendar.DAY_OF_MONTH)
             )

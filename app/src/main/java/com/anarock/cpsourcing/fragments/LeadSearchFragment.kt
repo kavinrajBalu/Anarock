@@ -1,14 +1,11 @@
-package com.anarock.cpsourcing
+package com.anarock.cpsourcing.fragments
 
-import android.app.Activity
-import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -16,6 +13,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.anarock.cpsourcing.R
 import com.anarock.cpsourcing.adapter.LeadSearchResultAdapter
 import com.anarock.cpsourcing.databinding.FragmentLeadSearchBinding
 import com.anarock.cpsourcing.utilities.CommonUtilities.Companion.hideKeyboard
@@ -41,7 +39,8 @@ class LeadSearchFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_lead_search, container, false)
+        binding = DataBindingUtil.inflate(inflater,
+            R.layout.fragment_lead_search, container, false)
         binding.search.isCursorVisible = true
         binding.search.requestFocus()
         showKeyBoard(requireContext())
