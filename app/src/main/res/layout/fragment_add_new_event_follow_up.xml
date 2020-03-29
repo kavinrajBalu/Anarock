@@ -109,7 +109,7 @@
             android:id="@+id/date_time"
             layout="@layout/custom_spinner"
             android:layout_width="378dp"
-            android:layout_height="59dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="@+id/cp_spinner"
             app:layout_constraintHorizontal_bias="0.0"
