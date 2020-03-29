@@ -29,7 +29,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Call CP"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView2" />
@@ -53,7 +52,14 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.555"
                 app:srcCompat="@drawable/ic_add" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        <Button
+            android:id="@+id/addCp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add/edit CP"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/callCp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

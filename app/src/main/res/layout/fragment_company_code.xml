@@ -61,7 +61,7 @@
             android:id="@+id/nextImageButton"
             android:layout_width="56dp"
             android:layout_height="48dp"
-            android:background="@drawable/oval_bg_blue"
+            android:background="@drawable/rounded_rect_bg_blue"
             android:src="@drawable/ic_arrow_forward_24px"
             android:elevation="5dp"
             android:visibility="visible"

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- START xml_defaults -->
+<defaultsMap>
+    <entry>
+        <key>latest_app_url</key>
+        <value>https://registration.anarock.com/anarock-connect?du=https://appcdn.anarock.com/sales-connect-v0.4.0-staging.apk</value>
+    </entry>
+    <entry>
+        <key>latest_app_version_code</key>
+        <value>4</value>
+    </entry>
+</defaultsMap>
+    <!-- END xml_defaults -->

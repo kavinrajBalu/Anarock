@@ -70,6 +70,10 @@ class LoginFragment : Fragment() {
 
         companyNameTv.text = arguments?.getString("tenantName")
 
+        startSMSRetriever(requireContext())
+
+        loginSharedViewModel.setToolbarTheme(ToolBarTheme(true, false))
+
         if (spinner != null) {
             spinner.adapter = adapter
             spinner.onItemSelectedListener = object :
@@ -98,8 +102,6 @@ class LoginFragment : Fragment() {
         })
 
         binding.loginEditButton.setOnClickListener {
-            ApiClient.resetRetrofit()
-            ApiClient.setDomainName(ApiClient.META_DOMAIN, ApiClient.DOMAIN_ANAROCK);
             findNavController().navigate(R.id.action_loginFragment_to_companyCode)
         }
 
@@ -146,6 +148,11 @@ class LoginFragment : Fragment() {
 
         }
 
+        binding.loginGetSupportTextView.setOnClickListener {
+            CommonUtilities.getEmailSupport(requireContext())
+        }
+
+
         return binding.root
     }
 
@@ -168,4 +175,5 @@ class LoginFragment : Fragment() {
                 }
             }
     }
+
 }

@@ -17,6 +17,8 @@ import androidx.navigation.fragment.findNavController
 import com.anarock.cpsourcing.R
 import com.anarock.cpsourcing.databinding.FragmentOtpBinding
 import com.anarock.cpsourcing.utilities.CommonUtilities
+import com.anarock.cpsourcing.utilities.Constants
+import com.anarock.cpsourcing.utilities.SharedPreferenceUtil
 import com.anarock.cpsourcing.viewModel.LoginSharedViewModel
 import com.anarock.cpsourcing.viewModel.SharedUtilityViewModel
 import kotlinx.android.synthetic.main.fragment_otp.*
@@ -65,6 +67,7 @@ class OtpFragment : Fragment() {
             inflater,
             R.layout.fragment_otp, container, false
         )
+        loginSharedViewModel.setToolbarTheme(ToolBarTheme(true, false))
         mOTPOne = binding.otpOne
         mOTPTwo = binding.otpTwo
         mOTPThree = binding.otpThree
@@ -74,6 +77,17 @@ class OtpFragment : Fragment() {
         countryId = arguments?.getInt("countryId")!!
         binding.otpPhoneNo.text = phoneNo
 
+
+        loginSharedViewModel.getOTP().observe(viewLifecycleOwner, Observer {
+            if(CommonUtilities.notnull(it)){
+                mOTPOne.setText(it[0].toString())
+                mOTPTwo.setText(it[1].toString())
+                mOTPThree.setText(it[2].toString())
+                mOTPFour.setText(it[3].toString())
+
+
+            }
+        })
         binding.verifyOtpButton.setOnClickListener {
             validateOTP()
         }
@@ -91,6 +105,9 @@ class OtpFragment : Fragment() {
             findNavController().navigate(R.id.action_otpFragment_to_loginFragment)
         }
 
+        binding.otpGetSupportTextView.setOnClickListener {
+            CommonUtilities.getEmailSupport(requireContext())
+        }
 
         setUpOtpTextListeners()
 
@@ -236,6 +253,8 @@ class OtpFragment : Fragment() {
             if (CommonUtilities.notnull(otp)) {
                 loginSharedViewModel.verifyOTP(otp, countryId, phoneNo)
                     .observe(viewLifecycleOwner, Observer {
+                        var otpResponse  = it.response
+                        SharedPreferenceUtil.getInstance(requireContext()).putString(Constants.PreferenceKeys.TOKEN, otpResponse.authToken)
                         findNavController().navigate(R.id.action_global_eventFragement)
                         sharedUtilityViewModel.setBottomNavigationVisibility(true)
                         loginSharedViewModel.setLoginState(LoginSharedViewModel.LoginState.LOGIN_SUCCESS)

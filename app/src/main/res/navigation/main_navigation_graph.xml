@@ -21,6 +21,9 @@
         <action
             android:id="@+id/action_eventFragement_to_addNewEvent"
             app:destination="@id/addNewEvent" />
+        <action
+            android:id="@+id/action_eventFragement_to_addCpFragment"
+            app:destination="@id/addCpFragment" />
     </fragment>
     <fragment
         android:id="@+id/cpFragment"
@@ -71,7 +74,8 @@
                 app:destination="@id/otpFragment" />
             <action
                 android:id="@+id/action_loginFragment_to_companyCode"
-                app:destination="@id/companyCode" />
+                app:popUpTo="@id/companyCode"
+                />
             <argument
                 android:name="tenantName"
                 app:argType="string"
@@ -91,7 +95,7 @@
                 android:defaultValue="0" />
             <action
                 android:id="@+id/action_otpFragment_to_loginFragment"
-                app:destination="@id/loginFragment" />
+                app:popUpTo="@id/loginFragment" />
         </fragment>
         <action
             android:id="@+id/action_global_eventFragement"
@@ -157,4 +161,9 @@
         android:name="com.anarock.cpsourcing.LeadSearchFragment"
         android:label="fragment_lead_search"
         tools:layout="@layout/fragment_lead_search" />
+ <fragment
+        android:id="@+id/addCpFragment"
+        tools:layout="@layout/fragment_add_cp"
+        android:name="com.anarock.cpsourcing.fragments.AddCpFragment"
+        android:label="AddCpFragment" />
 </navigation>

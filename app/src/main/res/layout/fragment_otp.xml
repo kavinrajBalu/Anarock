@@ -138,7 +138,7 @@
             android:layout_width="56dp"
             android:layout_height="48dp"
             android:layout_marginEnd="5dp"
-            android:background="@drawable/oval_bg_blue"
+            android:background="@drawable/rounded_rect_bg_blue"
             android:elevation="5dp"
             android:src="@drawable/ic_arrow_forward_24px"
             android:visibility="visible"

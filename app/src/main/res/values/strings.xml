@@ -38,4 +38,32 @@
     <string name="thirty_mins">30 mins</string>
     <string name="two_hours">2 hours</string>
     <string name="choose_event_type">CHOOSE EVENT TYPE</string>
+    <string name="email_support_template"> Hi Ravina Jain,
+        \n\nVersion : 1.0\nDo not delete the above info
+        \n\nI am unable to login, my registered email id and phone are as follows.
+        \nRegistered email id :
+        \nRegistered phone no :
+    </string>
+    <string name="enable_full_functionality">App requires permissions of call logs \nto enable full functionality.</string>
+    <string name="permission_required">Permission \nRequired</string>
+    <string name="grant_permissions">Grant permissions</string>
+
+    <string name="install_sales_connect_text">Sales Connect enables full functionality of this app. You may have to allow installation of apps from unknown sources to install Sales Connect.</string>
+    <string name="install_sales_connect">Install Sales Connect</string>
+    <string name="install_now">Install Now</string>
+
+    <string name="add_name"><font color="#143FFF">+ Add name</font></string>
+    <string name="add_phone_number"><font color="#143FFF">+ Add number</font></string>
+    <string name="add_email"><font color="#143FFF">+ Add email</font></string>
+    <string name="add_firm_name"><font color="#143FFF">+ Add firm name</font></string>
+    <string name="add_firm_address"><font color="#143FFF">+ Add firm address</font></string>
+    <string name="add_firm_locality"><font color="#143FFF">+ Add firm locality</font></string>
+    <string name="add_team_size"><font color="#143FFF">+ Add team size</font></string>
+    <string name="add_orgn_type"><font color="#143FFF">+ Add organisation type</font></string>
+    <string name="add_gst_number"><font color="#143FFF">+ Add GST number</font></string>
+    <string name="add_rera_number"><font color="#143FFF">+ Add RERA number</font></string>
+    <string name="add_nature_business"><font color="#143FFF">+ Add nature of business</font></string>
+    <string name="add_area"><font color="#143FFF">+ Add area</font></string>
+    <string name="add_partners"><font color="#143FFF">+ Add partners/directors</font></string>
+
 </resources>

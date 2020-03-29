@@ -1,7 +1,9 @@
 package com.anarock.cpsourcing.activity
 
 import android.content.pm.ActivityInfo
+import android.content.Context
 import android.os.Bundle
+import android.os.PowerManager
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
