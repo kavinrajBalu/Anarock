@@ -16,6 +16,7 @@ import com.anarock.cpsourcing.databinding.FragmentAddNewEventFaceToFaceBinding
 import com.anarock.cpsourcing.model.CustomAppBar
 import com.anarock.cpsourcing.utilities.DateTimeUtils
 import com.anarock.cpsourcing.viewModel.SharedUtilityViewModel
+import kotlinx.android.synthetic.main.custom_date_time_field.view.*
 import kotlinx.android.synthetic.main.custom_spinner.view.*
 import java.util.*
 
@@ -51,18 +52,8 @@ class AddNewEventFaceToFaceFragment : Fragment() {
             findNavController().navigate(R.id.action_addNewEventFaceToFace_to_addNewEvent)
         }
         initViews()
-        binding.eventType.setOnClickListener {
-            findNavController().navigate(R.id.action_addNewEventFollowUpFragment_to_addNewEvent)
-        }
-        binding.dateTime.setOnClickListener {
-            if(datePickerDialog.isShowing)
-            {
-                datePickerDialog.dismiss()
-            }
-            datePickerDialog.show()
-        }
 
-        binding.dateTime.field.spinner.setOnClickListener {
+          binding.dateTime.customTextInput.editText?.setOnClickListener {
             if(datePickerDialog.isShowing)
             {
                 datePickerDialog.dismiss()
@@ -73,7 +64,7 @@ class AddNewEventFaceToFaceFragment : Fragment() {
         val time = TimePickerDialog.OnTimeSetListener { view, hourOfDay, minute ->
             myCalendar[Calendar.HOUR_OF_DAY] = hourOfDay
             myCalendar[Calendar.MINUTE] = minute
-            binding.dateTime.field.spinner.setText(DateTimeUtils.customDateTimeString(DATE_FORMAT,myCalendar))
+              binding.dateTime.customTextInput.editText?.setText(DateTimeUtils.customDateTimeString(DATE_FORMAT,myCalendar))
         }
 
         val timePickerDialog  = TimePickerDialog(requireContext(),
@@ -117,7 +108,7 @@ class AddNewEventFaceToFaceFragment : Fragment() {
             isSuccess= false
         }
 
-        if(binding.dateTime.field.spinner.text.isEmpty())
+        if(  binding.dateTime.customTextInput.editText?.text?.isEmpty() == true)
         {
             binding.dateTime.field.error = "Date time required"
             isSuccess= false
@@ -128,13 +119,13 @@ class AddNewEventFaceToFaceFragment : Fragment() {
 
     private fun clearAllFields() {
         binding.cpSpinner.field.spinner.text.clear()
-        binding.dateTime.field.spinner.text.clear()
+          binding.dateTime.customTextInput.editText?.text?.clear()
         binding.reminderChipGroup.clearCheck()
         binding.notes.text.clear()
     }
 
     private fun initViews() {
-        binding.cpSpinner.field.spinner.hint = getString(R.string.select_cp)
-        binding.dateTime.field.spinner.hint = getString(R.string.date_time_hint)
+        binding.cpSpinner.field.spinner.hint = getString(R.string.search_cp)
+        binding.dateTime.customTextInput.editText?.hint = getString(R.string.date_time_hint)
     }
 }

@@ -37,6 +37,7 @@
             android:name=".callHandler.FaceToFaceSuccessCallOverlay"
             android:enabled="true"
             android:exported="false"/>
+        <service android:name=".services.EventCreationBroadcastService"></service>
     </application>
 
 </manifest>

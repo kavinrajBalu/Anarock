@@ -4,7 +4,6 @@ import android.app.Service
 import android.content.Context
 import android.content.Intent
 import android.graphics.PixelFormat
-import android.os.Build
 import android.os.IBinder
 import android.view.ContextThemeWrapper
 import android.view.Gravity
@@ -12,7 +11,7 @@ import android.view.View
 import android.view.WindowManager
 import android.widget.Button
 import android.widget.EditText
-import androidx.navigation.NavDeepLinkBuilder
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.anarock.cpsourcing.R
 
 class EventSuccessCallOverlay : Service() {
@@ -24,6 +23,7 @@ class EventSuccessCallOverlay : Service() {
     lateinit var followUp : Button
     lateinit var faceToFace : Button
     lateinit var notes: EditText
+    private val EVENT_CREATION_BROADCAST = "action.event.creation"
 
     override fun onBind(intent: Intent?): IBinder? {
         TODO("Not yet implemented")
@@ -56,7 +56,11 @@ class EventSuccessCallOverlay : Service() {
             }
             else
             {
-
+              val localBroadcastManager = LocalBroadcastManager.getInstance(this)
+              val intent = Intent(EVENT_CREATION_BROADCAST)
+                intent.putExtra("screen","proposed")
+                localBroadcastManager.sendBroadcast(intent)
+                stopSelf()
             }
         }
     }

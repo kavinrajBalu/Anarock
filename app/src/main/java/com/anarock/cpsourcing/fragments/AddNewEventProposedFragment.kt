@@ -18,6 +18,7 @@ import androidx.navigation.fragment.findNavController
 import com.anarock.cpsourcing.R
 import com.anarock.cpsourcing.databinding.FragmentAddNewEventProposedBinding
 import com.anarock.cpsourcing.model.CustomAppBar
+import com.anarock.cpsourcing.model.EventCreationPayload
 import com.anarock.cpsourcing.utilities.DateTimeUtils
 import com.anarock.cpsourcing.viewModel.CreateEventProposedViewModel
 import com.anarock.cpsourcing.viewModel.SharedUtilityViewModel
@@ -35,7 +36,7 @@ class AddNewEventProposedFragment : Fragment() {
     private lateinit var projectSpinner : Spinner
     private lateinit var datePickerDialog: DatePickerDialog
     private val DATE_FORMAT = "EE, MMM dd - hh:ssaa"
-    val myCalendar = Calendar.getInstance()
+    val startTime = Calendar.getInstance()
         override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -50,40 +51,36 @@ class AddNewEventProposedFragment : Fragment() {
             sharedUtilityViewModel.setCustomStatusBar(android.R.color.white)
             val items = arrayOf("NMas", "NaasY", "NasaC", "NasaD")
             val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, items)
-            binding.projectSpinner.field.spinner.setAdapter(adapter)
+            binding.projectSpinner.spinner.setAdapter(adapter)
             binding.cpSpinner.field.spinner.setAdapter(adapter)
             initViews()
 
-            binding.dateTime.field.spinner.setOnClickListener {
-                if(datePickerDialog.isShowing)
-                {
-                    datePickerDialog.dismiss()
-                }
+            binding.dateTime.customTextInput.editText?.setOnClickListener {
                 datePickerDialog.show()
             }
 
             val time = TimePickerDialog.OnTimeSetListener { view, hourOfDay, minute ->
-                     myCalendar[Calendar.HOUR_OF_DAY] = hourOfDay
-                     myCalendar[Calendar.MINUTE] = minute
-                binding.dateTime.field.spinner.setText(DateTimeUtils.customDateTimeString(DATE_FORMAT,myCalendar))
+                     startTime[Calendar.HOUR_OF_DAY] = hourOfDay
+                     startTime[Calendar.MINUTE] = minute
+                binding.dateTime.customTextInput.editText?.setText(DateTimeUtils.customDateTimeString(DATE_FORMAT,startTime))
             }
 
             val timePickerDialog  = TimePickerDialog(requireContext(),
                 R.style.DialogTheme,time,Calendar.HOUR_OF_DAY,Calendar.MINUTE,false)
             val date =
                 OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
-                    myCalendar[Calendar.YEAR] = year
-                    myCalendar[Calendar.MONTH] = monthOfYear
-                    myCalendar[Calendar.DAY_OF_MONTH] = dayOfMonth
+                    startTime[Calendar.YEAR] = year
+                    startTime[Calendar.MONTH] = monthOfYear
+                    startTime[Calendar.DAY_OF_MONTH] = dayOfMonth
                     timePickerDialog.show()
                     //updateLabel()
                 }
 
             datePickerDialog = DatePickerDialog(
                 requireContext(),
-                R.style.DialogTheme,date, myCalendar
-                    .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-                myCalendar.get(Calendar.DAY_OF_MONTH)
+                R.style.DialogTheme,date, startTime
+                    .get(Calendar.YEAR), startTime.get(Calendar.MONTH),
+                startTime.get(Calendar.DAY_OF_MONTH)
             )
 
 
@@ -102,10 +99,19 @@ class AddNewEventProposedFragment : Fragment() {
             binding.addEvent.setOnClickListener {
                 if(isMandatoryFieldFilled())
                 {
+                    createEventProposedViewModel.eventCreateAPI(getPayloadObject()).observe(viewLifecycleOwner,
+                        androidx.lifecycle.Observer {
 
+                            findNavController().navigate(R.id.action_addNewEventProposedFragment_to_eventFragement)
+
+                        })
                 }
             }
             return binding.root
+    }
+
+    private fun getPayloadObject(): EventCreationPayload {
+           return  EventCreationPayload(1,123,startTime.time.toString(),"",12,23,binding.notes.text.toString())
     }
 
     private fun isMandatoryFieldFilled(): Boolean {
@@ -134,9 +140,9 @@ class AddNewEventProposedFragment : Fragment() {
             isSuccess= false
         }
 
-        if(binding.dateTime.field.spinner.text.isEmpty())
+        if(binding.dateTime.customTextInput.editText?.text?.isEmpty() == true)
         {
-            binding.dateTime.field.error = "Date time required"
+            binding.dateTime.customTextInput.error = "Date time required"
             isSuccess= false
         }
      return isSuccess
@@ -147,17 +153,17 @@ class AddNewEventProposedFragment : Fragment() {
         binding.cpSpinner.field.spinner.text.clear()
         binding.leadName.field.spinner.text?.clear()
         binding.leadPhoneNumber.customTextInput.editText?.text?.clear()
-        binding.dateTime.field.spinner.text.clear()
+        binding.dateTime.customTextInput.editText?.text?.clear()
         binding.reminderChipGroup.clearCheck()
         binding.notes.text.clear()
     }
 
     private fun initViews() {
         binding.projectSpinner.field.spinner.hint = getString(R.string.select_project)
-        binding.cpSpinner.field.spinner.hint = getString(R.string.select_cp)
-        binding.leadName.field.spinner.hint = getString(R.string.enter_lead_name)
+        binding.cpSpinner.field.spinner.hint = getString(R.string.search_cp)
+        binding.leadName.field.spinner.hint = getString(R.string.search_lead_name)
         binding.leadPhoneNumber.customTextInput.editText?.inputType = InputType.TYPE_CLASS_PHONE
         binding.leadPhoneNumber.customTextInput.editText?.hint = getString(R.string.lead_phone_number)
-        binding.dateTime.field.spinner.hint = getString(R.string.date_time_hint)
+        binding.dateTime.customTextInput.editText?.hint = getString(R.string.date_time_hint)
     }
 }

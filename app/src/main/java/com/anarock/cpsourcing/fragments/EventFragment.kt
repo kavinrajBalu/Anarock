@@ -24,7 +24,6 @@ import com.anarock.cpsourcing.callHandler.CallStateListener
 import com.anarock.cpsourcing.callHandler.EventSuccessCallOverlay
 import com.anarock.cpsourcing.databinding.FragementEventBinding
 import com.anarock.cpsourcing.interfaces.PhoneCallStatusCallBack
-import com.anarock.cpsourcing.model.CustomAppBar
 import com.anarock.cpsourcing.utilities.CommonUtilities
 import com.anarock.cpsourcing.utilities.CommonUtilities.Companion.playCall
 import com.anarock.cpsourcing.viewModel.LoginSharedViewModel

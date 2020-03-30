@@ -180,7 +180,7 @@
 
            <include
                android:id="@+id/date_time"
-               layout="@layout/custom_spinner"
+               layout="@layout/custom_date_time_field"
                android:layout_width="378dp"
                android:layout_height="wrap_content"
                app:layout_constraintEnd_toEndOf="@+id/lead_phone_number"

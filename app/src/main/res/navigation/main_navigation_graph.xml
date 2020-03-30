@@ -129,6 +129,11 @@
             app:destination="@id/addNewEvent"
             app:popUpTo="@id/addNewEvent"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_addNewEventProposedFragment_to_eventFragement"
+            app:destination="@id/eventFragement"
+            app:popUpTo="@id/eventFragement"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/addNewEventFollowUpFragment"
@@ -140,6 +145,11 @@
             app:destination="@id/addNewEvent"
             app:popUpTo="@id/addNewEvent"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_addNewEventFollowUpFragment_to_eventFragement"
+            app:destination="@id/eventFragement"
+            app:popUpTo="@id/eventFragement"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/addNewEventFaceToFace"
@@ -150,6 +160,11 @@
             android:id="@+id/action_addNewEventFaceToFace_to_addNewEvent"
             app:destination="@id/addNewEvent"
             app:popUpTo="@id/addNewEvent"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_addNewEventFaceToFace_to_eventFragement"
+            app:destination="@id/eventFragement"
+            app:popUpTo="@id/eventFragement"
             app:popUpToInclusive="true" />
     </fragment>
     <fragment
