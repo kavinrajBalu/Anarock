@@ -70,7 +70,7 @@ class EventFragment : Fragment() {
             findNavController().navigate(R.id.action_eventFragement_to_addNewEvent)
         }
 
-        binding.callCp.setOnClickListener {
+      /*  binding.callCp.setOnClickListener {
             CommonUtilities.makeCall(requireContext(),"8903653203")
 
             val callRecord = CallRecord.Builder(requireContext())
@@ -98,7 +98,7 @@ class EventFragment : Fragment() {
 
             })
             telephonyManager.listen(callStateListener, PhoneStateListener.LISTEN_CALL_STATE)
-        }
+        }*/
 
         return  binding.root
 
