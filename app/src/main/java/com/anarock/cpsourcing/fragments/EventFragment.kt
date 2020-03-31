@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
+import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -18,6 +19,11 @@ import androidx.navigation.fragment.findNavController
 import com.anarock.cpsourcing.R
 import com.anarock.cpsourcing.callHandler.CallStateListener
 import com.anarock.cpsourcing.databinding.FragementEventBinding
+import com.anarock.cpsourcing.interfaces.PhoneCallStatusCallBack
+import com.anarock.cpsourcing.utilities.CommonUtilities
+//import com.anarock.cpsourcing.utilities.CommonUtilities.Companion.playCall
+import com.anarock.cpsourcing.utilities.Constants
+import com.anarock.cpsourcing.utilities.SharedPreferenceUtil
 import com.anarock.cpsourcing.viewModel.LoginSharedViewModel
 import com.anarock.cpsourcing.viewModel.SharedUtilityViewModel
 
@@ -33,11 +39,13 @@ class EventFragment : Fragment() {
     private val sharedUtilityViewModel: SharedUtilityViewModel by activityViewModels()
 
     //TODO : All runtime permission goes here
-    private  var permissions : Array<String?>  = arrayOfNulls(3)
+    private var permissions = ArrayList<String?>()
     private val REQUEST_MULTIPLE_PERMISSION = 1
     val CLASS_NAME = EventFragment::class.java.simpleName
-    lateinit var callStateListener : CallStateListener
+    lateinit var callStateListener: CallStateListener
     private val CODE_DRAW_OVER_OTHER_APP_PERMISSION = 2084
+    val dialogFragment =PermissionsFragment()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,17 +54,63 @@ class EventFragment : Fragment() {
         val binding : FragementEventBinding =  DataBindingUtil.inflate(inflater, R.layout.fragement_event,container,false)
         sharedUtilityViewModel.setToolBarVisibility(false)
         sharedUtilityViewModel.setCustomStatusBar(R.color.anarock_blue)
+        dialogFragment.isCancelable = false
+
         // TODO : For understanding purpose managing login state using viewModel. Use preference to maintain login/logout state.
-        loginSharedViewModel.getLoginState().observe(viewLifecycleOwner, Observer {
-            if(it == LoginSharedViewModel.LoginState.LOGIN_FAILED) {
-                sharedUtilityViewModel.setBottomNavigationVisibility(false)
-                findNavController().navigate(R.id.action_eventFragement_to_loginNavigation)
+       /* loginSharedViewModel.getLoginState().observe(viewLifecycleOwner, Observer {
+            if (it == LoginSharedViewModel.LoginState.LOGIN_FAILED) {
+                loginSharedViewModel.setBottomNavigationVisibility(false)
+                if (permissions.isNotEmpty() || !CommonUtilities.isPackageInstalled(
+                        Constants.CONNECT_APP_PACKAGE_NAME,
+                        requireContext()
+                    )
+                ) {
+                    var bundle = bundleOf("fullScreen" to true)
+
+                    dialogFragment.arguments = bundle
+
+                    var ft  = requireActivity().supportFragmentManager.beginTransaction()
+                    val prev: Fragment? =
+                        requireActivity().supportFragmentManager.findFragmentByTag("dialog")
+                    if (prev != null) {
+                        ft.remove(prev)
+                    }
+                    ft.addToBackStack(null)
+
+
+                    dialogFragment.show(ft, "dialog")
+
+//                    findNavController().navigate(R.id.action_eventFragement_to_permissionsFragment, bundle)
+
+                } else {
+                    findNavController().navigate(R.id.action_eventFragement_to_loginNavigation)
+                }
+
+            }else{
+                if (permissions.isNotEmpty() || !CommonUtilities.isPackageInstalled(
+                        Constants.CONNECT_APP_PACKAGE_NAME,
+                        requireContext()
+                    )
+                ) {
+                    var bundle = bundleOf("fullScreen" to false)
+
+//                    findNavController().navigate(R.id.action_eventFragement_to_permissionsFragment, bundle)
+
+                }
             }
-        })
+        })*/
+        /* val isInstalled = CommonUtilities.isPackageInstalled(Constants.CONNECT_APP_PACKAGE_NAME, requireContext())
 
-        val telephonyManager = requireActivity().getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
+         if (!isInstalled){
+             loginSharedViewModel.setBottomNavigationVisibility(false)
+             findNavController().navigate(R.id.action_eventFragement_to_permissionsFragment)
 
-        getAllRequiredPermission()
+         }*/
+
+//        loginSharedViewModel.setToolbarTheme(ToolBarTheme(true, false))
+
+        val telephonyManager =
+            requireActivity().getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
 
         binding.addEvent.setOnClickListener {
             findNavController().navigate(R.id.action_eventFragement_to_addNewEvent)
@@ -92,52 +146,100 @@ class EventFragment : Fragment() {
             telephonyManager.listen(callStateListener, PhoneStateListener.LISTEN_CALL_STATE)
         }*/
 
-        return  binding.root
+        binding.addCp.setOnClickListener {
+            findNavController().navigate(R.id.action_eventFragement_to_addCpFragment, bundleOf("editMode" to true))
+        }
+
+        return binding.root
 
     }
+
+    override fun onResume() {
+        super.onResume()
+        getAllRequiredPermission()
+        val token = SharedPreferenceUtil.getInstance(requireContext()).getString(Constants.PreferenceKeys.TOKEN, "")
+       if(CommonUtilities.notnull(token)){
+           if (permissions.isNotEmpty() || !CommonUtilities.isPackageInstalled(
+                   Constants.CONNECT_APP_PACKAGE_NAME,
+                   requireContext()
+               )
+           ) {
+               openPermissionDialogFrag(false)
+
+           }else{
+               sharedUtilityViewModel.setToolBarVisibility(false)
+               sharedUtilityViewModel.setCustomStatusBar(R.color.anarock_blue)
+               sharedUtilityViewModel.setBottomNavigationVisibility(true)
+           }
+       }else{
+           if (permissions.isNotEmpty() || !CommonUtilities.isPackageInstalled(
+                   Constants.CONNECT_APP_PACKAGE_NAME,
+                   requireContext()
+               )
+           ) {
+               sharedUtilityViewModel.setBottomNavigationVisibility(false)
+               openPermissionDialogFrag(true)
+
+           } else {
+               sharedUtilityViewModel.setBottomNavigationVisibility(false)
+               findNavController().navigate(R.id.action_eventFragement_to_loginNavigation)
+           }
+       }
+
+    }
+
+    private fun openPermissionDialogFrag(isFullScreen: Boolean) {
+        var bundle = bundleOf("fullScreen" to isFullScreen)
+
+        dialogFragment.arguments = bundle
+
+        var ft  = requireActivity().supportFragmentManager.beginTransaction()
+        val prev: Fragment? =
+            requireActivity().supportFragmentManager.findFragmentByTag("dialog")
+        if (prev != null) {
+            ft.remove(prev)
+        }
+        ft.addToBackStack(null)
+
+
+        dialogFragment.show(ft, "dialog")    }
 
     private fun getAllRequiredPermission() {
-        when {
-            ActivityCompat.checkSelfPermission(requireContext(),Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED -> {
-                permissions[0] = Manifest.permission.READ_PHONE_STATE
-            }
-            ActivityCompat.checkSelfPermission(requireContext(),Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED ->
-            {
-                permissions[1] = Manifest.permission.CALL_PHONE
-            }
-            ActivityCompat.checkSelfPermission(requireContext(),Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED ->
-            {
-                permissions[1] = Manifest.permission.RECORD_AUDIO
-            }
-            else -> {
+        permissions.clear()
+        if (ActivityCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            permissions.add(Manifest.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS)
 
-            }
+        }
+        if (ActivityCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.CALL_PHONE
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            permissions.add(Manifest.permission.CALL_PHONE)
+
+        }
+        if (ActivityCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.RECORD_AUDIO
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            permissions.add(Manifest.permission.RECORD_AUDIO)
+
+        }
+        if (ActivityCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.READ_CONTACTS
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            permissions.add(Manifest.permission.READ_CONTACTS)
+
         }
 
-        requestPermissions(permissions,REQUEST_MULTIPLE_PERMISSION)
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-
     }
 
 
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        when (requestCode) {
-            REQUEST_MULTIPLE_PERMISSION -> {
-              /*  val intent = Intent(
-                    Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
-                    Uri.parse("package:${requireContext().packageName}")
-                )
-                startActivityForResult(intent, CODE_DRAW_OVER_OTHER_APP_PERMISSION)*/
-            }
-            else -> {
-
-            }
-        }
-    }
 }

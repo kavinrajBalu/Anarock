@@ -6,7 +6,9 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.content.pm.ActivityInfo
 import android.os.Bundle
+import android.os.PowerManager
 import android.view.View
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -30,7 +32,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var appBarConfiguration : AppBarConfiguration
+    private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
     var eventCreationListener: BroadcastReceiver? = null
     private val EVENT_CREATION_BROADCAST = "action.event.creation"
@@ -47,11 +49,12 @@ class MainActivity : AppCompatActivity() {
 
         appBarConfiguration = AppBarConfiguration(navController.graph)
 
-        val drawerLayout : DrawerLayout? = findViewById(R.id.drawer_layout)
+        val drawerLayout: DrawerLayout? = findViewById(R.id.drawer_layout)
 
         appBarConfiguration = AppBarConfiguration(
-            setOf(R.id.eventFragement,R.id.companyCode),
-            drawerLayout)
+            setOf(R.id.eventFragement, R.id.companyCode),
+            drawerLayout
+        )
 
         setupActionBar(navController, appBarConfiguration)
 
@@ -59,12 +62,9 @@ class MainActivity : AppCompatActivity() {
         val sharedViewModel = ViewModelProvider(this).get(SharedUtilityViewModel::class.java)
 
         sharedViewModel.getBottomNavigationVisibility().observe(this, Observer {
-            if(it)
-            {
+            if (it) {
                 binding.bottomNavView.visibility = View.VISIBLE
-            }
-            else
-            {
+            } else {
                 binding.bottomNavView.visibility = View.GONE
             }
         })
@@ -130,8 +130,9 @@ class MainActivity : AppCompatActivity() {
         bottomNavView.setupWithNavController(navController)
     }
 
-    private fun setupActionBar(navController: NavController,
-                               appBarConfig : AppBarConfiguration
+    private fun setupActionBar(
+        navController: NavController,
+        appBarConfig: AppBarConfiguration
     ) {
         setupActionBarWithNavController(navController, appBarConfig)
     }

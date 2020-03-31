@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:paddingTop="10dp"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/partnerNameTxv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/muli_regular"
+        android:gravity="center_vertical"
+        android:text="Kalpit Dadiya"
+        android:textColor="@color/ccTitleColor"
+        android:textSize="13sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/ellipse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:src="@drawable/ic_ellipse"
+        app:layout_constraintBottom_toBottomOf="@+id/partnerNameTxv"
+        app:layout_constraintStart_toEndOf="@+id/partnerNameTxv"
+        app:layout_constraintTop_toTopOf="@+id/partnerNameTxv" />
+
+    <TextView
+        android:id="@+id/designationTxv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/muli_regular"
+        android:gravity="center_vertical"
+        android:text="Director"
+        android:layout_marginLeft="8dp"
+        android:textColor="@color/cc_subTitle_color"
+        android:textSize="13sp"
+        app:layout_constraintStart_toEndOf="@+id/ellipse"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/partnerPhNoTxv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/muli_regular"
+        android:gravity="center_vertical"
+        android:layout_marginTop="5dp"
+        android:text="9876543210"
+        android:textColor="@color/light_blue_black"
+        android:textSize="11sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/partnerNameTxv" />
+
+    <ImageView
+        android:id="@+id/ellipse2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:src="@drawable/ic_ellipse"
+        app:layout_constraintBottom_toBottomOf="@+id/partnerPhNoTxv"
+        app:layout_constraintStart_toEndOf="@+id/partnerPhNoTxv"
+        app:layout_constraintTop_toTopOf="@+id/partnerPhNoTxv" />
+
+    <TextView
+        android:id="@+id/partnerEmailTxv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/muli_regular"
+        android:gravity="center_vertical"
+        android:text="kalpitdodiya@gmail.com"
+        android:layout_marginLeft="8dp"
+        android:textColor="@color/light_blue_black"
+        android:textSize="11sp"
+        app:layout_constraintStart_toEndOf="@+id/ellipse2"
+        app:layout_constraintTop_toTopOf="@+id/partnerPhNoTxv" />
+
+
+    <ImageView
+        android:id="@+id/partnerEditBtn"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="19dp"
+        android:src="@drawable/ic_create_blue_24px"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/partnerEmailTxv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/partnerNameTxv" />
+
+
+    <View
+        android:id="@+id/partnerView"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_1dp"
+        android:layout_marginTop="11dp"
+        android:background="@color/light_grey"
+        app:layout_constraintTop_toBottomOf="@+id/partnerPhNoTxv" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
