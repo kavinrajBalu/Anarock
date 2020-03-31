@@ -6,7 +6,7 @@ import retrofit2.Response
 
 
 internal  object ErrorUtils {
-    fun parseError(response: Response<Any>): APIError? {
+    fun parseError(response: Response<out Any>): APIError? {
         return ApiClient.getClient()?.responseBodyConverter<APIError>(
             APIError::class.java,
             arrayOf()

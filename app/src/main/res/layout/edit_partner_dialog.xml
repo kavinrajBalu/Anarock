@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="16dp">
+
+    <TextView
+        android:id="@+id/edit_dialog_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/muli_semibold"
+        android:text="Edit Partners or Directors"
+        android:textColor="@color/ccTitleColor"
+        android:textSize="13dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:layout_width="@dimen/_14dp"
+        android:layout_height="14dp"
+        android:layout_marginRight="25dp"
+        android:src="@drawable/ic_close"
+        app:layout_constraintBottom_toBottomOf="@+id/edit_dialog_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/edit_dialog_title" />
+
+    <View
+        android:id="@+id/edit_cp_divider"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_1dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/light_grey"
+        app:layout_constraintTop_toBottomOf="@+id/edit_dialog_title" />
+
+
+    <TextView
+        android:id="@+id/partnerNameLabel"
+        style="@style/sub_title_style"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="24dp"
+        android:fontFamily="@font/muli_bold"
+        android:text="NAME"
+        android:textColor="@color/ccTitleColor"
+        android:textSize="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_cp_divider" />
+
+    <include
+        android:id="@+id/partnerNamEdtxt"
+        layout="@layout/custom_text_field"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/partnerNameLabel"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/partnerNameLabel"
+        app:layout_constraintTop_toBottomOf="@+id/partnerNameLabel"
+        app:layout_constraintVertical_bias="0.019" />
+
+    <TextView
+        android:id="@+id/partnerDesignationLabel"
+        style="@style/sub_title_style"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/muli_bold"
+        android:text="DESIGNATION"
+        android:textColor="@color/ccTitleColor"
+        android:textSize="12dp"
+        app:layout_constraintStart_toStartOf="@+id/partnerNamEdtxt"
+        app:layout_constraintTop_toBottomOf="@+id/partnerNamEdtxt" />
+
+
+    <include
+        android:id="@+id/partnerDesgnEdtxt"
+        layout="@layout/custom_text_field"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/partnerNameLabel"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/partnerNameLabel"
+        app:layout_constraintTop_toBottomOf="@+id/partnerDesignationLabel" />
+
+    <TextView
+        android:id="@+id/textView13"
+        style="@style/sub_title_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/muli_bold"
+        android:text="PHONE NUMBER"
+        android:textColor="@color/ccTitleColor"
+        android:textSize="12dp"
+        app:layout_constraintStart_toStartOf="@+id/partnerNameLabel"
+        app:layout_constraintTop_toBottomOf="@+id/partnerDesgnEdtxt" />
+
+    <include
+        android:id="@+id/partnerPhnoEdtxt"
+        layout="@layout/custom_text_field"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/partnerNamEdtxt"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/textView13"
+        app:layout_constraintTop_toBottomOf="@+id/textView13" />
+
+
+    <TextView
+        android:id="@+id/textView14"
+        style="@style/sub_title_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/muli_bold"
+        android:text="EMAIL"
+        android:textColor="@color/ccTitleColor"
+        android:textSize="12dp"
+        app:layout_constraintStart_toStartOf="@+id/partnerNameLabel"
+        app:layout_constraintTop_toBottomOf="@+id/partnerPhnoEdtxt" />
+
+    <include
+        android:id="@+id/partnerEmailEdtxt"
+        layout="@layout/custom_text_field"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/partnerNamEdtxt"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/textView14"
+        app:layout_constraintTop_toBottomOf="@+id/textView14" />
+
+
+    <View
+        android:id="@+id/edit_cp_divider_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_1dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/light_grey"
+        app:layout_constraintTop_toBottomOf="@+id/partnerEmailEdtxt" />
+
+    <TextView
+        android:id="@+id/edit_cp_done_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/muli_semibold"
+        android:text="Done"
+        android:textColor="@color/blue"
+        android:textSize="13sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_cp_divider_bottom" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
