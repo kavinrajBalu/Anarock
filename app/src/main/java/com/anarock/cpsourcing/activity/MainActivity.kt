@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.content.pm.ActivityInfo
-import android.content.Context
 import android.os.Bundle
 import android.os.PowerManager
 import android.view.View
