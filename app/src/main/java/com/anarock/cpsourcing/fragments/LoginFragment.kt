@@ -99,7 +99,7 @@ class LoginFragment : Fragment() {
 
         binding.loginEditButton.setOnClickListener {
             ApiClient.resetRetrofit()
-            ApiClient.setDomainName(ApiClient.META_DOMAIN, ApiClient.DOMAIN_ANAROCK);
+            ApiClient.setDomainName(ApiClient.STAGE_DOMAIN, ApiClient.DOMAIN_ANAROCK)
             findNavController().navigate(R.id.action_loginFragment_to_companyCode)
         }
 

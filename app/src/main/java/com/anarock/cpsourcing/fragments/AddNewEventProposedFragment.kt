@@ -4,7 +4,9 @@ import android.app.DatePickerDialog
 import android.app.DatePickerDialog.OnDateSetListener
 import android.app.TimePickerDialog
 import android.os.Bundle
+import android.text.Editable
 import android.text.InputType
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,21 +19,23 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.anarock.cpsourcing.R
 import com.anarock.cpsourcing.databinding.FragmentAddNewEventProposedBinding
+import com.anarock.cpsourcing.model.CPSearchPayload
 import com.anarock.cpsourcing.model.CustomAppBar
 import com.anarock.cpsourcing.model.EventCreationPayload
 import com.anarock.cpsourcing.utilities.DateTimeUtils
-import com.anarock.cpsourcing.viewModel.CreateEventProposedViewModel
+import com.anarock.cpsourcing.viewModel.CreateEventViewModel
 import com.anarock.cpsourcing.viewModel.SharedUtilityViewModel
 import com.google.android.material.chip.Chip
 import kotlinx.android.synthetic.main.custom_spinner.view.*
 import kotlinx.android.synthetic.main.custom_text_field.view.*
 import java.util.*
+import kotlin.collections.ArrayList
 
 
 class AddNewEventProposedFragment : Fragment() {
 
     private val sharedUtilityViewModel : SharedUtilityViewModel by activityViewModels()
-    private val createEventProposedViewModel: CreateEventProposedViewModel by viewModels()
+    private val createEventViewModel: CreateEventViewModel by viewModels()
     private lateinit var binding : FragmentAddNewEventProposedBinding
     private lateinit var projectSpinner : Spinner
     private lateinit var datePickerDialog: DatePickerDialog
@@ -99,7 +103,7 @@ class AddNewEventProposedFragment : Fragment() {
             binding.addEvent.setOnClickListener {
                 if(isMandatoryFieldFilled())
                 {
-                    createEventProposedViewModel.eventCreateAPI(getPayloadObject()).observe(viewLifecycleOwner,
+                    createEventViewModel.eventCreateAPI(getPayloadObject()).observe(viewLifecycleOwner,
                         androidx.lifecycle.Observer {
 
                             findNavController().navigate(R.id.action_addNewEventProposedFragment_to_eventFragement)
@@ -107,6 +111,28 @@ class AddNewEventProposedFragment : Fragment() {
                         })
                 }
             }
+
+            binding.cpSpinner.field.spinner.addTextChangedListener(object :TextWatcher{
+                override fun afterTextChanged(s: Editable?) {
+                }
+
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int
+                ) {
+                }
+
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                     createEventViewModel.searchCP(CPSearchPayload(s.toString())).observe(viewLifecycleOwner,
+                         androidx.lifecycle.Observer {
+                             val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item,ArrayList(it.values))
+                             binding.projectSpinner.spinner.setAdapter(adapter)
+                             binding.cpSpinner.field.spinner.setAdapter(adapter)
+                         })
+                }
+            })
             return binding.root
     }
 
@@ -122,7 +148,7 @@ class AddNewEventProposedFragment : Fragment() {
             isSuccess= false
         }
 
-        if( binding.cpSpinner.field.spinner.text.isEmpty())
+        if(binding.cpSpinner.field.spinner.text.isEmpty())
         {
             binding.cpSpinner.field.error = "CP required"
             isSuccess= false

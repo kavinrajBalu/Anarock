@@ -2,19 +2,14 @@ package com.anarock.cpsourcing.utilities
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
-import android.media.MediaPlayer
 import android.net.Uri
 import android.util.Log
 import android.util.Patterns
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
-import com.anarock.callrecord.CallRecord
-import java.io.File
-import java.io.FileInputStream
 import java.util.*
 import java.util.regex.Pattern
 
@@ -63,7 +58,7 @@ class CommonUtilities{
             context.startActivity(intent)
         }
 
-        fun playCall(callRecord : CallRecord) : MediaPlayer
+       /* fun playCall(callRecord : CallRecord) : MediaPlayer
         {
             val mp = MediaPlayer()
             try {
@@ -79,7 +74,7 @@ class CommonUtilities{
             }
 
             return  mp
-        }
+        }*/
 
         fun hideKeyboard(activity: Activity) {
             val imm =

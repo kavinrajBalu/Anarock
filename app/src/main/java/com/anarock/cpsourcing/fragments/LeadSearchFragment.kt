@@ -18,7 +18,7 @@ import com.anarock.cpsourcing.adapter.LeadSearchResultAdapter
 import com.anarock.cpsourcing.databinding.FragmentLeadSearchBinding
 import com.anarock.cpsourcing.utilities.CommonUtilities.Companion.hideKeyboard
 import com.anarock.cpsourcing.utilities.CommonUtilities.Companion.showKeyBoard
-import com.anarock.cpsourcing.viewModel.CreateEventProposedViewModel
+import com.anarock.cpsourcing.viewModel.CreateEventViewModel
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -33,7 +33,7 @@ private const val ARG_PARAM2 = "param2"
  */
 class LeadSearchFragment : Fragment() {
     lateinit var binding : FragmentLeadSearchBinding
-    val leadViewModel : CreateEventProposedViewModel by viewModels()
+    val leadViewModel : CreateEventViewModel by viewModels()
     private lateinit var viewManager: RecyclerView.LayoutManager
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

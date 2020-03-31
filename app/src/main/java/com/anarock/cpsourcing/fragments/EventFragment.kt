@@ -4,11 +4,8 @@ import android.Manifest
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.media.MediaRecorder
 import android.os.Bundle
-import android.telephony.PhoneStateListener
 import android.telephony.TelephonyManager
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,14 +15,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import com.anarock.callrecord.CallRecord
 import com.anarock.cpsourcing.R
 import com.anarock.cpsourcing.callHandler.CallStateListener
-import com.anarock.cpsourcing.callHandler.EventSuccessCallOverlay
 import com.anarock.cpsourcing.databinding.FragementEventBinding
-import com.anarock.cpsourcing.interfaces.PhoneCallStatusCallBack
-import com.anarock.cpsourcing.utilities.CommonUtilities
-import com.anarock.cpsourcing.utilities.CommonUtilities.Companion.playCall
 import com.anarock.cpsourcing.viewModel.LoginSharedViewModel
 import com.anarock.cpsourcing.viewModel.SharedUtilityViewModel
 
