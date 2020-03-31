@@ -25,7 +25,6 @@ import com.anarock.cpsourcing.callHandler.CallStateListener
 import com.anarock.cpsourcing.callHandler.EventSuccessCallOverlay
 import com.anarock.cpsourcing.databinding.FragementEventBinding
 import com.anarock.cpsourcing.interfaces.PhoneCallStatusCallBack
-import com.anarock.cpsourcing.model.CustomAppBar
 import com.anarock.cpsourcing.utilities.CommonUtilities
 import com.anarock.cpsourcing.utilities.CommonUtilities.Companion.playCall
 import com.anarock.cpsourcing.utilities.Constants
@@ -130,7 +129,7 @@ class EventFragment : Fragment() {
             findNavController().navigate(R.id.action_eventFragement_to_addNewEvent)
         }
 
-        binding.callCp.setOnClickListener {
+      /*  binding.callCp.setOnClickListener {
             CommonUtilities.makeCall(requireContext(),"8903653203")
 
             val callRecord = CallRecord.Builder(requireContext())
@@ -158,7 +157,7 @@ class EventFragment : Fragment() {
 
             })
             telephonyManager.listen(callStateListener, PhoneStateListener.LISTEN_CALL_STATE)
-        }
+        }*/
 
         binding.addCp.setOnClickListener {
             findNavController().navigate(R.id.action_eventFragement_to_addCpFragment)

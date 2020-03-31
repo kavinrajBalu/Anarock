@@ -2,6 +2,7 @@ package com.anarock.cpsourcing.utilities
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
 import android.media.MediaPlayer
@@ -151,7 +152,10 @@ class CommonUtilities {
             }
 
         }
+  fun showProgressDialog(context: Context)
+        {
 
+        }
 
     }
 }

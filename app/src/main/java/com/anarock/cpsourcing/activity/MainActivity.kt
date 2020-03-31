@@ -1,11 +1,16 @@
 package com.anarock.cpsourcing.activity
 
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import android.content.pm.ActivityInfo
 import android.content.Context
 import android.os.Bundle
 import android.os.PowerManager
 import android.view.View
 import android.view.WindowManager
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.get
@@ -13,6 +18,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
@@ -29,6 +35,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
+    var eventCreationListener: BroadcastReceiver? = null
+    private val EVENT_CREATION_BROADCAST = "action.event.creation"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,38 +67,7 @@ class MainActivity : AppCompatActivity() {
                 binding.bottomNavView.visibility = View.VISIBLE
             } else {
                 binding.bottomNavView.visibility = View.GONE
-
             }
-        })
-      /*  Observer {
-            if(it){
-                binding.toolbar.navigationIcon= getDrawable(R.drawable.ic_back_black)
-                binding.toolbar.background = ContextCompat.getDrawable(this, android.R.color.white)
-                binding.toolbar.title = " "
-            }else{
-                binding.toolbar.navigationIcon= getDrawable(R.drawable.ic_back)
-                binding.toolbar.background = ContextCompat.getDrawable(this, R.color.colorPrimary)
-            }
-        }
-*/
-        sharedViewModel.getToolbarTheme().observe(this, Observer {
-            if(!it.isFirstFragment)
-                binding.toolbar.navigationIcon= getDrawable(R.drawable.ic_back_black)
-            else
-                binding.toolbar.navigationIcon= null
-
-            if(it.isLightTheme){
-                binding.toolbar.background = ContextCompat.getDrawable(this, android.R.color.white)
-                binding.toolbar.title = " "
-
-                window.setStatusBarColor(ContextCompat.getColor(this, android.R.color.white));
-
-            }else{
-                binding.toolbar.navigationIcon= getDrawable(R.drawable.ic_back)
-                binding.toolbar.background = ContextCompat.getDrawable(this, R.color.colorPrimary)
-                window.setStatusBarColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
-            }
-
         })
 
         sharedViewModel.getToolBarVisibility().observe(this, Observer {
@@ -123,6 +100,26 @@ class MainActivity : AppCompatActivity() {
         })
 
         setUpBottomNavigationMenu(navController,binding.bottomNavView)
+        eventCreationListenerImpl()
+    }
+
+    private fun eventCreationListenerImpl() {
+        val filter = IntentFilter()
+        filter.addAction(EVENT_CREATION_BROADCAST)
+        eventCreationListener = object : BroadcastReceiver() {
+            override fun onReceive(context: Context?, intent: Intent?) {
+                //UI update here
+                if (intent != null)
+                {
+                    if(intent.getStringExtra("screen") == "proposed")
+                    {
+
+                        findNavController(R.id.nav_host_fragment_container).navigate(R.id.addNewEventProposedFragment)
+                    }
+                }
+            }
+        }
+        LocalBroadcastManager.getInstance(this).registerReceiver(eventCreationListener as BroadcastReceiver, filter)
     }
 
     private fun setUpBottomNavigationMenu(
@@ -143,5 +140,10 @@ class MainActivity : AppCompatActivity() {
 
     override fun onSupportNavigateUp(): Boolean {
         return findNavController(R.id.nav_host_fragment_container).navigateUp()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        unregisterReceiver(eventCreationListener)
     }
 }
