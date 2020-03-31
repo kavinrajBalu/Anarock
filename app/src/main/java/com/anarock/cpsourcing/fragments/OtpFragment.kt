@@ -23,6 +23,7 @@ import com.anarock.cpsourcing.utilities.SharedPreferenceUtil
 import com.anarock.cpsourcing.viewModel.LoginSharedViewModel
 import kotlinx.android.synthetic.main.fragment_otp.*
 import com.anarock.cpsourcing.utilities.SMSRetrieverClient
+import com.anarock.cpsourcing.viewModel.SharedUtilityViewModel
 
 
 // TODO: Rename parameter arguments, choose names that match

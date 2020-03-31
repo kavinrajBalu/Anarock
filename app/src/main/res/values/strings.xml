@@ -60,6 +60,7 @@
     <string name="add_firm_locality"><font color="#143FFF">+ Add firm locality</font></string>
     <string name="add_team_size"><font color="#143FFF">+ Add team size</font></string>
     <string name="add_orgn_type"><font color="#143FFF">+ Add organisation type</font></string>
+    <string name="add_members"><font color="#143FFF">+ Add members</font></string>
     <string name="add_gst_number"><font color="#143FFF">+ Add GST number</font></string>
     <string name="add_rera_number"><font color="#143FFF">+ Add RERA number</font></string>
     <string name="add_nature_business"><font color="#143FFF">+ Add nature of business</font></string>

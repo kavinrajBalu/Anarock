@@ -4,744 +4,1063 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+<variable
+    name="fragment"
+    type="com.anarock.cpsourcing.fragments.AddCpFragment" />
     </data>
 
-    <ScrollView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout3"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@android:color/white"
-            android:paddingTop="24dp"
-            android:paddingBottom="28dp"
+            android:layout_height="@dimen/_60dp"
+            android:background="@color/anarock_blue"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/cp_back_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginLeft="16dp"
+                app:layout_constraintVertical_bias="0.555"
+                app:srcCompat="@drawable/ic_back_black" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="@+id/cp_back_btn"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginLeft="16dp"
+                android:text="Details"
+                android:textSize="13sp"
+                android:fontFamily="@font/muli_bold"
+                android:textColor="@android:color/white"
+                app:layout_constraintVertical_bias="0.555"
+                />
+
+            <ImageView
+                android:id="@+id/cp_edit_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.555"
+                app:srcCompat="@drawable/ic_create_24px" />
+            <TextView
+                android:id="@+id/cpSaveChanges"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginEnd="16dp"
+                android:text="Save changes"
+                android:textSize="12sp"
+                android:visibility="gone"
+                android:fontFamily="@font/muli_regular"
+                android:textColor="@android:color/white"
+                app:layout_constraintVertical_bias="0.555"
+                />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout3"
             tools:context=".fragments.AddCpFragment">
 
-            <View
-                android:id="@+id/pd_view"
-                android:layout_width="40dp"
-                android:layout_height="2dp"
-                android:background="@color/view_separator_grey"
-                app:layout_constraintBottom_toBottomOf="@+id/personal_details_title"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/personal_details_title" />
-
-            <TextView
-                android:id="@+id/personal_details_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:fontFamily="@font/muli_bold"
-                android:text="PERSONAL DETAILS"
-                android:textColor="@color/ccTitleColor"
-                android:textSize="12sp"
-                app:layout_constraintLeft_toRightOf="@+id/pd_view"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/nameLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="20dp"
-                android:fontFamily="@font/muli_bold"
-                android:text="Name"
-                android:textColor="@color/ccTitleColor"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/personal_details_title" />
-
-            <TextView
-                android:id="@+id/nameTxv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:fontFamily="@font/muli_regular"
-                android:gravity="center_vertical"
-                android:text="Nidhin"
-                android:textSize="13sp"
-                android:textColor="@color/ccTitleColor"
-                app:layout_constraintStart_toStartOf="@+id/nameLabel"
-                app:layout_constraintTop_toBottomOf="@+id/nameLabel" />
-
-            <View
-                android:id="@+id/nameView"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_1dp"
-                android:layout_marginTop="11dp"
-                android:background="@color/light_grey"
-                app:layout_constraintTop_toBottomOf="@+id/nameTxv" />
-
-         <!--   <ImageView
-                android:id="@+id/nameEditBtn"
-                android:layout_width="18dp"
-                android:layout_height="18dp"
-                android:layout_below="@+id/nameLabel"
-                android:layout_alignTop="@+id/nameTxv"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="19dp"
-                android:src="@drawable/ic_create_blue_24px"
-                app:layout_constraintBottom_toBottomOf="@+id/nameTxv"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/nameTxv" />
--->
-            <!--phone number-->
-            <TextView
-                android:id="@+id/phoneLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:fontFamily="@font/muli_bold"
-                android:text="Phone number"
-                android:textColor="@color/ccTitleColor"
-                app:layout_constraintStart_toStartOf="@+id/nameLabel"
-                app:layout_constraintTop_toBottomOf="@+id/nameView" />
-
-            <TextView
-                android:id="@+id/phoneTxv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:textColor="@color/ccTitleColor"
-                android:fontFamily="@font/muli_regular"
-                android:gravity="center_vertical"
-                android:text="9876543210"
-                android:textSize="13sp"
-                app:layout_constraintStart_toStartOf="@+id/nameLabel"
-                app:layout_constraintTop_toBottomOf="@+id/phoneLabel" />
-
-            <View
-                android:id="@+id/phoneView"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_1dp"
-                android:layout_marginTop="11dp"
-                android:background="@color/light_grey"
-                app:layout_constraintTop_toBottomOf="@+id/phoneTxv" />
-
-          <!--  <ImageView
-                android:id="@+id/phoneEditBtn"
-                android:layout_width="18dp"
-                android:layout_height="18dp"
-                android:layout_marginRight="19dp"
-                android:src="@drawable/ic_create_blue_24px"
-                app:layout_constraintBottom_toBottomOf="@+id/phoneTxv"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/phoneTxv" />
--->
-            <!-- alternate number-->
-
-            <TextView
-                android:id="@+id/alternateNoLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:fontFamily="@font/muli_bold"
-                android:text="Alternate number"
-                android:textColor="@color/ccTitleColor"
-                app:layout_constraintStart_toStartOf="@+id/nameLabel"
-                app:layout_constraintTop_toBottomOf="@+id/phoneView" />
-
-            <TextView
-                android:id="@+id/alternateNoTxv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:textColor="@color/ccTitleColor"
-                android:fontFamily="@font/muli_regular"
-                android:gravity="center_vertical"
-                android:text="@string/add_phone_number"
-                android:textSize="13sp"
-                app:layout_constraintStart_toStartOf="@+id/nameLabel"
-                app:layout_constraintTop_toBottomOf="@+id/alternateNoLabel" />
-
-            <View
-                android:id="@+id/alternateNoView"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_1dp"
-                android:layout_marginTop="11dp"
-                android:background="@color/light_grey"
-                app:layout_constraintTop_toBottomOf="@+id/alternateNoTxv" />
-
-            <ImageView
-                android:id="@+id/alternateNoEditBtn"
-                android:layout_width="18dp"
-                android:layout_height="18dp"
-                android:layout_marginRight="19dp"
-                android:src="@drawable/ic_create_blue_24px"
-                app:layout_constraintBottom_toBottomOf="@+id/alternateNoTxv"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/alternateNoTxv" />
-
-            <!--alternate number 2-->
-            <TextView
-                android:id="@+id/alternateNoLabel2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:fontFamily="@font/muli_bold"
-                android:text="Alternate number 1"
-                android:textColor="@color/ccTitleColor"
-                app:layout_constraintStart_toStartOf="@+id/nameLabel"
-                app:layout_constraintTop_toBottomOf="@+id/alternateNoView" />
-
-            <TextView
-                android:id="@+id/alternateNoTxv2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:textColor="@color/ccTitleColor"
-                android:fontFamily="@font/muli_regular"
-                android:gravity="center_vertical"
-                android:text="@string/add_phone_number"
-                android:textSize="13sp"
-                app:layout_constraintStart_toStartOf="@+id/nameLabel"
-                app:layout_constraintTop_toBottomOf="@+id/alternateNoLabel2" />
-
-            <View
-                android:id="@+id/alternateNoView2"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_1dp"
-                android:layout_marginTop="11dp"
-                android:background="@color/light_grey"
-                app:layout_constraintTop_toBottomOf="@+id/alternateNoTxv2" />
-
-            <ImageView
-                android:id="@+id/alternateNoEditBtn2"
-                android:layout_width="18dp"
-                android:layout_height="18dp"
-                android:layout_marginRight="19dp"
-                android:src="@drawable/ic_create_blue_24px"
-                app:layout_constraintBottom_toBottomOf="@+id/alternateNoTxv2"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/alternateNoTxv2" />
-
-            <!--            email-->
-            <TextView
-                android:id="@+id/emailLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:fontFamily="@font/muli_bold"
-                android:text="Email address"
-                android:textColor="@color/ccTitleColor"
-                app:layout_constraintStart_toStartOf="@+id/nameLabel"
-                app:layout_constraintTop_toBottomOf="@+id/alternateNoView2" />
-
-            <TextView
-                android:id="@+id/emailTxv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:textColor="@color/ccTitleColor"
-                android:fontFamily="@font/muli_regular"
-                android:gravity="center_vertical"
-                android:textSize="13sp"
-                app:layout_constraintStart_toStartOf="@+id/nameLabel"
-                app:layout_constraintTop_toBottomOf="@+id/emailLabel"
-                tools:text="sairealtypvtltd@gmail.com" />
-
-            <View
-                android:id="@+id/emailView"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_1dp"
-                android:layout_marginTop="11dp"
-                android:background="@color/light_grey"
-                app:layout_constraintTop_toBottomOf="@+id/emailTxv" />
-
-            <ImageView
-                android:id="@+id/emailEditBtn"
-                android:layout_width="18dp"
-                android:layout_height="18dp"
-                android:layout_marginRight="19dp"
-                android:src="@drawable/ic_create_blue_24px"
-                app:layout_constraintBottom_toBottomOf="@+id/emailTxv"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/emailTxv" />
-
-
-<!--            Firm details-->
-
-            <View
-                android:id="@+id/firm_view"
-                android:layout_width="40dp"
-                android:layout_height="2dp"
-                android:background="@color/view_separator_grey"
-                app:layout_constraintBottom_toBottomOf="@+id/firm_details_title"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/firm_details_title" />
-
-            <TextView
-                android:id="@+id/firm_details_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="40dp"
-                android:fontFamily="@font/muli_bold"
-                android:text="FIRM DETAILS"
-                android:textColor="@color/ccTitleColor"
-                android:textSize="12sp"
-                app:layout_constraintLeft_toRightOf="@+id/pd_view"
-                app:layout_constraintTop_toBottomOf="@+id/emailView" />
-
-            <TextView
-                android:id="@+id/firmNameLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:fontFamily="@font/muli_bold"
-                android:text="Firm name"
-                android:textColor="@color/ccTitleColor"
-                app:layout_constraintStart_toStartOf="@+id/nameLabel"
-                app:layout_constraintTop_toBottomOf="@+id/firm_details_title" />
-            <TextView
-                android:id="@+id/firmNameTxv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:textColor="@color/ccTitleColor"
-                android:fontFamily="@font/muli_regular"
-                android:gravity="center_vertical"
-                android:text="Sai Realty Pvt Ltd."
-                android:textSize="13sp"
-                app:layout_constraintStart_toStartOf="@+id/nameLabel"
-                app:layout_constraintTop_toBottomOf="@+id/firmNameLabel" />
-
-            <View
-                android:id="@+id/firmNameView"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_1dp"
-                android:layout_marginTop="11dp"
-                android:background="@color/light_grey"
-                app:layout_constraintTop_toBottomOf="@+id/firmNameTxv" />
-
-            <ImageView
-                android:id="@+id/firmNameEditBtn"
-                android:layout_width="18dp"
-                android:layout_height="18dp"
-                android:layout_marginRight="19dp"
-                android:src="@drawable/ic_create_blue_24px"
-                app:layout_constraintBottom_toBottomOf="@+id/firmNameTxv"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/firmNameTxv" />
-
-<!--            Firm address-->
-            <TextView
-                android:id="@+id/firmAddressLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:fontFamily="@font/muli_bold"
-                android:text="Firm address"
-                android:textColor="@color/ccTitleColor"
-                app:layout_constraintStart_toStartOf="@+id/nameLabel"
-                app:layout_constraintTop_toBottomOf="@+id/firmNameView" />
-
-            <TextView
-                android:id="@+id/firmAddressTxv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:textColor="@color/ccTitleColor"
-                android:fontFamily="@font/muli_regular"
-                android:gravity="center_vertical"
-                android:text="Sai Realty Pvt Ltd. Address"
-                android:textSize="13sp"
-                app:layout_constraintStart_toStartOf="@+id/nameLabel"
-                app:layout_constraintTop_toBottomOf="@+id/firmAddressLabel" />
-
-            <View
-                android:id="@+id/firmAddressView"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_1dp"
-                android:layout_marginTop="11dp"
-                android:background="@color/light_grey"
-                app:layout_constraintTop_toBottomOf="@+id/firmAddressTxv" />
-
-            <ImageView
-                android:id="@+id/firmAddressEditBtn"
-                android:layout_width="18dp"
-                android:layout_height="18dp"
-                android:layout_marginRight="19dp"
-                android:src="@drawable/ic_create_blue_24px"
-                app:layout_constraintBottom_toBottomOf="@+id/firmAddressTxv"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/firmAddressTxv" />
-
-<!--            Firm locality-->
-
-            <TextView
-                android:id="@+id/firmLocalityLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:fontFamily="@font/muli_bold"
-                android:text="Firm locality"
-                android:textColor="@color/ccTitleColor"
-                app:layout_constraintStart_toStartOf="@+id/nameLabel"
-                app:layout_constraintTop_toBottomOf="@+id/firmAddressView" />
-
-            <TextView
-                android:id="@+id/firmLocalityTxv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:textColor="@color/ccTitleColor"
-                android:fontFamily="@font/muli_regular"
-                android:gravity="center_vertical"
-                android:text="Kandivali East"
-                android:textSize="13sp"
-                app:layout_constraintStart_toStartOf="@+id/nameLabel"
-                app:layout_constraintTop_toBottomOf="@+id/firmLocalityLabel" />
-
-            <View
-                android:id="@+id/firmLocalityView"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_1dp"
-                android:layout_marginTop="11dp"
-                android:background="@color/light_grey"
-                app:layout_constraintTop_toBottomOf="@+id/firmLocalityTxv" />
-
-            <ImageView
-                android:id="@+id/firmLocalityEditBtn"
-                android:layout_width="18dp"
-                android:layout_height="18dp"
-                android:layout_marginRight="19dp"
-                android:src="@drawable/ic_create_blue_24px"
-                app:layout_constraintBottom_toBottomOf="@+id/firmLocalityTxv"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/firmLocalityTxv" />
-
-
-            <!--           Team size-->
-
-            <TextView
-                android:id="@+id/teamSizeLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:fontFamily="@font/muli_bold"
-                android:text="Team size"
-                android:textColor="@color/ccTitleColor"
-                app:layout_constraintStart_toStartOf="@+id/nameLabel"
-                app:layout_constraintTop_toBottomOf="@+id/firmLocalityView" />
-
-            <TextView
-                android:id="@+id/teamSizeTxv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:textColor="@color/ccTitleColor"
-                android:fontFamily="@font/muli_regular"
-                android:gravity="center_vertical"
-                android:text="4+ members operating"
-                android:textSize="13sp"
-                app:layout_constraintStart_toStartOf="@+id/nameLabel"
-                app:layout_constraintTop_toBottomOf="@+id/teamSizeLabel" />
-
-            <View
-                android:id="@+id/teamSizeView"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_1dp"
-                android:layout_marginTop="11dp"
-                android:background="@color/light_grey"
-                app:layout_constraintTop_toBottomOf="@+id/teamSizeTxv" />
-
-            <ImageView
-                android:id="@+id/teamSizeEditBtn"
-                android:layout_width="18dp"
-                android:layout_height="18dp"
-                android:layout_marginRight="19dp"
-                android:src="@drawable/ic_create_blue_24px"
-                app:layout_constraintBottom_toBottomOf="@+id/teamSizeTxv"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/teamSizeTxv" />
-
-            <!--  Organisation-->
-
-            <TextView
-                android:id="@+id/organisationLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:fontFamily="@font/muli_bold"
-                android:text="Organisation type"
-                android:textColor="@color/ccTitleColor"
-                app:layout_constraintStart_toStartOf="@+id/nameLabel"
-                app:layout_constraintTop_toBottomOf="@+id/teamSizeView" />
-
-            <TextView
-                android:id="@+id/organisationTxv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:textColor="@color/ccTitleColor"
-                android:fontFamily="@font/muli_regular"
-                android:gravity="center_vertical"
-                android:text="Sole Proprietorship"
-                android:textSize="13sp"
-                app:layout_constraintStart_toStartOf="@+id/nameLabel"
-                app:layout_constraintTop_toBottomOf="@+id/organisationLabel" />
-
-            <View
-                android:id="@+id/organisationView"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_1dp"
-                android:layout_marginTop="11dp"
-                android:background="@color/light_grey"
-                app:layout_constraintTop_toBottomOf="@+id/organisationTxv" />
-
-            <ImageView
-                android:id="@+id/organisationEditBtn"
-                android:layout_width="18dp"
-                android:layout_height="18dp"
-                android:layout_marginRight="19dp"
-                android:src="@drawable/ic_create_blue_24px"
-                app:layout_constraintBottom_toBottomOf="@+id/firmLocalityTxv"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/organisationTxv" />
-
-            <!--            MEmbers-->
-
-            <TextView
-                android:id="@+id/membersLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:fontFamily="@font/muli_bold"
-                android:text="Members of associations"
-                android:textColor="@color/ccTitleColor"
-                app:layout_constraintStart_toStartOf="@+id/nameLabel"
-                app:layout_constraintTop_toBottomOf="@+id/organisationView" />
-
-            <TextView
-                android:id="@+id/membersTxv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:textColor="@color/ccTitleColor"
-                android:fontFamily="@font/muli_regular"
-                android:gravity="center_vertical"
-                android:text="BRAI, CREDAI"
-                android:textSize="13sp"
-                app:layout_constraintStart_toStartOf="@+id/nameLabel"
-                app:layout_constraintTop_toBottomOf="@+id/membersLabel" />
-
-            <View
-                android:id="@+id/membersView"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_1dp"
-                android:layout_marginTop="11dp"
-                android:background="@color/light_grey"
-                app:layout_constraintTop_toBottomOf="@+id/membersTxv" />
-
-            <ImageView
-                android:id="@+id/membersEditBtn"
-                android:layout_width="18dp"
-                android:layout_height="18dp"
-                android:layout_marginRight="19dp"
-                android:src="@drawable/ic_create_blue_24px"
-                app:layout_constraintBottom_toBottomOf="@+id/membersTxv"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/membersTxv" />
-
-            <!--            GST-->
-
-            <TextView
-                android:id="@+id/gstLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:fontFamily="@font/muli_bold"
-                android:text="GST number"
-                android:textColor="@color/ccTitleColor"
-                app:layout_constraintStart_toStartOf="@+id/nameLabel"
-                app:layout_constraintTop_toBottomOf="@+id/membersView" />
-
-            <TextView
-                android:id="@+id/gstTxv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:textColor="@color/ccTitleColor"
-                android:fontFamily="@font/muli_regular"
-                android:gravity="center_vertical"
-                android:text="9876543210"
-                android:textSize="13sp"
-                app:layout_constraintStart_toStartOf="@+id/nameLabel"
-                app:layout_constraintTop_toBottomOf="@+id/gstLabel" />
-
-            <View
-                android:id="@+id/gstView"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_1dp"
-                android:layout_marginTop="11dp"
-                android:background="@color/light_grey"
-                app:layout_constraintTop_toBottomOf="@+id/gstTxv" />
-
-            <ImageView
-                android:id="@+id/gstEditBtn"
-                android:layout_width="18dp"
-                android:layout_height="18dp"
-                android:layout_marginRight="19dp"
-                android:src="@drawable/ic_create_blue_24px"
-                app:layout_constraintBottom_toBottomOf="@+id/gstTxv"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/gstTxv" />
-
-            <!--            RERA-->
-
-            <TextView
-                android:id="@+id/reraLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:fontFamily="@font/muli_bold"
-                android:text="RERA number"
-                android:textColor="@color/ccTitleColor"
-                app:layout_constraintStart_toStartOf="@+id/nameLabel"
-                app:layout_constraintTop_toBottomOf="@+id/gstView" />
-
-            <TextView
-                android:id="@+id/reraTxv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:textColor="@color/ccTitleColor"
-                android:fontFamily="@font/muli_regular"
-                android:gravity="center_vertical"
-                android:text="9876543210"
-                android:textSize="13sp"
-                app:layout_constraintStart_toStartOf="@+id/nameLabel"
-                app:layout_constraintTop_toBottomOf="@+id/reraLabel" />
-
-            <View
-                android:id="@+id/reraView"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_1dp"
-                android:layout_marginTop="11dp"
-                android:background="@color/light_grey"
-                app:layout_constraintTop_toBottomOf="@+id/reraTxv" />
-
-            <ImageView
-                android:id="@+id/reraEditBtn"
-                android:layout_width="18dp"
-                android:layout_height="18dp"
-                android:layout_marginRight="19dp"
-                android:src="@drawable/ic_create_blue_24px"
-                app:layout_constraintBottom_toBottomOf="@+id/reraTxv"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/reraTxv" />
-
-            <!--  business-->
-
-            <TextView
-                android:id="@+id/natureLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:fontFamily="@font/muli_bold"
-                android:text="Nature of business"
-                android:textColor="@color/ccTitleColor"
-                app:layout_constraintStart_toStartOf="@+id/nameLabel"
-                app:layout_constraintTop_toBottomOf="@+id/reraView" />
-
-            <TextView
-                android:id="@+id/natureTxv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:textColor="@color/ccTitleColor"
-                android:fontFamily="@font/muli_regular"
-                android:gravity="center_vertical"
-                android:text="business"
-                android:textSize="13sp"
-                app:layout_constraintStart_toStartOf="@+id/nameLabel"
-                app:layout_constraintTop_toBottomOf="@+id/natureLabel" />
-
-            <View
-                android:id="@+id/natureView"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_1dp"
-                android:layout_marginTop="11dp"
-                android:background="@color/light_grey"
-                app:layout_constraintTop_toBottomOf="@+id/natureTxv" />
-
-            <ImageView
-                android:id="@+id/natureEditBtn"
-                android:layout_width="18dp"
-                android:layout_height="18dp"
-                android:layout_marginRight="19dp"
-                android:src="@drawable/ic_create_blue_24px"
-                app:layout_constraintBottom_toBottomOf="@+id/natureTxv"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/natureTxv" />
-
-            <!--       area of operation-->
-
-            <TextView
-                android:id="@+id/areaLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:fontFamily="@font/muli_bold"
-                android:text="Area of operation"
-                android:textColor="@color/ccTitleColor"
-                app:layout_constraintStart_toStartOf="@+id/nameLabel"
-                app:layout_constraintTop_toBottomOf="@+id/natureView" />
-
-            <TextView
-                android:id="@+id/areaTxv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:textColor="@color/ccTitleColor"
-                android:fontFamily="@font/muli_regular"
-                android:gravity="center_vertical"
-                android:text="Bandra"
-                android:textSize="13sp"
-                app:layout_constraintStart_toStartOf="@+id/nameLabel"
-                app:layout_constraintTop_toBottomOf="@+id/areaLabel" />
-
-            <View
-                android:id="@+id/areaView"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_1dp"
-                android:layout_marginTop="11dp"
-                android:background="@color/light_grey"
-                app:layout_constraintTop_toBottomOf="@+id/areaTxv" />
-
-            <ImageView
-                android:id="@+id/areaEditBtn"
-                android:layout_width="18dp"
-                android:layout_height="18dp"
-                android:layout_marginRight="19dp"
-                android:src="@drawable/ic_create_blue_24px"
-                app:layout_constraintBottom_toBottomOf="@+id/areaTxv"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/areaTxv" />
-
-<!--            Partners or directors -->
-
-            <TextView
-                android:id="@+id/partnerLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:fontFamily="@font/muli_bold"
-                android:text="Partners or Directors"
-                android:textColor="@color/ccTitleColor"
-                app:layout_constraintStart_toStartOf="@+id/nameLabel"
-                app:layout_constraintTop_toBottomOf="@+id/areaView" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:listitem="@layout/partners_list_item"
-                app:layout_constraintStart_toStartOf="@+id/nameLabel"
-                app:layout_constraintTop_toBottomOf="@+id/partnerLabel"/>
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
+                android:layout_height="match_parent"
+                android:background="@android:color/white"
+                android:paddingTop="24dp"
+                android:paddingBottom="28dp"
+                tools:context=".fragments.AddCpFragment">
+
+                <View
+                    android:id="@+id/pd_view"
+                    android:layout_width="40dp"
+                    android:layout_height="2dp"
+                    android:background="@color/view_separator_grey"
+                    app:layout_constraintBottom_toBottomOf="@+id/personal_details_title"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/personal_details_title" />
+
+                <TextView
+                    android:id="@+id/personal_details_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:fontFamily="@font/muli_bold"
+                    android:text="PERSONAL DETAILS"
+                    android:textColor="@color/ccTitleColor"
+                    android:textSize="12sp"
+                    app:layout_constraintLeft_toRightOf="@+id/pd_view"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+<!--            cp name -->
+                <TextView
+                    android:id="@+id/nameLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/muli_bold"
+                    android:text="Name"
+                    android:textColor="@color/ccTitleColor"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/personal_details_title" />
+
+                <TextView
+                    android:id="@+id/nameTxv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/muli_regular"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/ccTitleColor"
+                    android:textSize="13sp"
+                    android:text="Mr Perera"
+                    app:layout_constraintStart_toStartOf="@+id/nameLabel"
+                    app:layout_constraintTop_toBottomOf="@+id/nameLabel" />
+
+                <TextView
+                    android:id="@+id/nameEmptyTxv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/muli_regular"
+                    android:gravity="center_vertical"
+                    android:text="@string/add_name"
+                    android:visibility="gone"
+                    android:textColor="@color/ccTitleColor"
+                    android:textSize="13sp"
+                    android:onClick="@{(view)->fragment.openEditDialog(view)}"
+                    app:layout_constraintStart_toStartOf="@+id/nameLabel"
+                    app:layout_constraintTop_toBottomOf="@+id/nameLabel" />
+
+                <ImageView
+                    android:id="@+id/nameEditBtn"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_marginRight="19dp"
+                    android:visibility="gone"
+                    android:src="@drawable/ic_create_blue_24px"
+                    app:layout_constraintBottom_toBottomOf="@+id/nameTxv"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/nameTxv" />
+
+                <View
+                    android:id="@+id/nameView"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_1dp"
+                    android:layout_marginTop="11dp"
+                    android:background="@color/light_grey"
+                    app:layout_constraintTop_toBottomOf="@+id/nameTxv" />
+
+<!--                phone number-->
+                <TextView
+                    android:id="@+id/phoneLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:fontFamily="@font/muli_bold"
+                    android:text="Phone number"
+                    android:textColor="@color/ccTitleColor"
+                    app:layout_constraintStart_toStartOf="@+id/nameLabel"
+                    app:layout_constraintTop_toBottomOf="@+id/nameView" />
+
+                <TextView
+                    android:id="@+id/phoneTxv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/muli_regular"
+                    android:gravity="center_vertical"
+                    android:text="9876543210"
+                    android:textColor="@color/ccTitleColor"
+                    android:textSize="13sp"
+                    app:layout_constraintStart_toStartOf="@+id/nameLabel"
+                    app:layout_constraintTop_toBottomOf="@+id/phoneLabel" />
+
+                <TextView
+                    android:id="@+id/phoneEmptyTxv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/muli_regular"
+                    android:gravity="center_vertical"
+                    android:text="@string/add_phone_number"
+                    android:visibility="gone"
+                    android:textColor="@color/ccTitleColor"
+                    android:textSize="13sp"
+                    app:layout_constraintStart_toStartOf="@+id/nameLabel"
+                    app:layout_constraintTop_toBottomOf="@+id/phoneLabel" />
+
+                <ImageView
+                    android:id="@+id/phoneNoEditBtn"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_marginRight="19dp"
+                    android:visibility="gone"
+                    android:src="@drawable/ic_create_blue_24px"
+                    app:layout_constraintBottom_toBottomOf="@+id/phoneTxv"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/phoneTxv" />
+
+                <View
+                    android:id="@+id/phoneView"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_1dp"
+                    android:layout_marginTop="11dp"
+                    android:background="@color/light_grey"
+                    app:layout_constraintTop_toBottomOf="@+id/phoneTxv" />
+
+                <!-- alternate number-->
+
+                <TextView
+                    android:id="@+id/alternateNoLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:fontFamily="@font/muli_bold"
+                    android:text="Alternate number"
+                    android:textColor="@color/ccTitleColor"
+                    app:layout_constraintStart_toStartOf="@+id/nameLabel"
+                    app:layout_constraintTop_toBottomOf="@+id/phoneView" />
+
+                <TextView
+                    android:id="@+id/alternateNoTxv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/muli_regular"
+                    android:gravity="center_vertical"
+                    tools:text=""
+                    android:textColor="@color/ccTitleColor"
+                    android:textSize="13sp"
+                    app:layout_constraintStart_toStartOf="@+id/nameLabel"
+                    app:layout_constraintTop_toBottomOf="@+id/alternateNoLabel" />
+
+                <TextView
+                    android:id="@+id/alternateNoEmptyTxv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/muli_regular"
+                    android:gravity="center_vertical"
+                    android:text="@string/add_phone_number"
+                    android:textColor="@color/ccTitleColor"
+                    android:textSize="13sp"
+                    app:layout_constraintStart_toStartOf="@+id/nameLabel"
+                    app:layout_constraintTop_toBottomOf="@+id/alternateNoLabel" />
+
+                <View
+                    android:id="@+id/alternateNoView"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_1dp"
+                    android:layout_marginTop="11dp"
+                    android:background="@color/light_grey"
+                    app:layout_constraintTop_toBottomOf="@+id/alternateNoTxv" />
+
+                <ImageView
+                    android:id="@+id/alternateNoEditBtn"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_marginRight="19dp"
+                    android:visibility="gone"
+                    android:src="@drawable/ic_create_blue_24px"
+                    app:layout_constraintBottom_toBottomOf="@+id/alternateNoTxv"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/alternateNoTxv" />
+
+                <!--alternate number 2-->
+                <TextView
+                    android:id="@+id/alternateNoLabel2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:fontFamily="@font/muli_bold"
+                    android:text="Alternate number 1"
+                    android:textColor="@color/ccTitleColor"
+                    app:layout_constraintStart_toStartOf="@+id/nameLabel"
+                    app:layout_constraintTop_toBottomOf="@+id/alternateNoView" />
+
+                <TextView
+                    android:id="@+id/alternateNoTxv2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/muli_regular"
+                    android:gravity="center_vertical"
+                    tools:text="9876543210"
+                    android:textColor="@color/ccTitleColor"
+                    android:textSize="13sp"
+                    app:layout_constraintStart_toStartOf="@+id/nameLabel"
+                    app:layout_constraintTop_toBottomOf="@+id/alternateNoLabel2" />
+
+                <TextView
+                    android:id="@+id/alternateNoEmptyTxv2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/muli_regular"
+                    android:gravity="center_vertical"
+                    android:visibility="gone"
+                    android:text="@string/add_phone_number"
+                    android:textColor="@color/ccTitleColor"
+                    android:textSize="13sp"
+                    app:layout_constraintStart_toStartOf="@+id/nameLabel"
+                    app:layout_constraintTop_toBottomOf="@+id/alternateNoLabel2" />
+
+                <View
+                    android:id="@+id/alternateNoView2"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_1dp"
+                    android:layout_marginTop="11dp"
+                    android:background="@color/light_grey"
+                    app:layout_constraintTop_toBottomOf="@+id/alternateNoTxv2" />
+
+                <ImageView
+                    android:id="@+id/alternateNoEditBtn2"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_marginRight="19dp"
+                    android:visibility="gone"
+                    android:src="@drawable/ic_create_blue_24px"
+                    app:layout_constraintBottom_toBottomOf="@+id/alternateNoTxv2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/alternateNoTxv2" />
+
+                <!--            email-->
+                <TextView
+                    android:id="@+id/emailLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:fontFamily="@font/muli_bold"
+                    android:text="Email address"
+                    android:textColor="@color/ccTitleColor"
+                    app:layout_constraintStart_toStartOf="@+id/nameLabel"
+                    app:layout_constraintTop_toBottomOf="@+id/alternateNoView2" />
+
+                <TextView
+                    android:id="@+id/emailTxv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/muli_regular"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/ccTitleColor"
+                    android:textSize="13sp"
+                    app:layout_constraintStart_toStartOf="@+id/nameLabel"
+                    app:layout_constraintTop_toBottomOf="@+id/emailLabel"
+                    android:text="sairealtypvtltd@gmail.com" />
+                <TextView
+                    android:id="@+id/emailEmptyTxv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/muli_regular"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/ccTitleColor"
+                    android:textSize="13sp"
+                    android:text="@string/add_email"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toStartOf="@+id/nameLabel"
+                    app:layout_constraintTop_toBottomOf="@+id/emailLabel"
+                    tools:text="sairealtypvtltd@gmail.com" />
+
+
+                <View
+                    android:id="@+id/emailView"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_1dp"
+                    android:layout_marginTop="11dp"
+                    android:background="@color/light_grey"
+                    app:layout_constraintTop_toBottomOf="@+id/emailTxv" />
+
+                <ImageView
+                    android:id="@+id/emailEditBtn"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:visibility="gone"
+                    android:layout_marginRight="19dp"
+                    android:src="@drawable/ic_create_blue_24px"
+                    app:layout_constraintBottom_toBottomOf="@+id/emailTxv"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/emailTxv" />
+
+
+                <!--            Firm details-->
+
+                <View
+                    android:id="@+id/firm_view"
+                    android:layout_width="40dp"
+                    android:layout_height="2dp"
+                    android:background="@color/view_separator_grey"
+                    app:layout_constraintBottom_toBottomOf="@+id/firm_details_title"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/firm_details_title" />
+
+                <TextView
+                    android:id="@+id/firm_details_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="40dp"
+                    android:fontFamily="@font/muli_bold"
+                    android:text="FIRM DETAILS"
+                    android:textColor="@color/ccTitleColor"
+                    android:textSize="12sp"
+                    app:layout_constraintLeft_toRightOf="@+id/pd_view"
+                    app:layout_constraintTop_toBottomOf="@+id/emailView" />
+
+                <TextView
+                    android:id="@+id/firmNameLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/muli_bold"
+                    android:text="Firm name"
+                    android:textColor="@color/ccTitleColor"
+                    app:layout_constraintStart_toStartOf="@+id/nameLabel"
+                    app:layout_constraintTop_toBottomOf="@+id/firm_details_title" />
+
+                <TextView
+                    android:id="@+id/firmNameTxv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/muli_regular"
+                    android:gravity="center_vertical"
+                    tools:text="Sai Realty Pvt Ltd."
+                    android:textColor="@color/ccTitleColor"
+                    android:textSize="13sp"
+                    app:layout_constraintStart_toStartOf="@+id/nameLabel"
+                    app:layout_constraintTop_toBottomOf="@+id/firmNameLabel" />
+
+                <TextView
+                    android:id="@+id/firmNameEmptyTxv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/muli_regular"
+                    android:gravity="center_vertical"
+                    android:text="@string/add_firm_name"
+                    android:visibility="gone"
+                    android:textColor="@color/ccTitleColor"
+                    android:textSize="13sp"
+                    app:layout_constraintStart_toStartOf="@+id/nameLabel"
+                    app:layout_constraintTop_toBottomOf="@+id/firmNameLabel" />
+
+                <View
+                    android:id="@+id/firmNameView"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_1dp"
+                    android:layout_marginTop="11dp"
+                    android:background="@color/light_grey"
+                    app:layout_constraintTop_toBottomOf="@+id/firmNameTxv" />
+
+                <ImageView
+                    android:id="@+id/firmNameEditBtn"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_marginRight="19dp"
+                    android:visibility="gone"
+                    android:src="@drawable/ic_create_blue_24px"
+                    app:layout_constraintBottom_toBottomOf="@+id/firmNameTxv"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/firmNameTxv" />
+
+                <!--            Firm address-->
+                <TextView
+                    android:id="@+id/firmAddressLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/muli_bold"
+                    android:text="Firm address"
+                    android:textColor="@color/ccTitleColor"
+                    app:layout_constraintStart_toStartOf="@+id/nameLabel"
+                    app:layout_constraintTop_toBottomOf="@+id/firmNameView" />
+
+                <TextView
+                    android:id="@+id/firmAddressTxv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/muli_regular"
+                    android:gravity="center_vertical"
+                    tools:text="Sai Realty Pvt Ltd. Address"
+                    android:textColor="@color/ccTitleColor"
+                    android:textSize="13sp"
+                    app:layout_constraintStart_toStartOf="@+id/nameLabel"
+                    app:layout_constraintTop_toBottomOf="@+id/firmAddressLabel" />
+
+                <TextView
+                    android:id="@+id/firmAddressEmptyTxv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/muli_regular"
+                    android:gravity="center_vertical"
+                    android:text="@string/add_firm_address"
+                    android:visibility="gone"
+                    android:textColor="@color/ccTitleColor"
+                    android:textSize="13sp"
+                    app:layout_constraintStart_toStartOf="@+id/nameLabel"
+                    app:layout_constraintTop_toBottomOf="@+id/firmAddressLabel" />
+
+                <View
+                    android:id="@+id/firmAddressView"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_1dp"
+                    android:layout_marginTop="11dp"
+                    android:background="@color/light_grey"
+                    app:layout_constraintTop_toBottomOf="@+id/firmAddressTxv" />
+
+                <ImageView
+                    android:id="@+id/firmAddressEditBtn"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_marginRight="19dp"
+                    android:visibility="gone"
+                    android:src="@drawable/ic_create_blue_24px"
+                    app:layout_constraintBottom_toBottomOf="@+id/firmAddressTxv"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/firmAddressTxv" />
+
+                <!--            Firm locality-->
+
+                <TextView
+                    android:id="@+id/firmLocalityLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/muli_bold"
+                    android:text="Firm locality"
+                    android:textColor="@color/ccTitleColor"
+                    app:layout_constraintStart_toStartOf="@+id/nameLabel"
+                    app:layout_constraintTop_toBottomOf="@+id/firmAddressView" />
+
+                <TextView
+                    android:id="@+id/firmLocalityTxv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/muli_regular"
+                    android:gravity="center_vertical"
+                    tools:text="Kandivali East"
+                    android:textColor="@color/ccTitleColor"
+                    android:textSize="13sp"
+                    app:layout_constraintStart_toStartOf="@+id/nameLabel"
+                    app:layout_constraintTop_toBottomOf="@+id/firmLocalityLabel" />
+
+                <TextView
+                    android:id="@+id/firmLocalityEmptyTxv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/muli_regular"
+                    android:gravity="center_vertical"
+                    android:text="@string/add_firm_locality"
+                    android:visibility="gone"
+                    android:textColor="@color/ccTitleColor"
+                    android:textSize="13sp"
+                    app:layout_constraintStart_toStartOf="@+id/nameLabel"
+                    app:layout_constraintTop_toBottomOf="@+id/firmLocalityLabel" />
+
+                <View
+                    android:id="@+id/firmLocalityView"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_1dp"
+                    android:layout_marginTop="11dp"
+                    android:background="@color/light_grey"
+                    app:layout_constraintTop_toBottomOf="@+id/firmLocalityTxv" />
+
+                <ImageView
+                    android:id="@+id/firmLocalityEditBtn"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_marginRight="19dp"
+                    android:visibility="gone"
+                    android:src="@drawable/ic_create_blue_24px"
+                    app:layout_constraintBottom_toBottomOf="@+id/firmLocalityTxv"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/firmLocalityTxv" />
+
+
+                <!--           Team size-->
+
+                <TextView
+                    android:id="@+id/teamSizeLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/muli_bold"
+                    android:text="Team size"
+                    android:textColor="@color/ccTitleColor"
+                    app:layout_constraintStart_toStartOf="@+id/nameLabel"
+                    app:layout_constraintTop_toBottomOf="@+id/firmLocalityView" />
+
+                <TextView
+                    android:id="@+id/teamSizeTxv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/muli_regular"
+                    android:gravity="center_vertical"
+                    tools:text="4+ members operating"
+                    android:textColor="@color/ccTitleColor"
+                    android:textSize="13sp"
+                    app:layout_constraintStart_toStartOf="@+id/nameLabel"
+                    app:layout_constraintTop_toBottomOf="@+id/teamSizeLabel" />
+
+                <TextView
+                    android:id="@+id/teamSizeEmptyTxv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/muli_regular"
+                    android:gravity="center_vertical"
+                    android:text="@string/add_team_size"
+                    android:visibility="gone"
+                    android:textColor="@color/ccTitleColor"
+                    android:textSize="13sp"
+                    app:layout_constraintStart_toStartOf="@+id/nameLabel"
+                    app:layout_constraintTop_toBottomOf="@+id/teamSizeLabel" />
+
+                <View
+                    android:id="@+id/teamSizeView"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_1dp"
+                    android:layout_marginTop="11dp"
+                    android:background="@color/light_grey"
+                    app:layout_constraintTop_toBottomOf="@+id/teamSizeTxv" />
+
+                <ImageView
+                    android:id="@+id/teamSizeEditBtn"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_marginRight="19dp"
+                    android:visibility="gone"
+                    android:src="@drawable/ic_create_blue_24px"
+                    app:layout_constraintBottom_toBottomOf="@+id/teamSizeTxv"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/teamSizeTxv" />
+
+                <!--  Organisation-->
+
+                <TextView
+                    android:id="@+id/organisationLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/muli_bold"
+                    android:text="Organisation type"
+                    android:textColor="@color/ccTitleColor"
+                    app:layout_constraintStart_toStartOf="@+id/nameLabel"
+                    app:layout_constraintTop_toBottomOf="@+id/teamSizeView" />
+
+                <TextView
+                    android:id="@+id/organisationTxv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/muli_regular"
+                    android:gravity="center_vertical"
+                    tools:text="Sole Proprietorship"
+                    android:textColor="@color/ccTitleColor"
+                    android:textSize="13sp"
+                    app:layout_constraintStart_toStartOf="@+id/nameLabel"
+                    app:layout_constraintTop_toBottomOf="@+id/organisationLabel" />
+
+                <TextView
+                    android:id="@+id/organisationEmptyTxv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/muli_regular"
+                    android:gravity="center_vertical"
+                    android:text="@string/add_orgn_type"
+                    android:visibility="gone"
+                    android:textColor="@color/ccTitleColor"
+                    android:textSize="13sp"
+                    app:layout_constraintStart_toStartOf="@+id/nameLabel"
+                    app:layout_constraintTop_toBottomOf="@+id/organisationLabel" />
+
+                <View
+                    android:id="@+id/organisationView"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_1dp"
+                    android:layout_marginTop="11dp"
+                    android:background="@color/light_grey"
+                    app:layout_constraintTop_toBottomOf="@+id/organisationTxv" />
+
+                <ImageView
+                    android:id="@+id/organisationEditBtn"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_marginRight="19dp"
+                    android:visibility="gone"
+                    android:src="@drawable/ic_create_blue_24px"
+                    app:layout_constraintBottom_toBottomOf="@+id/firmLocalityTxv"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/organisationTxv" />
+
+                <!--            MEmbers-->
+
+                <TextView
+                    android:id="@+id/membersLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/muli_bold"
+                    android:text="Members of associations"
+                    android:textColor="@color/ccTitleColor"
+                    app:layout_constraintStart_toStartOf="@+id/nameLabel"
+                    app:layout_constraintTop_toBottomOf="@+id/organisationView" />
+
+                <TextView
+                    android:id="@+id/membersTxv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/muli_regular"
+                    android:gravity="center_vertical"
+                    android:text="BRAI, CREDAI"
+                    android:textColor="@color/ccTitleColor"
+                    android:textSize="13sp"
+                    app:layout_constraintStart_toStartOf="@+id/nameLabel"
+                    app:layout_constraintTop_toBottomOf="@+id/membersLabel" />
+
+                <TextView
+                    android:id="@+id/membersEmptyTxv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/muli_regular"
+                    android:gravity="center_vertical"
+                    android:text="@string/add_members"
+                    android:visibility="gone"
+                    android:textColor="@color/ccTitleColor"
+                    android:textSize="13sp"
+                    app:layout_constraintStart_toStartOf="@+id/nameLabel"
+                    app:layout_constraintTop_toBottomOf="@+id/membersLabel" />
+
+                <View
+                    android:id="@+id/membersView"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_1dp"
+                    android:layout_marginTop="11dp"
+                    android:background="@color/light_grey"
+                    app:layout_constraintTop_toBottomOf="@+id/membersTxv" />
+
+                <ImageView
+                    android:id="@+id/membersEditBtn"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_marginRight="19dp"
+                    android:visibility="gone"
+                    android:src="@drawable/ic_create_blue_24px"
+                    app:layout_constraintBottom_toBottomOf="@+id/membersTxv"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/membersTxv" />
+
+                <!--            GST-->
+
+                <TextView
+                    android:id="@+id/gstLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/muli_bold"
+                    android:text="GST number"
+                    android:textColor="@color/ccTitleColor"
+                    app:layout_constraintStart_toStartOf="@+id/nameLabel"
+                    app:layout_constraintTop_toBottomOf="@+id/membersView" />
+
+                <TextView
+                    android:id="@+id/gstTxv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/muli_regular"
+                    android:gravity="center_vertical"
+                    tools:text="675388"
+                    android:textColor="@color/ccTitleColor"
+                    android:textSize="13sp"
+                    app:layout_constraintStart_toStartOf="@+id/nameLabel"
+                    app:layout_constraintTop_toBottomOf="@+id/gstLabel" />
+
+                <TextView
+                    android:id="@+id/gstEmptyTxv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/muli_regular"
+                    android:gravity="center_vertical"
+                    android:text="@string/add_gst_number"
+                    android:visibility="gone"
+                    android:textColor="@color/ccTitleColor"
+                    android:textSize="13sp"
+                    app:layout_constraintStart_toStartOf="@+id/nameLabel"
+                    app:layout_constraintTop_toBottomOf="@+id/gstLabel" />
+
+                <View
+                    android:id="@+id/gstView"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_1dp"
+                    android:layout_marginTop="11dp"
+                    android:background="@color/light_grey"
+                    app:layout_constraintTop_toBottomOf="@+id/gstTxv" />
+
+                <ImageView
+                    android:id="@+id/gstEditBtn"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_marginRight="19dp"
+                    android:visibility="gone"
+                    android:src="@drawable/ic_create_blue_24px"
+                    app:layout_constraintBottom_toBottomOf="@+id/gstTxv"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/gstTxv" />
+
+                <!--            RERA-->
+
+                <TextView
+                    android:id="@+id/reraLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/muli_bold"
+                    android:text="RERA number"
+                    android:textColor="@color/ccTitleColor"
+                    app:layout_constraintStart_toStartOf="@+id/nameLabel"
+                    app:layout_constraintTop_toBottomOf="@+id/gstView" />
+
+                <TextView
+                    android:id="@+id/reraTxv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/muli_regular"
+                    android:gravity="center_vertical"
+                    tools:text="9876543210"
+                    android:textColor="@color/ccTitleColor"
+                    android:textSize="13sp"
+                    app:layout_constraintStart_toStartOf="@+id/nameLabel"
+                    app:layout_constraintTop_toBottomOf="@+id/reraLabel" />
+
+                <TextView
+                    android:id="@+id/reraEmptyTxv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/muli_regular"
+                    android:gravity="center_vertical"
+                    android:text="@string/add_rera_number"
+                    android:visibility="gone"
+                    android:textColor="@color/ccTitleColor"
+                    android:textSize="13sp"
+                    app:layout_constraintStart_toStartOf="@+id/nameLabel"
+                    app:layout_constraintTop_toBottomOf="@+id/reraLabel" />
+
+                <View
+                    android:id="@+id/reraView"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_1dp"
+                    android:layout_marginTop="11dp"
+                    android:background="@color/light_grey"
+                    app:layout_constraintTop_toBottomOf="@+id/reraTxv" />
+
+                <ImageView
+                    android:id="@+id/reraEditBtn"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_marginRight="19dp"
+                    android:visibility="gone"
+                    android:src="@drawable/ic_create_blue_24px"
+                    app:layout_constraintBottom_toBottomOf="@+id/reraTxv"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/reraTxv" />
+
+                <!--  business-->
+
+                <TextView
+                    android:id="@+id/natureLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/muli_bold"
+                    android:text="Nature of business"
+                    android:textColor="@color/ccTitleColor"
+                    app:layout_constraintStart_toStartOf="@+id/nameLabel"
+                    app:layout_constraintTop_toBottomOf="@+id/reraView" />
+
+                <TextView
+                    android:id="@+id/natureTxv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/muli_regular"
+                    android:gravity="center_vertical"
+                    tools:text="business"
+                    android:textColor="@color/ccTitleColor"
+                    android:textSize="13sp"
+                    app:layout_constraintStart_toStartOf="@+id/nameLabel"
+                    app:layout_constraintTop_toBottomOf="@+id/natureLabel" />
+
+                <TextView
+                    android:id="@+id/natureEmptyTxv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/muli_regular"
+                    android:gravity="center_vertical"
+                    android:text="@string/add_nature_business"
+                    android:visibility="gone"
+                    android:textColor="@color/ccTitleColor"
+                    android:textSize="13sp"
+                    app:layout_constraintStart_toStartOf="@+id/nameLabel"
+                    app:layout_constraintTop_toBottomOf="@+id/natureLabel" />
+
+                <View
+                    android:id="@+id/natureView"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_1dp"
+                    android:layout_marginTop="11dp"
+                    android:background="@color/light_grey"
+                    app:layout_constraintTop_toBottomOf="@+id/natureTxv" />
+
+                <ImageView
+                    android:id="@+id/natureEditBtn"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_marginRight="19dp"
+                    android:visibility="gone"
+                    android:src="@drawable/ic_create_blue_24px"
+                    app:layout_constraintBottom_toBottomOf="@+id/natureTxv"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/natureTxv" />
+
+                <!--       area of operation-->
+
+                <TextView
+                    android:id="@+id/areaLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/muli_bold"
+                    android:text="Area of operation"
+                    android:textColor="@color/ccTitleColor"
+                    app:layout_constraintStart_toStartOf="@+id/nameLabel"
+                    app:layout_constraintTop_toBottomOf="@+id/natureView" />
+
+                <TextView
+                    android:id="@+id/areaEmptyTxv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/muli_regular"
+                    android:gravity="center_vertical"
+                    android:text="@string/add_area"
+                    android:textColor="@color/ccTitleColor"
+                    android:textSize="13sp"
+                    app:layout_constraintStart_toStartOf="@+id/nameLabel"
+                    app:layout_constraintTop_toBottomOf="@+id/areaLabel" />
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/areaChipGroup"
+                    android:layout_width="0dp"
+                    android:layout_height="147dp"
+                    android:layout_marginTop="24dp"
+                    android:paddingLeft="@dimen/_30dp"
+                    android:paddingTop="@dimen/_10dp"
+                    app:checkedChip="@+id/alternate_time_one"
+                    app:chipSpacing="@dimen/_10dp"
+                    app:chipSpacingVertical="@dimen/_15dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toStartOf="@+id/nameLabel"
+                    app:layout_constraintTop_toBottomOf="@+id/areaLabel"
+                    app:singleSelection="true">
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/alternate_time_one"
+                        style="@style/Widget.MaterialComponents.Chip.Choice.style"
+                        android:text="Bandra"
+                        app:chipBackgroundColor="@color/time_picker_chip_background" />
+                </com.google.android.material.chip.ChipGroup>
+
+                <View
+                    android:id="@+id/areaView"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_1dp"
+                    android:layout_marginTop="11dp"
+                    android:background="@color/light_grey"
+                    app:layout_constraintTop_toBottomOf="@+id/areaChipGroup" />
+
+                <ImageView
+                    android:id="@+id/areaEditBtn"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_marginRight="19dp"
+                    android:visibility="gone"
+                    android:src="@drawable/ic_create_blue_24px"
+                    app:layout_constraintBottom_toBottomOf="@+id/areaChipGroup"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/areaChipGroup" />
+
+                <!--            Partners or directors -->
+
+                <TextView
+                    android:id="@+id/partnerLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/muli_bold"
+                    android:text="Partners or Directors"
+                    android:textColor="@color/ccTitleColor"
+                    app:layout_constraintStart_toStartOf="@+id/nameLabel"
+                    app:layout_constraintTop_toBottomOf="@+id/areaView" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/partnerRecycler"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="@+id/nameLabel"
+                    app:layout_constraintTop_toBottomOf="@+id/partnerLabel"
+                    tools:listitem="@layout/partners_list_item" />
+
+                <TextView
+                    android:id="@+id/partnerEmptyTxv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/muli_regular"
+                    android:gravity="center_vertical"
+                    android:text="@string/add_partners"
+                    android:textColor="@color/ccTitleColor"
+                    android:textSize="13sp"
+                    app:layout_constraintStart_toStartOf="@+id/nameLabel"
+                    app:layout_constraintTop_toBottomOf="@+id/partnerRecycler" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>

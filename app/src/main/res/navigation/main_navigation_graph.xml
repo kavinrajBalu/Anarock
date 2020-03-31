@@ -57,7 +57,7 @@
         app:startDestination="@id/companyCode" >
         <fragment
             android:id="@+id/companyCode"
-            android:name="com.anarock.cpsourcing.fragments.CompanyCode"
+            android:name="com.anarock.cpsourcing.fragments.CompanyCodeFragment"
             tools:layout="@layout/fragment_company_code">
             <action
                 android:id="@+id/action_companyCode_to_loginFragment"
@@ -180,5 +180,10 @@
         android:id="@+id/addCpFragment"
         tools:layout="@layout/fragment_add_cp"
         android:name="com.anarock.cpsourcing.fragments.AddCpFragment"
-        android:label="AddCpFragment" />
+        android:label="AddCpFragment" >
+     <argument
+         android:name="editMode"
+         app:argType="boolean"
+         android:defaultValue="false" />
+ </fragment>
 </navigation>

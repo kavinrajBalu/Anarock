@@ -19,17 +19,17 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import com.anarock.callrecord.CallRecord
 import com.anarock.cpsourcing.R
 import com.anarock.cpsourcing.callHandler.CallStateListener
 import com.anarock.cpsourcing.callHandler.EventSuccessCallOverlay
 import com.anarock.cpsourcing.databinding.FragementEventBinding
 import com.anarock.cpsourcing.interfaces.PhoneCallStatusCallBack
 import com.anarock.cpsourcing.utilities.CommonUtilities
-import com.anarock.cpsourcing.utilities.CommonUtilities.Companion.playCall
+//import com.anarock.cpsourcing.utilities.CommonUtilities.Companion.playCall
 import com.anarock.cpsourcing.utilities.Constants
 import com.anarock.cpsourcing.utilities.SharedPreferenceUtil
 import com.anarock.cpsourcing.viewModel.LoginSharedViewModel
+import com.anarock.cpsourcing.viewModel.SharedUtilityViewModel
 
 
 /**
@@ -58,15 +58,6 @@ class EventFragment : Fragment() {
         val binding : FragementEventBinding =  DataBindingUtil.inflate(inflater, R.layout.fragement_event,container,false)
         sharedUtilityViewModel.setToolBarVisibility(false)
         sharedUtilityViewModel.setCustomStatusBar(R.color.anarock_blue)
-        // TODO : For understanding purpose managing login state using viewModel. Use preference to maintain login/logout state.
-        loginSharedViewModel.getLoginState().observe(viewLifecycleOwner, Observer {
-            if(it == LoginSharedViewModel.LoginState.LOGIN_FAILED) {
-                sharedUtilityViewModel.setBottomNavigationVisibility(false)
-                findNavController().navigate(R.id.action_eventFragement_to_loginNavigation)
-            }
-        })
-        val binding: FragementEventBinding =
-            DataBindingUtil.inflate(inflater, R.layout.fragement_event, container, false)
         dialogFragment.isCancelable = false
 
         // TODO : For understanding purpose managing login state using viewModel. Use preference to maintain login/logout state.
@@ -120,7 +111,7 @@ class EventFragment : Fragment() {
 
          }*/
 
-        loginSharedViewModel.setToolbarTheme(ToolBarTheme(true, false))
+//        loginSharedViewModel.setToolbarTheme(ToolBarTheme(true, false))
 
         val telephonyManager =
             requireActivity().getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
@@ -160,7 +151,7 @@ class EventFragment : Fragment() {
         }*/
 
         binding.addCp.setOnClickListener {
-            findNavController().navigate(R.id.action_eventFragement_to_addCpFragment)
+            findNavController().navigate(R.id.action_eventFragement_to_addCpFragment, bundleOf("editMode" to true))
         }
 
         return binding.root
@@ -180,8 +171,9 @@ class EventFragment : Fragment() {
                openPermissionDialogFrag(false)
 
            }else{
-               loginSharedViewModel.setToolbarTheme(ToolBarTheme(true, false))
-               loginSharedViewModel.setBottomNavigationVisibility(true)
+               sharedUtilityViewModel.setToolBarVisibility(false)
+               sharedUtilityViewModel.setCustomStatusBar(R.color.anarock_blue)
+               sharedUtilityViewModel.setBottomNavigationVisibility(true)
            }
        }else{
            if (permissions.isNotEmpty() || !CommonUtilities.isPackageInstalled(
@@ -189,11 +181,11 @@ class EventFragment : Fragment() {
                    requireContext()
                )
            ) {
-               loginSharedViewModel.setBottomNavigationVisibility(false)
+               sharedUtilityViewModel.setBottomNavigationVisibility(false)
                openPermissionDialogFrag(true)
 
            } else {
-               loginSharedViewModel.setBottomNavigationVisibility(false)
+               sharedUtilityViewModel.setBottomNavigationVisibility(false)
                findNavController().navigate(R.id.action_eventFragement_to_loginNavigation)
            }
        }

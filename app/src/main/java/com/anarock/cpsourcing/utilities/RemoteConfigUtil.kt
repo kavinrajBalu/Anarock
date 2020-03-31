@@ -26,10 +26,10 @@ class RemoteConfigUtil {
                 if (task.isSuccessful) {
                     val updated = task.result
                     Log.d(TAG, "Config params updated: $updated")
-                    Toast.makeText(
+                   /* Toast.makeText(
                         mContext, "Fetch and activate succeeded",
                         Toast.LENGTH_SHORT
-                    ).show()
+                    ).show()*/
                 } else {
                     Toast.makeText(
                         mContext, "Fetch failed",
