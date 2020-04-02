@@ -60,59 +60,6 @@ class EventFragment : Fragment() {
         sharedUtilityViewModel.setCustomStatusBar(R.color.anarock_blue)
         dialogFragment.isCancelable = false
 
-        // TODO : For understanding purpose managing login state using viewModel. Use preference to maintain login/logout state.
-       /* loginSharedViewModel.getLoginState().observe(viewLifecycleOwner, Observer {
-            if (it == LoginSharedViewModel.LoginState.LOGIN_FAILED) {
-                loginSharedViewModel.setBottomNavigationVisibility(false)
-                if (permissions.isNotEmpty() || !CommonUtilities.isPackageInstalled(
-                        Constants.CONNECT_APP_PACKAGE_NAME,
-                        requireContext()
-                    )
-                ) {
-                    var bundle = bundleOf("fullScreen" to true)
-
-                    dialogFragment.arguments = bundle
-
-                    var ft  = requireActivity().supportFragmentManager.beginTransaction()
-                    val prev: Fragment? =
-                        requireActivity().supportFragmentManager.findFragmentByTag("dialog")
-                    if (prev != null) {
-                        ft.remove(prev)
-                    }
-                    ft.addToBackStack(null)
-
-
-                    dialogFragment.show(ft, "dialog")
-
-//                    findNavController().navigate(R.id.action_eventFragement_to_permissionsFragment, bundle)
-
-                } else {
-                    findNavController().navigate(R.id.action_eventFragement_to_loginNavigation)
-                }
-
-            }else{
-                if (permissions.isNotEmpty() || !CommonUtilities.isPackageInstalled(
-                        Constants.CONNECT_APP_PACKAGE_NAME,
-                        requireContext()
-                    )
-                ) {
-                    var bundle = bundleOf("fullScreen" to false)
-
-//                    findNavController().navigate(R.id.action_eventFragement_to_permissionsFragment, bundle)
-
-                }
-            }
-        })*/
-        /* val isInstalled = CommonUtilities.isPackageInstalled(Constants.CONNECT_APP_PACKAGE_NAME, requireContext())
-
-         if (!isInstalled){
-             loginSharedViewModel.setBottomNavigationVisibility(false)
-             findNavController().navigate(R.id.action_eventFragement_to_permissionsFragment)
-
-         }*/
-
-//        loginSharedViewModel.setToolbarTheme(ToolBarTheme(true, false))
-
         val telephonyManager =
             requireActivity().getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
 
@@ -151,7 +98,7 @@ class EventFragment : Fragment() {
         }*/
 
         binding.addCp.setOnClickListener {
-            findNavController().navigate(R.id.action_eventFragement_to_addCpFragment, bundleOf("editMode" to true))
+            findNavController().navigate(R.id.action_eventFragement_to_addCpFragment, bundleOf("editMode" to false))
         }
 
         return binding.root

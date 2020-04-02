@@ -6,6 +6,8 @@ class Constants {
         const val CONNECT_APP_KEY = "connect_app"
         const val CONNECT_APP_URL_KEY = "latest_app_url"
         const val CONNECT_APP_VERSION_KEY = "latest_app_version_code"
+        const val ENCRYPTED_STRING = "a0zRfRgHnQqyQUYWRJQE/YcBycaPJWT5UlbzVwoJrJTxVhJ2hMQlYVwkoWAA\nf+vV\n"
+        const val INIT_VECTOR = "LdIbQZaeAU9NqzyFdDkWZA==\n"
 
     }
     class PreferenceKeys{

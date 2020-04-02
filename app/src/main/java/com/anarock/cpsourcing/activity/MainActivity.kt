@@ -26,7 +26,10 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.anarock.cpsourcing.R
 import com.anarock.cpsourcing.databinding.ActivityMainBinding
+import com.anarock.cpsourcing.utilities.Constants
+import com.anarock.cpsourcing.utilities.CryptoModule
 import com.anarock.cpsourcing.viewModel.SharedUtilityViewModel
+import com.google.android.libraries.places.api.Places
 import com.google.android.material.badge.BadgeDrawable
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -39,7 +42,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding  = DataBindingUtil.setContentView(this,R.layout.activity_main)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         setSupportActionBar(binding.toolbar)
         val host: NavHostFragment = supportFragmentManager
@@ -70,36 +73,42 @@ class MainActivity : AppCompatActivity() {
         })
 
         sharedViewModel.getToolBarVisibility().observe(this, Observer {
-            if(it)
-            {
+            if (it) {
                 supportActionBar?.show()
-            }
-            else
-            {
+            } else {
                 supportActionBar?.hide()
             }
 
         })
 
         sharedViewModel.getCustomToolBar().observe(this, Observer {
-            binding.toolbar.background = ContextCompat.getDrawable(this,it.background)
+            binding.toolbar.background = ContextCompat.getDrawable(this, it.background)
             binding.toolbar.setTitleTextColor(ContextCompat.getColor(this, it.titleColor))
         })
 
         sharedViewModel.getCustomStatusBar().observe(this, Observer {
-            if(it == android.R.color.white)
-            {
+            if (it == android.R.color.white) {
                 window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
-            }
-            else
-            {
+            } else {
                 window.decorView.systemUiVisibility = 0
             }
             window.statusBarColor = ContextCompat.getColor(this, it);
         })
 
-        setUpBottomNavigationMenu(navController,binding.bottomNavView)
+        setUpBottomNavigationMenu(navController, binding.bottomNavView)
         eventCreationListenerImpl()
+
+        val apiKey = CryptoModule.decryptAES(
+            Constants.ENCRYPTED_STRING,
+            Constants.INIT_VECTOR,
+            "staging_encryption_key"
+        )
+
+        // Initialize the SDK
+        Places.initialize(
+            this,
+            apiKey
+        )
     }
 
     private fun eventCreationListenerImpl() {
@@ -108,24 +117,24 @@ class MainActivity : AppCompatActivity() {
         eventCreationListener = object : BroadcastReceiver() {
             override fun onReceive(context: Context?, intent: Intent?) {
                 //UI update here
-                if (intent != null)
-                {
-                    if(intent.getStringExtra("screen") == "proposed")
-                    {
+                if (intent != null) {
+                    if (intent.getStringExtra("screen") == "proposed") {
 
                         findNavController(R.id.nav_host_fragment_container).navigate(R.id.addNewEventProposedFragment)
                     }
                 }
             }
         }
-        LocalBroadcastManager.getInstance(this).registerReceiver(eventCreationListener as BroadcastReceiver, filter)
+        LocalBroadcastManager.getInstance(this)
+            .registerReceiver(eventCreationListener as BroadcastReceiver, filter)
     }
 
     private fun setUpBottomNavigationMenu(
         navController: NavController,
         bottomNavView: BottomNavigationView
     ) {
-        val badge: BadgeDrawable = bottomNavView.getOrCreateBadge(binding.bottomNavView.menu[2].itemId)
+        val badge: BadgeDrawable =
+            bottomNavView.getOrCreateBadge(binding.bottomNavView.menu[2].itemId)
         badge.number = 10
         bottomNavView.setupWithNavController(navController)
     }

@@ -31,7 +31,7 @@ class CommonUtilities {
         private const val subject = "Unable to login"
 
         fun isValidEmail(email: String): Boolean {
-            return Patterns.EMAIL_ADDRESS.toRegex().matches(email);
+            return Patterns.EMAIL_ADDRESS.toRegex().matches(email.trim());
         }
 
         /*fun isValidPhoneNumber(number: String): Boolean {
