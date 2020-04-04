@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import com.anarock.cpsourcing.model.*
 import com.anarock.cpsourcing.repository.CreateEventRepository
 import com.anarock.cpsourcing.repository.LeadRepositry
@@ -11,7 +12,12 @@ import com.anarock.cpsourcing.repository.LeadRepositry
 class CreateEventViewModel(application: Application) : AndroidViewModel(application)
 {
 
-     var cpNamesList : MutableLiveData<ArrayList<String>> = MutableLiveData()
+     private  var cpSearchString : MutableLiveData<String> = MutableLiveData()
+    var cpDetailsList:MutableLiveData<ArrayList<CP>> = MutableLiveData()
+     val searchCpResult : LiveData<CPSearchResponse> = Transformations.switchMap(cpSearchString){
+         CreateEventRepository.searchCP(getApplication(),it)
+     }
+
 
     fun getLeadDetails(hint : String):LiveData<ArrayList<LeadSearchData>>
     {
@@ -22,20 +28,9 @@ class CreateEventViewModel(application: Application) : AndroidViewModel(applicat
        return CreateEventRepository.createEvent(payload,getApplication())
     }
 
-    fun searchCP(payload : CPSearchPayload) : LiveData<HashMap<Int,String>>
+    fun searchCP(hint : String)
     {
-        val response = CreateEventRepository.searchCP(getApplication(),payload)
-       return getCPNamesList(response)
+      cpSearchString.value = hint
     }
 
-    private fun getCPNamesList(response: MutableLiveData<CPSearchResponse>): LiveData<HashMap<Int,String>> {
-          var cpMap : MutableLiveData<HashMap<Int,String>> = MutableLiveData()
-           response.value?.response?.let {
-               for(cp in it)
-               {
-                   cp.id?.let { it1 -> cp.name?.let { it2 -> cpMap.value?.put(it1,it2) } }
-               }
-           }
-        return cpMap
-    }
 }

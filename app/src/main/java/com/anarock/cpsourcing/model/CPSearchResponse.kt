@@ -16,5 +16,5 @@ class CPSearchResponse(
 
     @SerializedName("response")
     @Expose
-    var response: List<CP>? = null
+    var response: ArrayList<CP>? = null
 )

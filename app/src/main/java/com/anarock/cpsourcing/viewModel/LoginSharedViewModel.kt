@@ -22,7 +22,7 @@ class LoginSharedViewModel(application: Application) : AndroidViewModel(applicat
 
      init {
 
-         loginState.value = LoginState.LOGIN_FAILED
+         loginState.value = LoginState.LOGIN_SUCCESS
      }
 
      fun fetchTenantDomain(tenantName : String) : LiveData<TenantDomainResponseModel>{

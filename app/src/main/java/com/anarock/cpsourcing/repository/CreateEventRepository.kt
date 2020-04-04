@@ -11,6 +11,8 @@ import com.anarock.cpsourcing.model.EventCreationPayload
 import com.anarock.cpsourcing.model.EventCreationResponse
 import com.anarock.cpsourcing.retrofit.ApiClient
 import com.anarock.cpsourcing.retrofit.EventAPIService
+import com.anarock.cpsourcing.utilities.Constants
+import com.anarock.cpsourcing.utilities.SharedPreferenceUtil
 import com.google.gson.Gson
 import okhttp3.RequestBody
 import retrofit2.Call
@@ -55,12 +57,12 @@ class CreateEventRepository {
           return result
         }
 
-        fun searchCP(context: Context,payload: CPSearchPayload):MutableLiveData<CPSearchResponse>
+        fun searchCP(context: Context,hint: String):MutableLiveData<CPSearchResponse>
         {
-            ApiClient.setDomainName(ApiClient.STAGE_DOMAIN, ApiClient.DOMAIN_ANAROCK)
+            ApiClient.setDomainName(ApiClient.EMPLOYEE_DOMAIN, ApiClient.DOMAIN_ANAROCK)
 
             var result : MutableLiveData<CPSearchResponse> = MutableLiveData()
-            val bodyJson: String = Gson().toJson(payload)
+           /* val bodyJson: String = Gson().toJson(payload)
 
             val requestBody: RequestBody = RequestBody.create(
                 okhttp3.MediaType.parse(
@@ -68,12 +70,13 @@ class CreateEventRepository {
                         R.string.request_type
                     )
                 ), bodyJson
-            )
-            val call = eventAPIService.searchCP(payload.q!!,"EpK9VhMu5BPuaZENjZ1BtpNkokDWgaGA5CluoXkEXH5WaTDv1lgGLJjt_zZXWJiHtaDdDaB92nj9D96BkycUR6uHXkhIBRCM8v1OwC8O948H6HumfRcexqGM1WM76kuNRPfuGwnwGxofXIquTHS_Ti6FwTaD7THh7-EqudTO0t8_web")
+            )*/
+            val call = eventAPIService.searchCP(hint,SharedPreferenceUtil.getInstance(context).getString(Constants.PreferenceKeys.TOKEN, "")!!)
 
             call.enqueue(object :Callback<CPSearchResponse>{
                 override fun onFailure(call: Call<CPSearchResponse>, t: Throwable) {
                     Log.d("failed",t.localizedMessage)
+                    SharedPreferenceUtil.getInstance(context).putString(Constants.PreferenceKeys.TOKEN,"")
                 }
 
                 override fun onResponse(

@@ -1,11 +1,8 @@
 package com.anarock.cpsourcing.fragments
 
-import android.content.Context
-import android.content.IntentFilter
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +11,7 @@ import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -21,10 +19,7 @@ import com.anarock.cpsourcing.R
 import com.anarock.cpsourcing.databinding.FragmentLoginBinding
 import com.anarock.cpsourcing.model.CountryCodeModel
 import com.anarock.cpsourcing.model.ToolBarTheme
-import com.anarock.cpsourcing.receiver.MySMSBroadcastReceiver
-import com.anarock.cpsourcing.retrofit.ApiClient
 import com.anarock.cpsourcing.utilities.CommonUtilities
-import com.anarock.cpsourcing.utilities.SMSRetrieverClient
 import com.anarock.cpsourcing.utilities.SMSRetrieverClient.Companion.startSMSRetriever
 import com.anarock.cpsourcing.viewModel.LoginSharedViewModel
 

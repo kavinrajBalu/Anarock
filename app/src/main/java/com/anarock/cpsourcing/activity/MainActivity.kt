@@ -6,10 +6,7 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.content.pm.ActivityInfo
 import android.os.Bundle
-import android.os.PowerManager
 import android.view.View
-import android.view.WindowManager
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.get
@@ -25,7 +22,9 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.anarock.cpsourcing.R
+import com.anarock.cpsourcing.callLogs.CallLogsReceiver
 import com.anarock.cpsourcing.databinding.ActivityMainBinding
+import com.anarock.cpsourcing.utilities.Constants
 import com.anarock.cpsourcing.viewModel.SharedUtilityViewModel
 import com.google.android.material.badge.BadgeDrawable
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -36,6 +35,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     var eventCreationListener: BroadcastReceiver? = null
     private val EVENT_CREATION_BROADCAST = "action.event.creation"
+    private  var callsLogger  = CallLogsReceiver()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -100,6 +100,21 @@ class MainActivity : AppCompatActivity() {
 
         setUpBottomNavigationMenu(navController,binding.bottomNavView)
         eventCreationListenerImpl()
+        fetchCallLogs()
+    }
+
+    private fun fetchCallLogs() {
+        val filter = IntentFilter()
+        filter.addAction(Constants.CALL_LOGS_CALL_EVENT)
+        filter.addAction(Constants.CALL_LOGS_CALLS_DETAILS_EVENT)
+        this.registerReceiver(callsLogger,filter)
+        val intent = Intent()
+        intent.setClassName("com.anarock.calls", "com.anarock.calls.CallsDetailsReceiver")
+        intent.action = "com.anarock.broadcast.GET_CALLS_DETAILS_EVENT"
+        intent.putExtra("since", 0)
+        intent.putExtra("delayMS", 1000)
+        intent.putExtra("sourceId", packageName)
+        sendBroadcast(intent)
     }
 
     private fun eventCreationListenerImpl() {
@@ -144,5 +159,6 @@ class MainActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         unregisterReceiver(eventCreationListener)
+        unregisterReceiver(callsLogger)
     }
 }

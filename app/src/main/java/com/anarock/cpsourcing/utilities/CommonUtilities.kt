@@ -2,6 +2,9 @@ package com.anarock.cpsourcing.utilities
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.job.JobInfo
+import android.app.job.JobScheduler
+import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.media.MediaPlayer
@@ -13,7 +16,9 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.core.content.ContextCompat.startActivity
+import com.anarock.callrecord.CallRecord
 import com.anarock.cpsourcing.R
+import com.anarock.cpsourcing.callLogs.ConnectAppCallLogsService
 import java.io.File
 import java.io.FileInputStream
 import java.util.*
@@ -72,11 +77,11 @@ class CommonUtilities {
             context.startActivity(intent)
         }
 
-/* fun playCall(callRecord : CallRecord) : MediaPlayer
+        fun playCall(path:String) : MediaPlayer
         {
             val mp = MediaPlayer()
             try {
-                val filePath = File(callRecord.recordDirPath+"/"+callRecord.recordDirName+"/"+callRecord.recordFileName)
+                val filePath = File(path)
                 val fileInputStream = FileInputStream(filePath)
                 mp.setDataSource(fileInputStream.fd)
                 mp.prepare()
@@ -88,7 +93,12 @@ class CommonUtilities {
             }
 
             return  mp
-        }*/
+        }
+
+        fun getCallRecordingFilePath(callRecord: CallRecord):String
+        {
+            return callRecord.recordDirPath+"/"+callRecord.recordDirName+"/"+callRecord.recordFileName
+        }
 
         fun hideKeyboard(activity: Activity) {
             val imm =
@@ -152,9 +162,15 @@ class CommonUtilities {
             }
 
         }
-  fun showProgressDialog(context: Context)
-        {
 
+        fun scheduleFetchConnectAppCallLogs(context: Context)
+        {
+            val componentName = ComponentName(context,ConnectAppCallLogsService::class.java)
+            val jobInfo = JobInfo.Builder(0,componentName)
+            jobInfo.setMinimumLatency(1*1000)
+            jobInfo.setOverrideDeadline(1*3000)
+            val jobScheduler = context.getSystemService(JobScheduler::class.java)
+            jobScheduler.schedule(jobInfo.build())
         }
 
     }

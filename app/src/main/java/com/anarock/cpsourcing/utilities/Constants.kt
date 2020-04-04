@@ -6,6 +6,8 @@ class Constants {
         const val CONNECT_APP_KEY = "connect_app"
         const val CONNECT_APP_URL_KEY = "latest_app_url"
         const val CONNECT_APP_VERSION_KEY = "latest_app_version_code"
+        const val CALL_LOGS_CALL_EVENT = "com.anarock.broadcast.CALL_EVENT"
+        const val CALL_LOGS_CALLS_DETAILS_EVENT = "com.anarock.broadcast.CALLS_DETAILS_EVENT"
 
     }
     class PreferenceKeys{

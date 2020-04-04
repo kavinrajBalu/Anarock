@@ -10,23 +10,27 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.MutableLiveData
 import androidx.navigation.fragment.findNavController
 import com.anarock.cpsourcing.R
 import com.anarock.cpsourcing.databinding.FragmentAddNewEventProposedBinding
-import com.anarock.cpsourcing.model.CPSearchPayload
-import com.anarock.cpsourcing.model.CustomAppBar
-import com.anarock.cpsourcing.model.EventCreationPayload
+import com.anarock.cpsourcing.model.*
 import com.anarock.cpsourcing.utilities.DateTimeUtils
 import com.anarock.cpsourcing.viewModel.CreateEventViewModel
 import com.anarock.cpsourcing.viewModel.SharedUtilityViewModel
 import com.google.android.material.chip.Chip
+import kotlinx.android.synthetic.main.custom_search_field.view.*
 import kotlinx.android.synthetic.main.custom_spinner.view.*
+import kotlinx.android.synthetic.main.custom_spinner.view.field
+import kotlinx.android.synthetic.main.custom_spinner.view.spinner
 import kotlinx.android.synthetic.main.custom_text_field.view.*
 import java.util.*
 import kotlin.collections.ArrayList
@@ -37,7 +41,7 @@ class AddNewEventProposedFragment : Fragment() {
     private val sharedUtilityViewModel : SharedUtilityViewModel by activityViewModels()
     private val createEventViewModel: CreateEventViewModel by viewModels()
     private lateinit var binding : FragmentAddNewEventProposedBinding
-    private lateinit var projectSpinner : Spinner
+    private var cpId : Int = 0
     private lateinit var datePickerDialog: DatePickerDialog
     private val DATE_FORMAT = "EE, MMM dd - hh:ssaa"
     val startTime = Calendar.getInstance()
@@ -56,7 +60,6 @@ class AddNewEventProposedFragment : Fragment() {
             val items = arrayOf("NMas", "NaasY", "NasaC", "NasaD")
             val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, items)
             binding.projectSpinner.spinner.setAdapter(adapter)
-            binding.cpSpinner.field.spinner.setAdapter(adapter)
             initViews()
 
             binding.dateTime.customTextInput.editText?.setOnClickListener {
@@ -112,6 +115,19 @@ class AddNewEventProposedFragment : Fragment() {
                 }
             }
 
+               createEventViewModel.searchCpResult.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+               createEventViewModel.cpDetailsList.value?.clear()
+               createEventViewModel.cpDetailsList.value = it.response
+               val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, it.response!!)
+               binding.cpSpinner.field.spinner.setAdapter(adapter)
+               binding.cpSpinner.field.spinner.showDropDown()
+           })
+
+            binding.cpSpinner.field.spinner.setOnItemClickListener { parent, view, position, id ->
+                cpId = createEventViewModel.cpDetailsList.value?.get(position)?.id!!
+                binding.leadName.field.spinner.requestFocus()
+            }
+
             binding.cpSpinner.field.spinner.addTextChangedListener(object :TextWatcher{
                 override fun afterTextChanged(s: Editable?) {
                 }
@@ -125,19 +141,15 @@ class AddNewEventProposedFragment : Fragment() {
                 }
 
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                     createEventViewModel.searchCP(CPSearchPayload(s.toString())).observe(viewLifecycleOwner,
-                         androidx.lifecycle.Observer {
-                             val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item,ArrayList(it.values))
-                             binding.projectSpinner.spinner.setAdapter(adapter)
-                             binding.cpSpinner.field.spinner.setAdapter(adapter)
-                         })
+                    createEventViewModel.searchCP(s.toString())
                 }
             })
             return binding.root
     }
 
+
     private fun getPayloadObject(): EventCreationPayload {
-           return  EventCreationPayload(1,123,startTime.time.toString(),"",12,23,binding.notes.text.toString())
+           return  EventCreationPayload(1,cpId,startTime.time.toString(),"",12,23,binding.notes.text.toString())
     }
 
     private fun isMandatoryFieldFilled(): Boolean {
@@ -192,4 +204,5 @@ class AddNewEventProposedFragment : Fragment() {
         binding.leadPhoneNumber.customTextInput.editText?.hint = getString(R.string.lead_phone_number)
         binding.dateTime.customTextInput.editText?.hint = getString(R.string.date_time_hint)
     }
+
 }

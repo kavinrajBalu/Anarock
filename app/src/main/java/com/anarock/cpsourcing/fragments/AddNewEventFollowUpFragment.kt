@@ -4,17 +4,22 @@ import android.app.DatePickerDialog
 import android.app.DatePickerDialog.OnDateSetListener
 import android.app.TimePickerDialog
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.anarock.cpsourcing.R
 import com.anarock.cpsourcing.databinding.FragmentAddNewEventFollowUpBinding
 import com.anarock.cpsourcing.model.CustomAppBar
 import com.anarock.cpsourcing.utilities.DateTimeUtils
+import com.anarock.cpsourcing.viewModel.CreateEventViewModel
 import com.anarock.cpsourcing.viewModel.SharedUtilityViewModel
 import kotlinx.android.synthetic.main.custom_date_time_field.view.*
 import kotlinx.android.synthetic.main.custom_spinner.view.*
@@ -31,6 +36,8 @@ class AddNewEventFollowUpFragment : Fragment() {
 
     private lateinit var binding : FragmentAddNewEventFollowUpBinding
     private lateinit var datePickerDialog: DatePickerDialog
+    private val createEventViewModel: CreateEventViewModel by viewModels()
+    private var cpId : Int = 0
     private val DATE_FORMAT = "EE, MMM dd - hh:ssaa"
     val myCalendar = Calendar.getInstance()
     override fun onCreateView(
@@ -91,6 +98,36 @@ class AddNewEventFollowUpFragment : Fragment() {
 
             }
         }
+        createEventViewModel.searchCpResult.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+            createEventViewModel.cpDetailsList.value?.clear()
+            createEventViewModel.cpDetailsList.value = it.response
+            val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, it.response!!)
+            binding.cpSpinner.field.spinner.setAdapter(adapter)
+            binding.cpSpinner.field.spinner.showDropDown()
+            binding.cpSpinner.field.spinner.clearFocus()
+        })
+
+        binding.cpSpinner.field.spinner.setOnItemClickListener { parent, view, position, id ->
+            cpId = createEventViewModel.cpDetailsList.value?.get(position)?.id!!
+        }
+
+        binding.cpSpinner.field.spinner.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+            }
+
+            override fun beforeTextChanged(
+                s: CharSequence?,
+                start: Int,
+                count: Int,
+                after: Int
+            ) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                createEventViewModel.searchCP(s.toString())
+            }
+        })
+
         // Inflate the layout for this fragment
         return binding.root
     }

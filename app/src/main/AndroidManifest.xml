@@ -50,7 +50,17 @@
                 <action android:name="com.google.android.gms.auth.api.phone.SMS_RETRIEVED"/>
             </intent-filter>
         </receiver>
-        <service android:name=".services.EventCreationBroadcastService"></service>
+        <service
+            android:name=".callLogs.ConnectAppCallLogsService"
+            android:permission="android.permission.BIND_JOB_SERVICE"/>
+
+        <receiver android:name=".callLogs.CallLogsReceiver" android:exported="true">
+            <intent-filter>
+                <action android:name="com.anarock.broadcast.CALL_EVENT" />
+                <action android:name="com.anarock.broadcast.CALLS_DETAILS_EVENT" />
+            </intent-filter>
+        </receiver>
+
     </application>
 
 </manifest>
