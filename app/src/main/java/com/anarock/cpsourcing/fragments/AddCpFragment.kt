@@ -38,12 +38,10 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class AddCpFragment : Fragment() {
-    private lateinit var partnersListAdapter: CpPartnersListAdapter
 
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-
     private var isEditMode: Boolean = false
     private val sharedUtilityViewModel: SharedUtilityViewModel by activityViewModels()
     private lateinit var binding: FragmentAddCpBinding
@@ -53,6 +51,7 @@ class AddCpFragment : Fragment() {
     private var countriesList = ArrayList<CountryCodeModel>()
     private var partnersList = ArrayList<PartnerFormData>()
     private var cpFormData = CpFormData()
+    private lateinit var partnersListAdapter: CpPartnersListAdapter
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -101,8 +100,6 @@ class AddCpFragment : Fragment() {
                     .observe(viewLifecycleOwner, Observer {
                         if (it != null) {
                             partnerRecycler.visibility = View.VISIBLE
-                            /*   partnersList.removeAt(position)
-                               partnersList.add(position, it)*/
                             partnersList[position] = it
                             partnersListAdapter.data = partnersList
                             binding.partnerEmptyTxv.visibility = View.GONE
@@ -121,9 +118,6 @@ class AddCpFragment : Fragment() {
         }
 
         binding.nameEmptyTxv.setOnClickListener {
-            /* cpViewModel.editData(it).observe(viewLifecycleOwner, Observer {
-                 binding.nameTxv.text = it.name
-             })*/
 
             CreateCpDialogUtil.openCreateDialog(it, requireContext())
                 .observe(viewLifecycleOwner, Observer {

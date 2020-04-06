@@ -7,10 +7,14 @@ import android.view.View
 import android.widget.*
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.widget.addTextChangedListener
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import com.anarock.cpsourcing.R
+import com.anarock.cpsourcing.interfaces.placesPredictListener
 import com.anarock.cpsourcing.model.CpFormData
 import com.anarock.cpsourcing.model.PartnerFormData
+import com.anarock.cpsourcing.model.PlacesPredict
 import com.google.android.material.chip.Chip
 
 
@@ -160,15 +164,37 @@ class CreateCpDialogUtil {
                 mLabelText.text = "Add business nature"
                 mNameEditText.hint = "Enter nature of business"
             }
+            var fruits = listOf("apple", "grapes", "jhjguy")
 
+            var placesList = ArrayList<String>()
             var adapter: ArrayAdapter<String> =
-                ArrayAdapter<String>(context, android.R.layout.select_dialog_item, listOf())
+                ArrayAdapter<String>(context, android.R.layout.select_dialog_item, fruits)
 
             mAutoCompleteTextView.setAdapter(adapter)
-            mAutoCompleteTextView.addTextChangedListener {
-                if (it.toString().length>2) {
-                    PlacesAutoCompleteUtil.findAutoCompletePredictions(it.toString(), context)
+            mAutoCompleteTextView.threshold = 3
+            mAutoCompleteTextView.onItemClickListener = AdapterView.OnItemClickListener { parent, _, position, _ ->
+                val place = parent.getItemAtPosition(position) as String
+                mAutoCompleteTextView.apply {
+                    setText(place)
+                    setSelection(mAutoCompleteTextView.length())
                 }
+            }
+            mAutoCompleteTextView.addTextChangedListener {
+//                if (it.toString().length > 2) {
+                    PlacesAutoCompleteUtil.findAutoCompletePredictions(
+                        it.toString(),
+                        context,
+                        object : placesPredictListener {
+                            override fun onResponse(placesPredict: PlacesPredict) {
+
+//                                placesPredict.placePrimary?.let { it1 -> placesList.add(it1) }
+//                                adapter.notifyDataSetChanged()
+
+                            }
+
+                        })
+
+//                }
             }
 
 
