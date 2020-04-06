@@ -1,14 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+<androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.ProjectSwitchFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="@dimen/_60dp"
+        android:background="@color/anarock_blue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-</FrameLayout>
+        <TextView
+            android:id="@+id/topFilterName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:text="All CPs"
+            android:textColor="@android:color/white"
+            android:textSize="13sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/ellipse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:src="@drawable/ic_ellipse"
+            app:layout_constraintBottom_toBottomOf="@+id/topFilterName"
+            app:layout_constraintStart_toEndOf="@+id/topFilterName"
+            app:layout_constraintTop_toTopOf="@+id/topFilterName" />
+
+        <TextView
+            android:id="@+id/topFilterCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:drawableEnd="@drawable/ic_expand"
+            android:drawablePadding="5dp"
+            android:text="155"
+            android:textColor="@android:color/white"
+            android:textSize="13sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/ellipse"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.555"
+            app:srcCompat="@drawable/ic_search" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <CheckedTextView
+        android:id="@+id/cpSelectionText"
+        android:layout_width="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        android:gravity="center_vertical"
+        android:text="All CPs"
+        android:drawablePadding="8dp"
+        android:checked="false"
+        android:checkMark="@null"
+        style="@style/project_switch_text_style"
+        android:layout_marginTop="48dp"
+        android:layout_marginLeft="16dp"
+        android:layout_height="wrap_content"/>
+
+    <CheckedTextView
+        android:id="@+id/cpCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:drawablePadding="5dp"
+        android:text="155"
+        android:checked="false"
+        android:fontFamily="@font/muli_semibold"
+        android:textColor="@color/project_switch_text_color"
+        android:textSize="13sp"
+        app:layout_constraintBottom_toBottomOf="@+id/cpSelectionText"
+        app:layout_constraintStart_toEndOf="@+id/cpSelectionText"
+        app:layout_constraintTop_toTopOf="@+id/cpSelectionText" />
+
+    <View
+        android:id="@+id/cp_divider"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_1dp"
+        android:layout_marginTop="12dp"
+        android:background="@color/light_grey"
+        app:layout_constraintStart_toStartOf="@+id/cpSelectionText"
+        app:layout_constraintTop_toBottomOf="@+id/cpSelectionText" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
