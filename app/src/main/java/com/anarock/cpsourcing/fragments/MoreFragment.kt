@@ -11,9 +11,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.NotificationCompat
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.anarock.cpsourcing.R
 import com.anarock.cpsourcing.databinding.FragmentMoreBinding
+import com.anarock.cpsourcing.viewModel.SharedUtilityViewModel
 import java.util.*
 
 // TODO: Rename parameter arguments, choose names that match
@@ -27,18 +29,7 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class MoreFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
-
+    private val sharedUtilityViewModel : SharedUtilityViewModel by activityViewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -46,8 +37,13 @@ class MoreFragment : Fragment() {
         // Inflate the layout for this fragment
         val binding: FragmentMoreBinding = DataBindingUtil.inflate(inflater,
             R.layout.fragment_more, container, false)
+        sharedUtilityViewModel.setBottomNavigationVisibility(true)
         binding.notificationButton.setOnClickListener {
             showDeepLinkNotification()
+        }
+
+        binding.callLogs.setOnClickListener {
+            findNavController().navigate(R.id.action_moreFragment_to_callLogsFragment)
         }
         return binding.root
     }

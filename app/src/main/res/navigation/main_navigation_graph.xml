@@ -51,6 +51,9 @@
         <deepLink
             android:id="@+id/deepLink3"
             app:uri="https://www.appAnarock.com/more" />
+        <action
+            android:id="@+id/action_moreFragment_to_callLogsFragment"
+            app:destination="@id/callLogsFragment" />
     </fragment>
     <navigation
         android:id="@+id/loginNavigation"
@@ -172,10 +175,9 @@
             app:popUpToInclusive="true" />
     </fragment>
     <fragment
-        android:id="@+id/leadSearchFragment"
-        android:name="com.anarock.cpsourcing.fragments.LeadSearchFragment"
-        android:label="fragment_lead_search"
-        tools:layout="@layout/fragment_lead_search" />
+        android:id="@+id/cpSearchFragment"
+        android:name="com.anarock.cpsourcing.fragments.CPSearchFragment"
+        tools:layout="@layout/fragment_cp_search" />
  <fragment
         android:id="@+id/addCpFragment"
         tools:layout="@layout/fragment_add_cp"
@@ -186,4 +188,13 @@
          app:argType="boolean"
          android:defaultValue="false" />
  </fragment>
+    <fragment
+        android:id="@+id/callLogsFragment"
+        android:name="com.anarock.cpsourcing.fragments.CallLogsFragment"
+        android:label="Call Logs"
+        tools:layout="@layout/fragment_call_logs" >
+        <action
+            android:id="@+id/action_callLogsFragment_to_cpSearchFragment"
+            app:destination="@id/cpSearchFragment" />
+    </fragment>
 </navigation>

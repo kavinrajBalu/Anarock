@@ -39,7 +39,7 @@ class AddNewEventFollowUpFragment : Fragment() {
     private val createEventViewModel: CreateEventViewModel by viewModels()
     private var cpId : Int = 0
     private val DATE_FORMAT = "EE, MMM dd - hh:ssaa"
-    val myCalendar = Calendar.getInstance()
+    val myCalendar: Calendar = Calendar.getInstance()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

@@ -66,5 +66,14 @@
     <string name="add_nature_business"><font color="#143FFF">+ Add nature of business</font></string>
     <string name="add_area"><font color="#143FFF">+ Add area</font></string>
     <string name="add_partners"><font color="#143FFF">+ Add partners/directors</font></string>
+    <string name="screen">screen</string>
+    <string name="screen_proposed_name">proposed</string>
+    <string name="connect_app_package">com.anarock.calls.debug</string>
+    <string name="connect_app_broadcast_receiver">com.anarock.calls.CallsDetailsReceiver</string>
+    <string name="call_details_event_action">com.anarock.broadcast.GET_CALLS_DETAILS_EVENT</string>
+    <string name="since">since</string>
+    <string name="delay_in_sec">delayMS</string>
+    <string name="source_id">sourceId</string>
+    <string name="app_package_name">com.anarock.cpsourcing</string>
 
 </resources>

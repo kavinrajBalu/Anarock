@@ -76,7 +76,7 @@ class CreateEventRepository {
             call.enqueue(object :Callback<CPSearchResponse>{
                 override fun onFailure(call: Call<CPSearchResponse>, t: Throwable) {
                     Log.d("failed",t.localizedMessage)
-                    SharedPreferenceUtil.getInstance(context).putString(Constants.PreferenceKeys.TOKEN,"")
+                   // SharedPreferenceUtil.getInstance(context).putString(Constants.PreferenceKeys.TOKEN,"")
                 }
 
                 override fun onResponse(

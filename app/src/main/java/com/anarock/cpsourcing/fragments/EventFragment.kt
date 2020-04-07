@@ -72,11 +72,11 @@ class EventFragment : Fragment() {
         }
 
        binding.callCp.setOnClickListener {
-            CommonUtilities.makeCall(requireContext(),"8903653203")
+            CommonUtilities.makeCall(requireContext(),"9080773231")
             val callRecord = CallRecord.Builder(requireContext())
                 .setLogEnable(true)
                 .setRecordFileName("sample")
-                .setRecordDirName("8903653203")
+                .setRecordDirName("9080773231")
                 .setRecordDirPath(requireContext().getExternalFilesDir(null)?.absolutePath)
                 .setAudioSource(MediaRecorder.AudioSource.VOICE_COMMUNICATION)
                 .setShowSeed(true)
@@ -115,6 +115,7 @@ class EventFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         getAllRequiredPermission()
+        SharedPreferenceUtil.getInstance(requireContext()).putString(Constants.PreferenceKeys.TOKEN,"sdvsdvs")
         val token = SharedPreferenceUtil.getInstance(requireContext()).getString(Constants.PreferenceKeys.TOKEN, "")
        if(CommonUtilities.notnull(token)){
            if (permissions.isNotEmpty() || !CommonUtilities.isPackageInstalled(

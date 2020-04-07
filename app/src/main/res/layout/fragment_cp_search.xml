@@ -10,7 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".fragments.LeadSearchFragment">
+        tools:context=".fragments.CPSearchFragment">
 
         <EditText
             android:id="@+id/search"
@@ -57,9 +57,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:text="Lead's"
-            android:textSize="@dimen/_16dp"
+            android:text="CP's"
             android:textColor="@color/light_blue_black"
+            android:textSize="@dimen/_16dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/divider12" />
 
@@ -74,6 +74,6 @@
             app:layout_constraintStart_toStartOf="@+id/textView21"
             app:layout_constraintTop_toBottomOf="@+id/textView21"
             app:layout_constraintVertical_bias="1.0"
-            tools:listitem="@layout/lead_search_item" />
+            tools:listitem="@layout/cp_search_item" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -44,7 +44,7 @@ class AddNewEventFaceToFaceFragment : Fragment() {
     private lateinit var datePickerDialog: DatePickerDialog
     private val DATE_FORMAT = "EE, MMM dd - hh:ssaa"
     private var cpId : Int = 0
-    val myCalendar = Calendar.getInstance()
+    val myCalendar: Calendar = Calendar.getInstance()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

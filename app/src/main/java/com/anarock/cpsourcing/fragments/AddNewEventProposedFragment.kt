@@ -10,30 +10,23 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Spinner
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.MutableLiveData
 import androidx.navigation.fragment.findNavController
 import com.anarock.cpsourcing.R
 import com.anarock.cpsourcing.databinding.FragmentAddNewEventProposedBinding
-import com.anarock.cpsourcing.model.*
+import com.anarock.cpsourcing.model.CustomAppBar
+import com.anarock.cpsourcing.model.EventCreationPayload
 import com.anarock.cpsourcing.utilities.DateTimeUtils
 import com.anarock.cpsourcing.viewModel.CreateEventViewModel
 import com.anarock.cpsourcing.viewModel.SharedUtilityViewModel
 import com.google.android.material.chip.Chip
-import kotlinx.android.synthetic.main.custom_search_field.view.*
 import kotlinx.android.synthetic.main.custom_spinner.view.*
-import kotlinx.android.synthetic.main.custom_spinner.view.field
-import kotlinx.android.synthetic.main.custom_spinner.view.spinner
 import kotlinx.android.synthetic.main.custom_text_field.view.*
 import java.util.*
-import kotlin.collections.ArrayList
 
 
 class AddNewEventProposedFragment : Fragment() {
@@ -44,7 +37,7 @@ class AddNewEventProposedFragment : Fragment() {
     private var cpId : Int = 0
     private lateinit var datePickerDialog: DatePickerDialog
     private val DATE_FORMAT = "EE, MMM dd - hh:ssaa"
-    val startTime = Calendar.getInstance()
+    val startTime: Calendar? = Calendar.getInstance()
         override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -67,28 +60,34 @@ class AddNewEventProposedFragment : Fragment() {
             }
 
             val time = TimePickerDialog.OnTimeSetListener { view, hourOfDay, minute ->
-                     startTime[Calendar.HOUR_OF_DAY] = hourOfDay
-                     startTime[Calendar.MINUTE] = minute
-                binding.dateTime.customTextInput.editText?.setText(DateTimeUtils.customDateTimeString(DATE_FORMAT,startTime))
+                     startTime?.set(Calendar.HOUR_OF_DAY, hourOfDay)
+                startTime?.set(Calendar.MINUTE, minute)
+                binding.dateTime.customTextInput.editText?.setText(startTime?.let {
+                    DateTimeUtils.customDateTimeString(DATE_FORMAT,
+                        it
+                    )
+                })
             }
 
             val timePickerDialog  = TimePickerDialog(requireContext(),
                 R.style.DialogTheme,time,Calendar.HOUR_OF_DAY,Calendar.MINUTE,false)
             val date =
                 OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
-                    startTime[Calendar.YEAR] = year
-                    startTime[Calendar.MONTH] = monthOfYear
-                    startTime[Calendar.DAY_OF_MONTH] = dayOfMonth
+                    startTime?.set(Calendar.YEAR, year)
+                    startTime?.set(Calendar.MONTH, monthOfYear)
+                    startTime?.set(Calendar.DAY_OF_MONTH, dayOfMonth)
                     timePickerDialog.show()
                     //updateLabel()
                 }
 
-            datePickerDialog = DatePickerDialog(
-                requireContext(),
-                R.style.DialogTheme,date, startTime
-                    .get(Calendar.YEAR), startTime.get(Calendar.MONTH),
-                startTime.get(Calendar.DAY_OF_MONTH)
-            )
+            if (startTime != null) {
+                datePickerDialog = DatePickerDialog(
+                    requireContext(),
+                    R.style.DialogTheme,date, startTime
+                        .get(Calendar.YEAR), startTime.get(Calendar.MONTH),
+                    startTime.get(Calendar.DAY_OF_MONTH)
+                )
+            }
 
 
             binding.reminderChipGroup.setOnCheckedChangeListener { chipGroup, id ->
@@ -149,7 +148,7 @@ class AddNewEventProposedFragment : Fragment() {
 
 
     private fun getPayloadObject(): EventCreationPayload {
-           return  EventCreationPayload(1,cpId,startTime.time.toString(),"",12,23,binding.notes.text.toString())
+           return  EventCreationPayload(1,cpId, startTime?.time.toString(),"",12,23,binding.notes.text.toString())
     }
 
     private fun isMandatoryFieldFilled(): Boolean {
