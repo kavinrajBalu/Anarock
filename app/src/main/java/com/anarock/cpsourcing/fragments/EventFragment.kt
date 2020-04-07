@@ -105,7 +105,7 @@ class EventFragment : Fragment() {
         }
 
         binding.addCp.setOnClickListener {
-            findNavController().navigate(R.id.action_eventFragement_to_addCpFragment, bundleOf("editMode" to true))
+            findNavController().navigate(R.id.action_eventFragement_to_addCpFragment, bundleOf("editMode" to false))
         }
 
         return binding.root

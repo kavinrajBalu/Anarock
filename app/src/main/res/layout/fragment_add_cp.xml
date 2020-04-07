@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-<variable
-    name="fragment"
-    type="com.anarock.cpsourcing.fragments.AddCpFragment" />
+        <variable
+            name="fragment"
+            type="com.anarock.cpsourcing.fragments.AddCpFragment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -26,26 +26,25 @@
                 android:id="@+id/cp_back_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginLeft="16dp"
                 app:layout_constraintVertical_bias="0.555"
                 app:srcCompat="@drawable/ic_back_black" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:fontFamily="@font/muli_bold"
+                android:text="Details"
+                android:textColor="@android:color/white"
+                android:textSize="13sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toRightOf="@+id/cp_back_btn"
                 app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginLeft="16dp"
-                android:text="Details"
-                android:textSize="13sp"
-                android:fontFamily="@font/muli_bold"
-                android:textColor="@android:color/white"
-                app:layout_constraintVertical_bias="0.555"
-                />
+                app:layout_constraintVertical_bias="0.555" />
 
             <ImageView
                 android:id="@+id/cp_edit_btn"
@@ -57,24 +56,24 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.555"
                 app:srcCompat="@drawable/ic_create_24px" />
+
             <TextView
                 android:id="@+id/cpSaveChanges"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:fontFamily="@font/muli_regular"
+                android:text="Save changes"
+                android:textColor="@android:color/white"
+                android:textSize="12sp"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginEnd="16dp"
-                android:text="Save changes"
-                android:textSize="12sp"
-                android:visibility="gone"
-                android:fontFamily="@font/muli_regular"
-                android:textColor="@android:color/white"
-                app:layout_constraintVertical_bias="0.555"
-                />
+                app:layout_constraintVertical_bias="0.555" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <ScrollView
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout3"
@@ -82,10 +81,11 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:background="@android:color/white"
                 android:paddingTop="24dp"
                 android:paddingBottom="28dp"
+                android:layout_marginBottom="20dp"
                 tools:context=".fragments.AddCpFragment">
 
                 <View
@@ -109,7 +109,7 @@
                     app:layout_constraintLeft_toRightOf="@+id/pd_view"
                     app:layout_constraintTop_toTopOf="parent" />
 
-<!--            cp name -->
+                <!--            cp name -->
                 <TextView
                     android:id="@+id/nameLabel"
                     android:layout_width="wrap_content"
@@ -131,22 +131,23 @@
                     android:gravity="center_vertical"
                     android:textColor="@color/ccTitleColor"
                     android:textSize="13sp"
-                    android:text="Mr Perera"
+                    android:visibility="invisible"
                     app:layout_constraintStart_toStartOf="@+id/nameLabel"
-                    app:layout_constraintTop_toBottomOf="@+id/nameLabel" />
+                    app:layout_constraintTop_toBottomOf="@+id/nameLabel"
+                    tools:text="Mr Perera" />
 
                 <TextView
                     android:id="@+id/nameEmptyTxv"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:fontFamily="@font/muli_regular"
                     android:gravity="center_vertical"
                     android:text="@string/add_name"
-                    android:visibility="gone"
                     android:textColor="@color/ccTitleColor"
                     android:textSize="13sp"
-                    android:onClick="@{(view)->fragment.openEditDialog(view)}"
+                    android:visibility="visible"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/nameLabel"
                     app:layout_constraintTop_toBottomOf="@+id/nameLabel" />
 
@@ -155,8 +156,8 @@
                     android:layout_width="18dp"
                     android:layout_height="18dp"
                     android:layout_marginRight="19dp"
-                    android:visibility="gone"
                     android:src="@drawable/ic_create_blue_24px"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="@+id/nameTxv"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/nameTxv" />
@@ -169,7 +170,7 @@
                     android:background="@color/light_grey"
                     app:layout_constraintTop_toBottomOf="@+id/nameTxv" />
 
-<!--                phone number-->
+                <!--                phone number-->
                 <TextView
                     android:id="@+id/phoneLabel"
                     android:layout_width="wrap_content"
@@ -188,23 +189,25 @@
                     android:layout_marginTop="5dp"
                     android:fontFamily="@font/muli_regular"
                     android:gravity="center_vertical"
-                    android:text="9876543210"
                     android:textColor="@color/ccTitleColor"
                     android:textSize="13sp"
+                    android:visibility="visible"
                     app:layout_constraintStart_toStartOf="@+id/nameLabel"
-                    app:layout_constraintTop_toBottomOf="@+id/phoneLabel" />
+                    app:layout_constraintTop_toBottomOf="@+id/phoneLabel"
+                    tools:text="9876543210" />
 
                 <TextView
                     android:id="@+id/phoneEmptyTxv"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:fontFamily="@font/muli_regular"
                     android:gravity="center_vertical"
                     android:text="@string/add_phone_number"
-                    android:visibility="gone"
                     android:textColor="@color/ccTitleColor"
                     android:textSize="13sp"
+                    android:visibility="visible"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/nameLabel"
                     app:layout_constraintTop_toBottomOf="@+id/phoneLabel" />
 
@@ -213,8 +216,8 @@
                     android:layout_width="18dp"
                     android:layout_height="18dp"
                     android:layout_marginRight="19dp"
-                    android:visibility="gone"
                     android:src="@drawable/ic_create_blue_24px"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="@+id/phoneTxv"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/phoneTxv" />
@@ -247,15 +250,15 @@
                     android:layout_marginTop="5dp"
                     android:fontFamily="@font/muli_regular"
                     android:gravity="center_vertical"
-                    tools:text=""
                     android:textColor="@color/ccTitleColor"
                     android:textSize="13sp"
                     app:layout_constraintStart_toStartOf="@+id/nameLabel"
-                    app:layout_constraintTop_toBottomOf="@+id/alternateNoLabel" />
+                    app:layout_constraintTop_toBottomOf="@+id/alternateNoLabel"
+                    tools:text="" />
 
                 <TextView
                     android:id="@+id/alternateNoEmptyTxv"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:fontFamily="@font/muli_regular"
@@ -263,6 +266,7 @@
                     android:text="@string/add_phone_number"
                     android:textColor="@color/ccTitleColor"
                     android:textSize="13sp"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/nameLabel"
                     app:layout_constraintTop_toBottomOf="@+id/alternateNoLabel" />
 
@@ -279,8 +283,8 @@
                     android:layout_width="18dp"
                     android:layout_height="18dp"
                     android:layout_marginRight="19dp"
-                    android:visibility="gone"
                     android:src="@drawable/ic_create_blue_24px"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="@+id/alternateNoTxv"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/alternateNoTxv" />
@@ -304,23 +308,24 @@
                     android:layout_marginTop="5dp"
                     android:fontFamily="@font/muli_regular"
                     android:gravity="center_vertical"
-                    tools:text="9876543210"
                     android:textColor="@color/ccTitleColor"
                     android:textSize="13sp"
                     app:layout_constraintStart_toStartOf="@+id/nameLabel"
-                    app:layout_constraintTop_toBottomOf="@+id/alternateNoLabel2" />
+                    app:layout_constraintTop_toBottomOf="@+id/alternateNoLabel2"
+                    tools:text="9876543210" />
 
                 <TextView
                     android:id="@+id/alternateNoEmptyTxv2"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:fontFamily="@font/muli_regular"
                     android:gravity="center_vertical"
-                    android:visibility="gone"
                     android:text="@string/add_phone_number"
                     android:textColor="@color/ccTitleColor"
                     android:textSize="13sp"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/nameLabel"
                     app:layout_constraintTop_toBottomOf="@+id/alternateNoLabel2" />
 
@@ -337,8 +342,8 @@
                     android:layout_width="18dp"
                     android:layout_height="18dp"
                     android:layout_marginRight="19dp"
-                    android:visibility="gone"
                     android:src="@drawable/ic_create_blue_24px"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="@+id/alternateNoTxv2"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/alternateNoTxv2" />
@@ -366,18 +371,20 @@
                     android:textSize="13sp"
                     app:layout_constraintStart_toStartOf="@+id/nameLabel"
                     app:layout_constraintTop_toBottomOf="@+id/emailLabel"
-                    android:text="sairealtypvtltd@gmail.com" />
+                    tools:text="sairealtypvtltd@gmail.com" />
+
                 <TextView
                     android:id="@+id/emailEmptyTxv"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:fontFamily="@font/muli_regular"
                     android:gravity="center_vertical"
+                    android:text="@string/add_email"
                     android:textColor="@color/ccTitleColor"
                     android:textSize="13sp"
-                    android:text="@string/add_email"
                     android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/nameLabel"
                     app:layout_constraintTop_toBottomOf="@+id/emailLabel"
                     tools:text="sairealtypvtltd@gmail.com" />
@@ -395,9 +402,9 @@
                     android:id="@+id/emailEditBtn"
                     android:layout_width="18dp"
                     android:layout_height="18dp"
-                    android:visibility="gone"
                     android:layout_marginRight="19dp"
                     android:src="@drawable/ic_create_blue_24px"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="@+id/emailTxv"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/emailTxv" />
@@ -445,23 +452,24 @@
                     android:layout_marginTop="5dp"
                     android:fontFamily="@font/muli_regular"
                     android:gravity="center_vertical"
-                    tools:text="Sai Realty Pvt Ltd."
                     android:textColor="@color/ccTitleColor"
                     android:textSize="13sp"
                     app:layout_constraintStart_toStartOf="@+id/nameLabel"
-                    app:layout_constraintTop_toBottomOf="@+id/firmNameLabel" />
+                    app:layout_constraintTop_toBottomOf="@+id/firmNameLabel"
+                    tools:text="Sai Realty Pvt Ltd." />
 
                 <TextView
                     android:id="@+id/firmNameEmptyTxv"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:fontFamily="@font/muli_regular"
                     android:gravity="center_vertical"
                     android:text="@string/add_firm_name"
-                    android:visibility="gone"
                     android:textColor="@color/ccTitleColor"
                     android:textSize="13sp"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/nameLabel"
                     app:layout_constraintTop_toBottomOf="@+id/firmNameLabel" />
 
@@ -478,8 +486,8 @@
                     android:layout_width="18dp"
                     android:layout_height="18dp"
                     android:layout_marginRight="19dp"
-                    android:visibility="gone"
                     android:src="@drawable/ic_create_blue_24px"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="@+id/firmNameTxv"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/firmNameTxv" />
@@ -503,23 +511,24 @@
                     android:layout_marginTop="5dp"
                     android:fontFamily="@font/muli_regular"
                     android:gravity="center_vertical"
-                    tools:text="Sai Realty Pvt Ltd. Address"
                     android:textColor="@color/ccTitleColor"
                     android:textSize="13sp"
                     app:layout_constraintStart_toStartOf="@+id/nameLabel"
-                    app:layout_constraintTop_toBottomOf="@+id/firmAddressLabel" />
+                    app:layout_constraintTop_toBottomOf="@+id/firmAddressLabel"
+                    tools:text="Sai Realty Pvt Ltd. Address" />
 
                 <TextView
                     android:id="@+id/firmAddressEmptyTxv"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:fontFamily="@font/muli_regular"
                     android:gravity="center_vertical"
                     android:text="@string/add_firm_address"
-                    android:visibility="gone"
                     android:textColor="@color/ccTitleColor"
                     android:textSize="13sp"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/nameLabel"
                     app:layout_constraintTop_toBottomOf="@+id/firmAddressLabel" />
 
@@ -536,8 +545,8 @@
                     android:layout_width="18dp"
                     android:layout_height="18dp"
                     android:layout_marginRight="19dp"
-                    android:visibility="gone"
                     android:src="@drawable/ic_create_blue_24px"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="@+id/firmAddressTxv"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/firmAddressTxv" />
@@ -562,23 +571,24 @@
                     android:layout_marginTop="5dp"
                     android:fontFamily="@font/muli_regular"
                     android:gravity="center_vertical"
-                    tools:text="Kandivali East"
                     android:textColor="@color/ccTitleColor"
                     android:textSize="13sp"
                     app:layout_constraintStart_toStartOf="@+id/nameLabel"
-                    app:layout_constraintTop_toBottomOf="@+id/firmLocalityLabel" />
+                    app:layout_constraintTop_toBottomOf="@+id/firmLocalityLabel"
+                    tools:text="Kandivali East" />
 
                 <TextView
                     android:id="@+id/firmLocalityEmptyTxv"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:fontFamily="@font/muli_regular"
                     android:gravity="center_vertical"
                     android:text="@string/add_firm_locality"
-                    android:visibility="gone"
                     android:textColor="@color/ccTitleColor"
                     android:textSize="13sp"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/nameLabel"
                     app:layout_constraintTop_toBottomOf="@+id/firmLocalityLabel" />
 
@@ -595,8 +605,8 @@
                     android:layout_width="18dp"
                     android:layout_height="18dp"
                     android:layout_marginRight="19dp"
-                    android:visibility="gone"
                     android:src="@drawable/ic_create_blue_24px"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="@+id/firmLocalityTxv"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/firmLocalityTxv" />
@@ -622,23 +632,24 @@
                     android:layout_marginTop="5dp"
                     android:fontFamily="@font/muli_regular"
                     android:gravity="center_vertical"
-                    tools:text="4+ members operating"
                     android:textColor="@color/ccTitleColor"
                     android:textSize="13sp"
                     app:layout_constraintStart_toStartOf="@+id/nameLabel"
-                    app:layout_constraintTop_toBottomOf="@+id/teamSizeLabel" />
+                    app:layout_constraintTop_toBottomOf="@+id/teamSizeLabel"
+                    tools:text="4+ members operating" />
 
                 <TextView
                     android:id="@+id/teamSizeEmptyTxv"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:fontFamily="@font/muli_regular"
                     android:gravity="center_vertical"
                     android:text="@string/add_team_size"
-                    android:visibility="gone"
                     android:textColor="@color/ccTitleColor"
                     android:textSize="13sp"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/nameLabel"
                     app:layout_constraintTop_toBottomOf="@+id/teamSizeLabel" />
 
@@ -655,8 +666,8 @@
                     android:layout_width="18dp"
                     android:layout_height="18dp"
                     android:layout_marginRight="19dp"
-                    android:visibility="gone"
                     android:src="@drawable/ic_create_blue_24px"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="@+id/teamSizeTxv"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/teamSizeTxv" />
@@ -681,23 +692,24 @@
                     android:layout_marginTop="5dp"
                     android:fontFamily="@font/muli_regular"
                     android:gravity="center_vertical"
-                    tools:text="Sole Proprietorship"
                     android:textColor="@color/ccTitleColor"
                     android:textSize="13sp"
                     app:layout_constraintStart_toStartOf="@+id/nameLabel"
-                    app:layout_constraintTop_toBottomOf="@+id/organisationLabel" />
+                    app:layout_constraintTop_toBottomOf="@+id/organisationLabel"
+                    tools:text="Sole Proprietorship" />
 
                 <TextView
                     android:id="@+id/organisationEmptyTxv"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:fontFamily="@font/muli_regular"
                     android:gravity="center_vertical"
                     android:text="@string/add_orgn_type"
-                    android:visibility="gone"
                     android:textColor="@color/ccTitleColor"
                     android:textSize="13sp"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/nameLabel"
                     app:layout_constraintTop_toBottomOf="@+id/organisationLabel" />
 
@@ -714,9 +726,9 @@
                     android:layout_width="18dp"
                     android:layout_height="18dp"
                     android:layout_marginRight="19dp"
-                    android:visibility="gone"
                     android:src="@drawable/ic_create_blue_24px"
-                    app:layout_constraintBottom_toBottomOf="@+id/firmLocalityTxv"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="@+id/organisationTxv"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/organisationTxv" />
 
@@ -740,23 +752,24 @@
                     android:layout_marginTop="5dp"
                     android:fontFamily="@font/muli_regular"
                     android:gravity="center_vertical"
-                    android:text="BRAI, CREDAI"
                     android:textColor="@color/ccTitleColor"
                     android:textSize="13sp"
                     app:layout_constraintStart_toStartOf="@+id/nameLabel"
-                    app:layout_constraintTop_toBottomOf="@+id/membersLabel" />
+                    app:layout_constraintTop_toBottomOf="@+id/membersLabel"
+                    tools:text="BRAI, CREDAI" />
 
                 <TextView
                     android:id="@+id/membersEmptyTxv"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:fontFamily="@font/muli_regular"
                     android:gravity="center_vertical"
                     android:text="@string/add_members"
-                    android:visibility="gone"
                     android:textColor="@color/ccTitleColor"
                     android:textSize="13sp"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/nameLabel"
                     app:layout_constraintTop_toBottomOf="@+id/membersLabel" />
 
@@ -773,8 +786,8 @@
                     android:layout_width="18dp"
                     android:layout_height="18dp"
                     android:layout_marginRight="19dp"
-                    android:visibility="gone"
                     android:src="@drawable/ic_create_blue_24px"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="@+id/membersTxv"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/membersTxv" />
@@ -799,23 +812,24 @@
                     android:layout_marginTop="5dp"
                     android:fontFamily="@font/muli_regular"
                     android:gravity="center_vertical"
-                    tools:text="675388"
                     android:textColor="@color/ccTitleColor"
                     android:textSize="13sp"
                     app:layout_constraintStart_toStartOf="@+id/nameLabel"
-                    app:layout_constraintTop_toBottomOf="@+id/gstLabel" />
+                    app:layout_constraintTop_toBottomOf="@+id/gstLabel"
+                    tools:text="675388" />
 
                 <TextView
                     android:id="@+id/gstEmptyTxv"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:fontFamily="@font/muli_regular"
                     android:gravity="center_vertical"
                     android:text="@string/add_gst_number"
-                    android:visibility="gone"
                     android:textColor="@color/ccTitleColor"
                     android:textSize="13sp"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/nameLabel"
                     app:layout_constraintTop_toBottomOf="@+id/gstLabel" />
 
@@ -832,8 +846,8 @@
                     android:layout_width="18dp"
                     android:layout_height="18dp"
                     android:layout_marginRight="19dp"
-                    android:visibility="gone"
                     android:src="@drawable/ic_create_blue_24px"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="@+id/gstTxv"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/gstTxv" />
@@ -858,23 +872,24 @@
                     android:layout_marginTop="5dp"
                     android:fontFamily="@font/muli_regular"
                     android:gravity="center_vertical"
-                    tools:text="9876543210"
                     android:textColor="@color/ccTitleColor"
                     android:textSize="13sp"
                     app:layout_constraintStart_toStartOf="@+id/nameLabel"
-                    app:layout_constraintTop_toBottomOf="@+id/reraLabel" />
+                    app:layout_constraintTop_toBottomOf="@+id/reraLabel"
+                    tools:text="9876543210" />
 
                 <TextView
                     android:id="@+id/reraEmptyTxv"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:fontFamily="@font/muli_regular"
                     android:gravity="center_vertical"
                     android:text="@string/add_rera_number"
-                    android:visibility="gone"
                     android:textColor="@color/ccTitleColor"
                     android:textSize="13sp"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/nameLabel"
                     app:layout_constraintTop_toBottomOf="@+id/reraLabel" />
 
@@ -891,8 +906,8 @@
                     android:layout_width="18dp"
                     android:layout_height="18dp"
                     android:layout_marginRight="19dp"
-                    android:visibility="gone"
                     android:src="@drawable/ic_create_blue_24px"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="@+id/reraTxv"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/reraTxv" />
@@ -917,23 +932,24 @@
                     android:layout_marginTop="5dp"
                     android:fontFamily="@font/muli_regular"
                     android:gravity="center_vertical"
-                    tools:text="business"
                     android:textColor="@color/ccTitleColor"
                     android:textSize="13sp"
                     app:layout_constraintStart_toStartOf="@+id/nameLabel"
-                    app:layout_constraintTop_toBottomOf="@+id/natureLabel" />
+                    app:layout_constraintTop_toBottomOf="@+id/natureLabel"
+                    tools:text="business" />
 
                 <TextView
                     android:id="@+id/natureEmptyTxv"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:fontFamily="@font/muli_regular"
                     android:gravity="center_vertical"
                     android:text="@string/add_nature_business"
-                    android:visibility="gone"
                     android:textColor="@color/ccTitleColor"
                     android:textSize="13sp"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/nameLabel"
                     app:layout_constraintTop_toBottomOf="@+id/natureLabel" />
 
@@ -950,8 +966,8 @@
                     android:layout_width="18dp"
                     android:layout_height="18dp"
                     android:layout_marginRight="19dp"
-                    android:visibility="gone"
                     android:src="@drawable/ic_create_blue_24px"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="@+id/natureTxv"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/natureTxv" />
@@ -969,7 +985,7 @@
                     app:layout_constraintStart_toStartOf="@+id/nameLabel"
                     app:layout_constraintTop_toBottomOf="@+id/natureView" />
 
-                <TextView
+              <!--  <TextView
                     android:id="@+id/areaEmptyTxv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -981,28 +997,24 @@
                     android:textSize="13sp"
                     app:layout_constraintStart_toStartOf="@+id/nameLabel"
                     app:layout_constraintTop_toBottomOf="@+id/areaLabel" />
-
+-->
                 <com.google.android.material.chip.ChipGroup
                     android:id="@+id/areaChipGroup"
                     android:layout_width="0dp"
-                    android:layout_height="147dp"
-                    android:layout_marginTop="24dp"
-                    android:paddingLeft="@dimen/_30dp"
-                    android:paddingTop="@dimen/_10dp"
-                    app:checkedChip="@+id/alternate_time_one"
-                    app:chipSpacing="@dimen/_10dp"
-                    app:chipSpacingVertical="@dimen/_15dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toStartOf="@+id/nameLabel"
                     app:layout_constraintTop_toBottomOf="@+id/areaLabel"
                     app:singleSelection="true">
 
                     <com.google.android.material.chip.Chip
-                        android:id="@+id/alternate_time_one"
-                        style="@style/Widget.MaterialComponents.Chip.Choice.style"
-                        android:text="Bandra"
-                        app:chipBackgroundColor="@color/time_picker_chip_background" />
+                        android:id="@+id/addAreaChip"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="+ Add area"
+                        android:textColor="@android:color/white"
+                        app:chipBackgroundColor="@color/blue" />
                 </com.google.android.material.chip.ChipGroup>
 
                 <View
@@ -1018,8 +1030,8 @@
                     android:layout_width="18dp"
                     android:layout_height="18dp"
                     android:layout_marginRight="19dp"
-                    android:visibility="gone"
                     android:src="@drawable/ic_create_blue_24px"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="@+id/areaChipGroup"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/areaChipGroup" />
@@ -1037,30 +1049,52 @@
                     app:layout_constraintStart_toStartOf="@+id/nameLabel"
                     app:layout_constraintTop_toBottomOf="@+id/areaView" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/partnerRecycler"
+                <ImageView
+                    android:id="@+id/partnerAddBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="@+id/nameLabel"
-                    app:layout_constraintTop_toBottomOf="@+id/partnerLabel"
-                    tools:listitem="@layout/partners_list_item" />
+                    android:tint="@color/blue"
+                    android:layout_marginRight="20dp"
+                    android:visibility="invisible"
+                    app:layout_constraintTop_toTopOf="@+id/partnerLabel"
+                    app:layout_constraintBottom_toBottomOf="@+id/partnerLabel"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:src="@drawable/ic_add"/>
 
                 <TextView
                     android:id="@+id/partnerEmptyTxv"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="8dp"
                     android:fontFamily="@font/muli_regular"
                     android:gravity="center_vertical"
                     android:text="@string/add_partners"
                     android:textColor="@color/ccTitleColor"
                     android:textSize="13sp"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/nameLabel"
-                    app:layout_constraintTop_toBottomOf="@+id/partnerRecycler" />
+                    app:layout_constraintTop_toBottomOf="@+id/partnerLabel" />
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/partnerRecycler"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:minHeight="50dp"
+                    android:visibility="invisible"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="20dp"
+                    android:nestedScrollingEnabled="false"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/partnerLabel"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    tools:listitem="@layout/partners_list_item" />
+
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-        </ScrollView>
+        </androidx.core.widget.NestedScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

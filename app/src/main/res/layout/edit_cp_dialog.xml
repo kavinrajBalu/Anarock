@@ -12,13 +12,14 @@
         android:layout_marginLeft="16dp"
         android:layout_marginTop="20dp"
         android:fontFamily="@font/muli_semibold"
-        android:text="Edit name"
+        android:text="Add Name"
         android:textColor="@color/ccTitleColor"
         android:textSize="13sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
+        android:id="@+id/closeEditDialog"
         android:layout_width="@dimen/_14dp"
         android:layout_height="14dp"
         android:layout_marginRight="25dp"
@@ -38,14 +39,15 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/edit_views_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:paddingBottom="20dp"
         app:layout_constraintTop_toBottomOf="@+id/edit_cp_divider">
 
         <Spinner
             android:id="@+id/editCpSpinner"
             style="@style/add_note_style"
-            android:layout_width="80dp"
+            android:layout_width="wrap_content"
             android:layout_height="48dp"
             android:layout_marginLeft="24dp"
             android:layout_marginTop="20dp"
@@ -67,7 +69,8 @@
             android:fontFamily="@font/muli_regular"
             android:gravity="center_vertical"
             android:hint="Enter number"
-            android:inputType="textPersonName"
+            android:maxEms="10"
+            android:inputType="phone"
             android:padding="15dp"
             android:textColor="@color/ccTitleColor"
             android:textSize="13sp"
@@ -94,15 +97,14 @@
             android:padding="15dp"
             android:textColor="@color/ccTitleColor"
             android:textSize="13sp"
-            android:visibility="invisible"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <include
-            android:id="@+id/area_autocomplete"
-            layout="@layout/custom_search_field"
+        <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+            android:id="@+id/editCpAutocomplete"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_marginLeft="24dp"
@@ -111,6 +113,11 @@
             android:fontFamily="@font/muli_regular"
             android:textColor="@color/ccTitleColor"
             android:textSize="13sp"
+            android:hint="Add area name"
+            android:textColorHint="@color/ccTitleColor"
+            android:paddingLeft="20dp"
+            android:background="@drawable/rounded_edit_text"
+            android:visibility="gone"
             app:layout_constraintHorizontal_bias="0.515"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -123,17 +130,17 @@
         android:id="@+id/edit_cp_divider_bottom"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_1dp"
-        android:layout_marginTop="20dp"
         android:background="@color/light_grey"
         app:layout_constraintTop_toBottomOf="@+id/edit_views_layout" />
 
     <TextView
-        android:id="@+id/edit_cp_done_btn"
+        android:id="@+id/editDoneBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/muli_semibold"
         android:text="Done"
+        android:textColor="@color/blue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edit_cp_divider_bottom" />

@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="5dp"
+    app:cardBackgroundColor="@android:color/white"
+    app:cardElevation="5dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white"
+        android:paddingTop="25dp"
+        android:paddingBottom="25dp">
+
+        <TextView
+            android:id="@+id/cpRating"
+            android:layout_width="29dp"
+            android:layout_height="18dp"
+            android:layout_marginLeft="16dp"
+            android:background="@drawable/border"
+            android:fontFamily="@font/muli_regular"
+            android:gravity="center"
+            android:text="P1"
+            android:textColor="@color/light_blue_black"
+            android:textSize="10sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/cpName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:fontFamily="@font/muli_bold"
+            android:gravity="center"
+            android:text="Suranjan"
+            android:textColor="@color/ccTitleColor"
+            android:textSize="17sp"
+            app:layout_constraintStart_toStartOf="@+id/cpRating"
+            app:layout_constraintTop_toBottomOf="@+id/cpRating" />
+
+        <TextView
+            android:id="@+id/cpFirmName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:fontFamily="@font/muli_regular"
+            android:gravity="center"
+            android:text="Sai Realty Pvt Ltd"
+            android:textColor="@color/cc_subTitle_color"
+            android:textSize="13sp"
+            app:layout_constraintStart_toStartOf="@+id/cpRating"
+            app:layout_constraintTop_toBottomOf="@+id/cpName" />
+
+        <LinearLayout
+            android:id="@+id/eventDataLay"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/edittext_bg_round_edge"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="16dp"
+            android:paddingTop="12dp"
+            android:paddingRight="16dp"
+            android:paddingBottom="12dp"
+            app:layout_constraintEnd_toStartOf="@+id/whatsappButton"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cpFirmName">
+
+            <TextView
+                android:id="@+id/cpEventCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/muli_bold"
+                android:text="9 Visits"
+                android:textColor="@color/ccTitleColor"
+                android:textSize="13sp"
+                app:layout_constraintStart_toStartOf="@+id/cpRating" />
+
+            <ImageView
+                android:id="@+id/ellipse"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:src="@drawable/ic_ellipse" />
+
+            <TextView
+                android:id="@+id/cpProjectCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/muli_bold"
+                android:text="3 Visits"
+                android:textColor="@color/ccTitleColor"
+                android:textSize="13sp"
+                app:layout_constraintStart_toStartOf="@+id/cpRating" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/callButton"
+            android:layout_width="56dp"
+            android:layout_height="48dp"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/rounded_rect_bg_grey"
+            android:padding="15dp"
+            android:src="@drawable/ic_call_icn_blue"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/eventDataLay" />
+
+        <ImageView
+            android:id="@+id/whatsappButton"
+            android:layout_width="56dp"
+            android:layout_height="48dp"
+            android:layout_marginRight="8dp"
+            android:background="@drawable/rounded_rect_bg_grey"
+            android:padding="15dp"
+            android:src="@drawable/ic_whatsapp"
+            app:layout_constraintRight_toLeftOf="@+id/callButton"
+            app:layout_constraintTop_toTopOf="@+id/eventDataLay" />
+
+        <TextView
+            android:id="@+id/cpNotes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="36dp"
+            android:drawableLeft="@drawable/ic_notes"
+            android:drawablePadding="10dp"
+            android:fontFamily="@font/muli_regular"
+            android:gravity="center"
+            android:text="Not interested in 1 BHK"
+            android:textColor="@color/light_blue_black"
+            android:textSize="13sp"
+            app:layout_constraintStart_toStartOf="@+id/cpRating"
+            app:layout_constraintTop_toBottomOf="@+id/eventDataLay" />
+
+        <View
+            android:id="@+id/cp_divider"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_1dp"
+            android:layout_marginTop="12dp"
+            android:background="@color/light_grey"
+            app:layout_constraintStart_toStartOf="@+id/cpRating"
+            app:layout_constraintTop_toBottomOf="@+id/cpNotes" />
+
+
+        <TextView
+            android:id="@+id/eventUpdate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:drawableLeft="@drawable/ic_calendar"
+            android:drawablePadding="10dp"
+            android:drawableTint="@color/light_blue_black"
+            android:fontFamily="@font/muli_regular"
+            android:gravity="center"
+            android:text="Follow up 2 days ago"
+            android:textColor="@color/light_blue_black"
+            android:textSize="13sp"
+            app:layout_constraintStart_toStartOf="@+id/cpRating"
+            app:layout_constraintTop_toBottomOf="@+id/cp_divider" />
+
+        <TextView
+            android:id="@+id/addEvent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="10dp"
+            android:fontFamily="@font/muli_semibold"
+            android:gravity="center"
+            android:text="+ New event"
+            android:textColor="@color/blue"
+            android:textSize="13sp"
+            android:layout_marginRight="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cp_divider"
+            app:layout_constraintTop_toTopOf="@+id/eventUpdate" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>
+

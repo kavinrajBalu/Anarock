@@ -1,19 +1,30 @@
 package com.anarock.cpsourcing.fragments
 
-import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
 import androidx.databinding.DataBindingUtil.inflate
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.anarock.cpsourcing.R
+import com.anarock.cpsourcing.adapter.CpPartnersListAdapter
 import com.anarock.cpsourcing.databinding.FragmentAddCpBinding
+import com.anarock.cpsourcing.interfaces.onClickEventListener
+import com.anarock.cpsourcing.model.CountryCodeModel
+import com.anarock.cpsourcing.model.CpFormData
 import com.anarock.cpsourcing.model.CustomAppBar
+import com.anarock.cpsourcing.model.PartnerFormData
 import com.anarock.cpsourcing.utilities.CommonUtilities
+import com.anarock.cpsourcing.utilities.CreateCpDialogUtil
+import com.anarock.cpsourcing.utilities.EditCpDialogeUtil
+import com.anarock.cpsourcing.viewModel.ChannelPartnerViewModel
+import com.anarock.cpsourcing.viewModel.LoginSharedViewModel
 import com.anarock.cpsourcing.viewModel.SharedUtilityViewModel
+import com.google.android.material.chip.Chip
+import kotlinx.android.synthetic.main.fragment_add_cp.*
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -27,18 +38,20 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class AddCpFragment : Fragment() {
+
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-
     private var isEditMode: Boolean = false
     private val sharedUtilityViewModel: SharedUtilityViewModel by activityViewModels()
     private lateinit var binding: FragmentAddCpBinding
-    private val DEFAULT_MODE = "default_edit_mode"
-    private val AUTOCOMPLETE_MODE = "autocomplete_edit_mode"
-    private val PHONE_NUMBER_MODE = "phone_edit_mode"
-    private val PARTNER_MODE = "partner_edit_mode"
-
+    private val cpViewModel: ChannelPartnerViewModel by activityViewModels()
+    private val loginSharedViewModel: LoginSharedViewModel by activityViewModels()
+    val countryCodeList = ArrayList<String>()
+    private var countriesList = ArrayList<CountryCodeModel>()
+    private var partnersList = ArrayList<PartnerFormData>()
+    private var cpFormData = CpFormData()
+    private lateinit var partnersListAdapter: CpPartnersListAdapter
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -64,6 +77,16 @@ class AddCpFragment : Fragment() {
         if (!isEditMode) {
             showAddCpView()
         }
+        sharedUtilityViewModel.setBottomNavigationVisibility(false)
+
+        loginSharedViewModel.fetchCountryCodes().observe(viewLifecycleOwner, Observer {
+            countriesList = it.countries
+            CreateCpDialogUtil.setCountryCodeArray(countryCodeList)
+            EditCpDialogeUtil.setCountryCodeArray(countryCodeList)
+            for (i in countriesList) {
+                i.countryCode?.let { it1 -> countryCodeList.add(it1) }
+            }
+        })
 
         sharedUtilityViewModel.setCustomToolBar(
             CustomAppBar(
@@ -71,50 +94,443 @@ class AddCpFragment : Fragment() {
                 android.R.color.white
             )
         )
+        partnersListAdapter = CpPartnersListAdapter(object : onClickEventListener {
+            override fun clickEvent(action: Int, mObj: Any?, position: Int) {
+                EditCpDialogeUtil.editPartnerDialog(requireContext(), partnersList[position])
+                    .observe(viewLifecycleOwner, Observer {
+                        if (it != null) {
+                            partnerRecycler.visibility = View.VISIBLE
+                            partnersList[position] = it
+                            partnersListAdapter.data = partnersList
+                            binding.partnerEmptyTxv.visibility = View.GONE
+                            binding.partnerAddBtn.visibility = View.VISIBLE
+                        }
+                    })
+            }
+        })
+        val viewManager = LinearLayoutManager(requireContext())
+        binding.partnerRecycler.layoutManager = viewManager
+        binding.partnerRecycler.adapter = partnersListAdapter
+
 
         binding.cpEditBtn.setOnClickListener {
             showEditMode()
         }
 
+        binding.nameEmptyTxv.setOnClickListener {
+
+            CreateCpDialogUtil.openCreateDialog(it, requireContext())
+                .observe(viewLifecycleOwner, Observer {
+                    if (CommonUtilities.notnull(it.name)) {
+                        binding.nameTxv.visibility = View.VISIBLE
+                        binding.nameTxv.text = it.name
+                        binding.nameEmptyTxv.visibility = View.GONE
+                        binding.nameEditBtn.visibility = View.VISIBLE
+                    }
+                })
+        }
+
+        binding.nameEditBtn.setOnClickListener {
+            cpFormData.name = nameTxv.text.toString()
+            EditCpDialogeUtil.openEditDialog(it, requireContext(), cpFormData)
+                .observe(viewLifecycleOwner, Observer {
+                    if (CommonUtilities.notnull(it.name)) {
+                        binding.nameTxv.visibility = View.VISIBLE
+                        binding.nameTxv.text = it.name
+                        binding.nameEmptyTxv.visibility = View.GONE
+                        binding.nameEditBtn.visibility = View.VISIBLE
+                    }
+                })
+        }
+
+        binding.phoneEmptyTxv.setOnClickListener {
+
+            CreateCpDialogUtil.openCreateDialog(it, requireContext())
+                .observe(viewLifecycleOwner, Observer {
+                    if (CommonUtilities.notnull(it.phone)) {
+                        binding.phoneTxv.visibility = View.VISIBLE
+                        binding.phoneTxv.text = it.phoneCountryId + " " + it.phone
+                        binding.phoneEmptyTxv.visibility = View.GONE
+                        binding.phoneNoEditBtn.visibility = View.VISIBLE
+                        cpFormData.phone = it.phone
+                        cpFormData.phoneCountryId = it.phoneCountryId
+                    }
+
+
+                })
+        }
+
+        binding.phoneNoEditBtn.setOnClickListener {
+            EditCpDialogeUtil.openEditDialog(it, requireContext(), cpFormData)
+                .observe(viewLifecycleOwner, Observer {
+                    if (CommonUtilities.notnull(it.phone)) {
+                        binding.phoneTxv.visibility = View.VISIBLE
+                        binding.phoneTxv.text = it.phoneCountryId + " " + it.phone
+                        binding.phoneEmptyTxv.visibility = View.GONE
+                        binding.phoneNoEditBtn.visibility = View.VISIBLE
+                    }
+
+
+                })
+        }
+
+
+        binding.alternateNoEmptyTxv.setOnClickListener {
+
+            CreateCpDialogUtil.openCreateDialog(it, requireContext())
+                .observe(viewLifecycleOwner, Observer {
+                    if (CommonUtilities.notnull(it.alternatePhoneOne)) {
+                        binding.alternateNoTxv.visibility = View.VISIBLE
+                        binding.alternateNoTxv.text =
+                            it.alternatePhoneOneCountryId + " " + it.alternatePhoneOne
+                        binding.alternateNoEmptyTxv.visibility = View.GONE
+                        binding.alternateNoEditBtn.visibility = View.VISIBLE
+                        cpFormData.alternatePhoneOne = it.alternatePhoneOne
+                        cpFormData.alternatePhoneOneCountryId = it.alternatePhoneOneCountryId
+                    }
+
+                })
+        }
+        binding.alternateNoEditBtn.setOnClickListener {
+
+            EditCpDialogeUtil.openEditDialog(it, requireContext(), cpFormData)
+                .observe(viewLifecycleOwner, Observer {
+                    if (CommonUtilities.notnull(it.alternatePhoneOne)) {
+                        binding.alternateNoTxv.visibility = View.VISIBLE
+                        binding.alternateNoTxv.text =
+                            it.alternatePhoneOneCountryId + " " + it.alternatePhoneOne
+                        binding.alternateNoEmptyTxv.visibility = View.GONE
+                        binding.alternateNoEditBtn.visibility = View.VISIBLE
+                        cpFormData.alternatePhoneOne = it.alternatePhoneOne
+                        cpFormData.alternatePhoneOneCountryId = it.alternatePhoneOneCountryId
+                    }
+
+                })
+        }
+
+        binding.alternateNoEmptyTxv2.setOnClickListener {
+            CreateCpDialogUtil.openCreateDialog(it, requireContext())
+                .observe(viewLifecycleOwner, Observer {
+                    if (CommonUtilities.notnull(it.alternatePhoneTwo)) {
+                        binding.alternateNoTxv2.visibility = View.VISIBLE
+                        binding.alternateNoTxv2.text =
+                            it.alternatePhoneTwoCountryId + " " + it.alternatePhoneTwo
+                        binding.alternateNoEmptyTxv2.visibility = View.GONE
+                        binding.alternateNoEditBtn2.visibility = View.VISIBLE
+                        cpFormData.alternatePhoneTwo = it.alternatePhoneTwo
+                        cpFormData.alternatePhoneTwoCountryId = it.alternatePhoneTwoCountryId
+
+                    }
+
+
+                })
+        }
+        binding.alternateNoEditBtn2.setOnClickListener {
+            EditCpDialogeUtil.openEditDialog(it, requireContext(), cpFormData)
+                .observe(viewLifecycleOwner, Observer {
+                    if (CommonUtilities.notnull(it.alternatePhoneTwo)) {
+                        binding.alternateNoTxv2.visibility = View.VISIBLE
+                        binding.alternateNoTxv2.text =
+                            it.alternatePhoneTwoCountryId + " " + it.alternatePhoneTwo
+                        binding.alternateNoEmptyTxv2.visibility = View.GONE
+                        binding.alternateNoEditBtn2.visibility = View.VISIBLE
+                        cpFormData.alternatePhoneTwo = it.alternatePhoneTwo
+                        cpFormData.alternatePhoneTwoCountryId = it.alternatePhoneTwoCountryId
+
+                    }
+
+
+                })
+        }
+
+        binding.addAreaChip.setOnClickListener {
+
+            CreateCpDialogUtil.openCreateDialog(it, requireContext())
+                .observe(viewLifecycleOwner, Observer {
+                    if (CommonUtilities.notnull(it.area)) {
+                        binding.areaChipGroup.visibility = View.VISIBLE
+                        val chip = Chip(requireContext())
+                        chip.setChipBackgroundColorResource(R.color.light_grey)
+                        chip.text = it.area
+                        binding.areaChipGroup.addView(chip, 0)
+
+                    }
+                })
+        }
+
+        binding.emailEmptyTxv.setOnClickListener {
+            CreateCpDialogUtil.openCreateDialog(it, requireContext())
+                .observe(viewLifecycleOwner, Observer {
+                    if (CommonUtilities.notnull(it.email)) {
+                        binding.emailTxv.visibility = View.VISIBLE
+                        binding.emailTxv.text = it.email
+                        binding.emailEmptyTxv.visibility = View.GONE
+                        binding.emailEditBtn.visibility = View.VISIBLE
+                    }
+                })
+        }
+        binding.emailEditBtn.setOnClickListener {
+            cpFormData.email = binding.emailTxv.text.toString()
+            EditCpDialogeUtil.openEditDialog(it, requireContext(), cpFormData)
+                .observe(viewLifecycleOwner, Observer {
+                    if (CommonUtilities.notnull(it.email)) {
+                        binding.emailTxv.visibility = View.VISIBLE
+                        binding.emailTxv.text = it.email
+                        binding.emailEmptyTxv.visibility = View.GONE
+                        binding.emailEditBtn.visibility = View.VISIBLE
+                    }
+                })
+        }
+
+        binding.partnerEmptyTxv.setOnClickListener {
+            CreateCpDialogUtil.openCreateDialog(it, requireContext())
+                .observe(viewLifecycleOwner, Observer {
+                    if (it.partnerList.size > 0) {
+                        partnerRecycler.visibility = View.VISIBLE
+                        partnersList.addAll(it.partnerList)
+                        partnersListAdapter.data = partnersList
+                        binding.partnerEmptyTxv.visibility = View.GONE
+                        binding.partnerAddBtn.visibility = View.VISIBLE
+                    }
+                })
+        }
+
+        binding.partnerAddBtn.setOnClickListener {
+            CreateCpDialogUtil.openCreateDialog(it, requireContext())
+                .observe(viewLifecycleOwner, Observer {
+                    if (it.partnerList.size > 0) {
+                        partnerRecycler.visibility = View.VISIBLE
+                        partnersList.addAll(it.partnerList)
+                        partnersListAdapter.data = partnersList
+                        binding.partnerEmptyTxv.visibility = View.GONE
+                        binding.partnerAddBtn.visibility = View.VISIBLE
+                    }
+                })
+        }
+
+        ///////firm
+
+        binding.firmNameEmptyTxv.setOnClickListener {
+            CreateCpDialogUtil.openCreateDialog(it, requireContext())
+                .observe(viewLifecycleOwner, Observer {
+                    if (CommonUtilities.notnull(it.firmName)) {
+                        binding.firmNameTxv.visibility = View.VISIBLE
+                        binding.firmNameTxv.text = it.firmName
+                        binding.firmNameEmptyTxv.visibility = View.GONE
+                        binding.firmNameEditBtn.visibility = View.VISIBLE
+                    }
+                })
+        }
+
+        binding.firmNameEditBtn.setOnClickListener {
+            cpFormData.firmName = firmNameTxv.text.toString()
+            EditCpDialogeUtil.openEditDialog(it, requireContext(), cpFormData)
+                .observe(viewLifecycleOwner, Observer {
+                    if (CommonUtilities.notnull(it.firmName)) {
+                        binding.firmNameTxv.text = it.firmName
+                        binding.firmNameEmptyTxv.visibility = View.GONE
+                    }
+                })
+        }
+/////////
+
+        binding.firmAddressEmptyTxv.setOnClickListener {
+            CreateCpDialogUtil.openCreateDialog(it, requireContext())
+                .observe(viewLifecycleOwner, Observer {
+                    if (CommonUtilities.notnull(it.address)) {
+                        binding.firmAddressTxv.visibility = View.VISIBLE
+                        binding.firmAddressTxv.text = it.address
+                        binding.firmAddressEmptyTxv.visibility = View.GONE
+                        binding.firmAddressEditBtn.visibility = View.VISIBLE
+                    }
+                })
+        }
+
+        binding.firmAddressEditBtn.setOnClickListener {
+            cpFormData.address = firmAddressTxv.text.toString()
+            EditCpDialogeUtil.openEditDialog(it, requireContext(), cpFormData)
+                .observe(viewLifecycleOwner, Observer {
+                    if (CommonUtilities.notnull(it.address)) {
+                        binding.firmAddressTxv.text = it.address
+                        binding.firmAddressEmptyTxv.visibility = View.GONE
+                    }
+                })
+        }
+
+////
+        binding.firmLocalityEmptyTxv.setOnClickListener {
+            CreateCpDialogUtil.openCreateDialog(it, requireContext())
+                .observe(viewLifecycleOwner, Observer {
+                    if (CommonUtilities.notnull(it.locality)) {
+                        binding.firmLocalityTxv.visibility = View.VISIBLE
+                        binding.firmLocalityTxv.text = it.locality
+                        binding.firmLocalityEmptyTxv.visibility = View.GONE
+                        binding.firmLocalityEditBtn.visibility = View.VISIBLE
+                    }
+                })
+        }
+
+        binding.firmLocalityEditBtn.setOnClickListener {
+            cpFormData.locality = firmLocalityTxv.text.toString()
+            EditCpDialogeUtil.openEditDialog(it, requireContext(), cpFormData)
+                .observe(viewLifecycleOwner, Observer {
+                    if (CommonUtilities.notnull(it.locality)) {
+                        binding.firmLocalityTxv.text = it.locality
+                        binding.firmLocalityEmptyTxv.visibility = View.GONE
+                    }
+                })
+        }
+
+////
+        binding.teamSizeEmptyTxv.setOnClickListener {
+            CreateCpDialogUtil.openCreateDialog(it, requireContext())
+                .observe(viewLifecycleOwner, Observer {
+                    if (CommonUtilities.notnull(it.teamSize)) {
+                        binding.teamSizeTxv.visibility = View.VISIBLE
+                        binding.teamSizeTxv.text = it.teamSize
+                        binding.teamSizeEmptyTxv.visibility = View.GONE
+                        binding.teamSizeEditBtn.visibility = View.VISIBLE
+                    }
+                })
+        }
+
+        binding.teamSizeEditBtn.setOnClickListener {
+            cpFormData.teamSize = teamSizeTxv.text.toString()
+            EditCpDialogeUtil.openEditDialog(it, requireContext(), cpFormData)
+                .observe(viewLifecycleOwner, Observer {
+                    if (CommonUtilities.notnull(it.teamSize)) {
+                        binding.teamSizeTxv.text = it.teamSize
+                        binding.teamSizeEmptyTxv.visibility = View.GONE
+                    }
+                })
+        }
+
+
+        ////////
+
+        binding.organisationEmptyTxv.setOnClickListener {
+            CreateCpDialogUtil.openCreateDialog(it, requireContext())
+                .observe(viewLifecycleOwner, Observer {
+                    if (CommonUtilities.notnull(it.organisationType)) {
+                        binding.organisationTxv.visibility = View.VISIBLE
+                        binding.organisationTxv.text = it.organisationType
+                        binding.organisationEmptyTxv.visibility = View.GONE
+                        binding.organisationEditBtn.visibility = View.VISIBLE
+                    }
+                })
+        }
+
+        binding.organisationEditBtn.setOnClickListener {
+            cpFormData.organisationType = organisationTxv.text.toString()
+            EditCpDialogeUtil.openEditDialog(it, requireContext(), cpFormData)
+                .observe(viewLifecycleOwner, Observer {
+                    if (CommonUtilities.notnull(it.organisationType)) {
+                        binding.organisationTxv.visibility = View.VISIBLE
+                        binding.organisationTxv.text = it.organisationType
+                        binding.organisationEmptyTxv.visibility = View.GONE
+                        binding.organisationEditBtn.visibility = View.VISIBLE
+                    }
+                })
+        }
+
+        ///////
+        binding.membersEmptyTxv.setOnClickListener {
+            CreateCpDialogUtil.openCreateDialog(it, requireContext())
+                .observe(viewLifecycleOwner, Observer {
+                    if (CommonUtilities.notnull(it.members)) {
+                        binding.membersTxv.visibility = View.VISIBLE
+                        binding.membersTxv.text = it.members
+                        binding.membersEmptyTxv.visibility = View.GONE
+                        binding.membersEditBtn.visibility = View.VISIBLE
+                    }
+                })
+        }
+
+        binding.membersEditBtn.setOnClickListener {
+            cpFormData.members = membersTxv.text.toString()
+            EditCpDialogeUtil.openEditDialog(it, requireContext(), cpFormData)
+                .observe(viewLifecycleOwner, Observer {
+                    if (CommonUtilities.notnull(it.members)) {
+                        binding.membersTxv.text = it.members
+                        binding.membersEmptyTxv.visibility = View.GONE
+                    }
+                })
+        }
+/////
+        binding.gstEmptyTxv.setOnClickListener {
+            CreateCpDialogUtil.openCreateDialog(it, requireContext())
+                .observe(viewLifecycleOwner, Observer {
+                    if (CommonUtilities.notnull(it.gst)) {
+                        binding.gstTxv.visibility = View.VISIBLE
+                        binding.gstTxv.text = it.gst
+                        binding.gstEmptyTxv.visibility = View.GONE
+                        binding.gstEditBtn.visibility = View.VISIBLE
+                    }
+                })
+        }
+
+        binding.gstEditBtn.setOnClickListener {
+            cpFormData.gst = gstTxv.text.toString()
+            EditCpDialogeUtil.openEditDialog(it, requireContext(), cpFormData)
+                .observe(viewLifecycleOwner, Observer {
+                    if (CommonUtilities.notnull(it.gst)) {
+                        binding.gstTxv.text = it.gst
+                        binding.gstEmptyTxv.visibility = View.GONE
+                    }
+                })
+        }
+/////
+        binding.reraEmptyTxv.setOnClickListener {
+                       CreateCpDialogUtil.openCreateDialog(it, requireContext())
+                .observe(viewLifecycleOwner, Observer {
+                    if (CommonUtilities.notnull(it.rera)) {
+                        binding.reraTxv.visibility = View.VISIBLE
+                        binding.reraTxv.text = it.rera
+                        binding.reraEmptyTxv.visibility = View.GONE
+                        binding.reraEditBtn.visibility = View.VISIBLE
+                    }
+                })
+        }
+
+        binding.reraEditBtn.setOnClickListener {
+            cpFormData.rera = reraTxv.text.toString()
+            EditCpDialogeUtil.openEditDialog(it, requireContext(), cpFormData)
+                .observe(viewLifecycleOwner, Observer {
+                    if (CommonUtilities.notnull(it.rera)) {
+                        binding.reraTxv.text = it.rera
+                        binding.reraEmptyTxv.visibility = View.GONE
+                    }
+                })
+        }
+////
+
+        binding.natureEmptyTxv.setOnClickListener {
+                      CreateCpDialogUtil.openCreateDialog(it, requireContext())
+                .observe(viewLifecycleOwner, Observer {
+                    if (CommonUtilities.notnull(it.natureOfBusiness)) {
+                        binding.natureTxv.visibility = View.VISIBLE
+                        binding.natureTxv.text = it.natureOfBusiness
+                        binding.natureEmptyTxv.visibility = View.GONE
+                        binding.natureEditBtn.visibility = View.VISIBLE
+                    }
+                })
+        }
+
+        binding.natureEditBtn.setOnClickListener {
+            cpFormData.natureOfBusiness = natureTxv.text.toString()
+            EditCpDialogeUtil.openEditDialog(it, requireContext(), cpFormData)
+                .observe(viewLifecycleOwner, Observer {
+                    if (CommonUtilities.notnull(it.natureOfBusiness)) {
+                        binding.natureTxv.text = it.natureOfBusiness
+                        binding.natureEmptyTxv.visibility = View.GONE
+                    }
+                })
+        }
+
+
         return binding.root
     }
 
-    fun openEditDialog(view: View) {
-        var EDIT_MODE: String
-        EDIT_MODE = if (view.id == R.id.phoneEmptyTxv)
-            PHONE_NUMBER_MODE
-        else if (view.id == R.id.areaEmptyTxv)
-            AUTOCOMPLETE_MODE
-        else if (view.id == R.id.partnerEmptyTxv)
-            PARTNER_MODE
-        else
-            DEFAULT_MODE
-
-
-        val builder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
-        val vv: View = LayoutInflater.from(requireContext()).inflate(R.layout.edit_cp_dialog, null)
-        val mNameEditText = vv.findViewById<View>(R.id.editCpNameEdtxt) as EditText
-
-        when (EDIT_MODE) {
-            DEFAULT_MODE -> {
-                mNameEditText.visibility = View.VISIBLE
-            }
-            DEFAULT_MODE -> {
-                mNameEditText.visibility = View.VISIBLE
-            }
-
-            DEFAULT_MODE -> {
-                mNameEditText.visibility = View.VISIBLE
-            }
-
-            DEFAULT_MODE -> {
-                mNameEditText.visibility = View.VISIBLE
-            }
-        }
-
-        builder.setView(vv)
-        builder.setCancelable(true)
-    }
 
     private fun showAddCpView() {
         binding.nameEmptyTxv.visibility = View.VISIBLE
@@ -159,7 +575,7 @@ class AddCpFragment : Fragment() {
         binding.natureEmptyTxv.visibility = View.VISIBLE
         binding.natureEditBtn.visibility = View.GONE
 
-        binding.areaEmptyTxv.visibility = View.VISIBLE
+        binding.addAreaChip.visibility = View.VISIBLE
 
         binding.partnerEmptyTxv.visibility = View.VISIBLE
     }

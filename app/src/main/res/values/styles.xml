@@ -114,6 +114,17 @@
         <item name="colorPrimary">@color/blue</item>
     </style>
 
+    <style name="project_switch_text_style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:clickable">true</item>
+        <item name="android:drawableLeft">@drawable/project_switch_check_item</item>
+        <item name="android:drawableRight">@drawable/project_switch_check_ellipse</item>
+        <item name="android:textColor">@color/project_switch_text_color</item>
+        <item name="android:fontFamily">@font/muli_semibold</item>
+        <item name="android:textSize">@dimen/_13dp</item>
+    </style>
+
     <style name="events_bar">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>

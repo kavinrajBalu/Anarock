@@ -19,6 +19,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
+        android:id="@+id/closeEditDialog"
         android:layout_width="@dimen/_14dp"
         android:layout_height="14dp"
         android:layout_marginRight="25dp"
@@ -148,7 +149,7 @@
         app:layout_constraintTop_toBottomOf="@+id/partnerEmailEdtxt" />
 
     <TextView
-        android:id="@+id/edit_cp_done_btn"
+        android:id="@+id/editDoneBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"

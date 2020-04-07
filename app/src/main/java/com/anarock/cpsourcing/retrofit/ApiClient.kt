@@ -31,8 +31,9 @@ class ApiClient {
 
                 retrofit = Retrofit.Builder().baseUrl(BASE_URL+ DOMAIN_NAME + API_VERSION)
                     .addConverterFactory(GsonConverterFactory.create(GsonBuilder().setLenient().create()))
+                    .client(OkHttpClient().newBuilder().addInterceptor(interceptor).build())
                    /* .client(OkHttpClient().newBuilder().addInterceptor(MockInterceptor()).build())*/
-                    .client(client)
+					//.client(client)
                     .build()
             }
             return retrofit
