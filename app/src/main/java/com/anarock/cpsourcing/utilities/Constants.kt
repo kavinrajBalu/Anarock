@@ -8,6 +8,8 @@ class Constants {
         const val CONNECT_APP_VERSION_KEY = "latest_app_version_code"
         const val ENCRYPTED_STRING = "a0zRfRgHnQqyQUYWRJQE/YcBycaPJWT5UlbzVwoJrJTxVhJ2hMQlYVwkoWAA\nf+vV\n"
         const val INIT_VECTOR = "LdIbQZaeAU9NqzyFdDkWZA==\n"
+        const val CALL_LOGS_CALL_EVENT = "com.anarock.broadcast.CALL_EVENT"
+        const val CALL_LOGS_CALLS_DETAILS_EVENT = "com.anarock.broadcast.CALLS_DETAILS_EVENT"
 
     }
     class PreferenceKeys{

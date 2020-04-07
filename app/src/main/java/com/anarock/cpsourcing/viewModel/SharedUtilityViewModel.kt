@@ -15,6 +15,8 @@ class SharedUtilityViewModel : ViewModel()
 
     private var customStatusBar : MutableLiveData<Int> = MutableLiveData()
 
+    private var callRecordPath : MutableLiveData<String> = MutableLiveData()
+
     fun setCustomStatusBar(color : Int)
     {
         customStatusBar.value = color
@@ -52,6 +54,16 @@ class SharedUtilityViewModel : ViewModel()
     fun getBottomNavigationVisibility(): LiveData<Boolean>
     {
         return  bottomNavigationVisibility
+    }
+
+    fun setCallRecordPath(path:String)
+    {
+        callRecordPath.value = path
+    }
+
+    fun getCallRecordPath():LiveData<String>
+    {
+        return callRecordPath
     }
 
 }

@@ -1,15 +1,14 @@
 package com.anarock.cpsourcing.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.Window
 import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -19,7 +18,6 @@ import com.anarock.cpsourcing.model.ToolBarTheme
 import com.anarock.cpsourcing.retrofit.ApiClient
 import com.anarock.cpsourcing.utilities.CommonUtilities
 import com.anarock.cpsourcing.viewModel.LoginSharedViewModel
-import com.google.android.gms.common.Feature
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -66,7 +64,7 @@ class CompanyCodeFragment : Fragment() {
                 viewModel.fetchTenantDomain(companyName).observe(viewLifecycleOwner, Observer {
                     if (it.message.equals("Success", ignoreCase = true)) {
                         val domain = it.response!!.domain
-                        ApiClient.setDomainName(ApiClient.EMPLOYEE_DOMAIN, domain);
+                        ApiClient.setDomainName(ApiClient.EMPLOYEE, domain)
                         ApiClient.resetRetrofit()
                         var bundle = bundleOf("tenantName" to companyName)
                         findNavController().navigate(

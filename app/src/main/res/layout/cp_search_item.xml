@@ -6,14 +6,14 @@
     android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/lead_name"
+        android:id="@+id/cp_name"
         style="@style/sub_title_style"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:textSize="@dimen/_16dp"
         android:layout_marginTop="20dp"
-        android:text="Lead's Name"
+        android:text="CP's Name"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -27,9 +27,9 @@
         android:textColor="@color/light_blue_black"
         android:textSize="@dimen/_14dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/lead_name"
+        app:layout_constraintEnd_toEndOf="@+id/cp_name"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lead_name"
+        app:layout_constraintTop_toBottomOf="@+id/cp_name"
         app:layout_constraintVertical_bias="1.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>

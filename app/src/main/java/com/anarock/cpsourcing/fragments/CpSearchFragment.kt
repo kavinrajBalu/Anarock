@@ -14,11 +14,11 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.anarock.cpsourcing.R
-import com.anarock.cpsourcing.adapter.LeadSearchResultAdapter
-import com.anarock.cpsourcing.databinding.FragmentLeadSearchBinding
+import com.anarock.cpsourcing.adapter.CPSearchResultAdapter
+import com.anarock.cpsourcing.databinding.FragmentCpSearchBinding
 import com.anarock.cpsourcing.utilities.CommonUtilities.Companion.hideKeyboard
 import com.anarock.cpsourcing.utilities.CommonUtilities.Companion.showKeyBoard
-import com.anarock.cpsourcing.viewModel.CreateEventProposedViewModel
+import com.anarock.cpsourcing.viewModel.CreateEventViewModel
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -28,19 +28,19 @@ private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
- * Use the [LeadSearchFragment.newInstance] factory method to
+ * Use the [CPSearchFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class LeadSearchFragment : Fragment() {
-    lateinit var binding : FragmentLeadSearchBinding
-    val leadViewModel : CreateEventProposedViewModel by viewModels()
+class CPSearchFragment : Fragment() {
+    lateinit var binding : FragmentCpSearchBinding
+    val leadViewModel : CreateEventViewModel by viewModels()
     private lateinit var viewManager: RecyclerView.LayoutManager
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater,
-            R.layout.fragment_lead_search, container, false)
+            R.layout.fragment_cp_search, container, false)
         binding.search.isCursorVisible = true
         binding.search.requestFocus()
         showKeyBoard(requireContext())
@@ -49,7 +49,7 @@ class LeadSearchFragment : Fragment() {
             findNavController().popBackStack()
         }
 
-        val adapter = LeadSearchResultAdapter()
+        val adapter = CPSearchResultAdapter()
         viewManager = LinearLayoutManager(requireContext())
         binding.leadResult.layoutManager = viewManager
         binding.leadResult.adapter = adapter

@@ -2,11 +2,13 @@ package com.anarock.cpsourcing.utilities
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.app.ProgressDialog
+import android.app.job.JobInfo
+import android.app.job.JobScheduler
+import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
-import android.media.MediaPlayer
 import android.content.pm.PackageManager
+import android.media.MediaPlayer
 import android.net.Uri
 import android.util.Log
 import android.util.Patterns
@@ -14,11 +16,16 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.core.content.ContextCompat.startActivity
+import com.anarock.callrecord.CallRecord
 import com.anarock.cpsourcing.R
+import com.anarock.cpsourcing.callLogs.CallLogsItem
+import com.anarock.cpsourcing.callLogs.CallLogsListItemType
+import com.anarock.cpsourcing.callLogs.ConnectAppCallLogsService
+import com.anarock.cpsourcing.callLogs.DateItem
+import com.anarock.cpsourcing.entities.CallLogs
 import java.io.File
 import java.io.FileInputStream
-import java.util.*
-import java.util.regex.Pattern
+
 
 class CommonUtilities {
     companion object {
@@ -59,10 +66,6 @@ class CommonUtilities {
                 .isEmpty() || data == "null" || data == "")
         }
 
-        fun getSecondsDifference(startTime: Date, endtime: Date): Long {
-            val diff: Long = endtime.time - startTime.time
-            return (diff / 1000) % 60
-        }
 
         @SuppressLint("MissingPermission")
         fun makeCall(context: Context, phoneNumber: String) {
@@ -73,23 +76,24 @@ class CommonUtilities {
             context.startActivity(intent)
         }
 
-/* fun playCall(callRecord : CallRecord) : MediaPlayer
-        {
+        fun playCall(path: String): MediaPlayer {
             val mp = MediaPlayer()
             try {
-                val filePath = File(callRecord.recordDirPath+"/"+callRecord.recordDirName+"/"+callRecord.recordFileName)
+                val filePath = File(path)
                 val fileInputStream = FileInputStream(filePath)
                 mp.setDataSource(fileInputStream.fd)
                 mp.prepare()
                 mp.start()
-            }
-            catch (e: Exception)
-            {
+            } catch (e: Exception) {
                 e.printStackTrace()
             }
 
-            return  mp
-        }*/
+            return mp
+        }
+
+        fun getCallRecordingFilePath(callRecord: CallRecord): String {
+            return callRecord.recordDirPath + "/" + callRecord.recordDirName + "/" + callRecord.recordFileName
+        }
 
         fun hideKeyboard(activity: Activity) {
             val imm =
@@ -104,17 +108,16 @@ class CommonUtilities {
         }
 
 
-        fun showKeyBoard(context: Context)
-        {
+        fun showKeyBoard(context: Context) {
             val inputMethodManager =
-                context!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             inputMethodManager.toggleSoftInput(
                 InputMethodManager.SHOW_FORCED,
                 0
             )
         }
 
-           fun getEmailSupport(mContext: Context) {
+        fun getEmailSupport(mContext: Context) {
             val message = mContext.getString(R.string.email_support_template)
             /*ACTION_SEND action to launch an email client installed on your Android device.*/
             val mIntent = Intent(Intent.ACTION_SEND)
@@ -145,7 +148,7 @@ class CommonUtilities {
             context: Context
         ): Boolean {
             return try {
-                val packageManager = context!!.packageManager
+                val packageManager = context.packageManager
                 packageManager.getPackageInfo(packageName, 0)
                 true
             } catch (e: PackageManager.NameNotFoundException) {
@@ -153,9 +156,31 @@ class CommonUtilities {
             }
 
         }
-  fun showProgressDialog(context: Context)
-        {
 
+        fun scheduleFetchConnectAppCallLogs(context: Context) {
+            val componentName = ComponentName(context, ConnectAppCallLogsService::class.java)
+            val jobInfo = JobInfo.Builder(0, componentName)
+            jobInfo.setMinimumLatency(1 * 1000)
+            jobInfo.setOverrideDeadline(1 * 3000)
+            val jobScheduler = context.getSystemService(JobScheduler::class.java)
+            jobScheduler.schedule(jobInfo.build())
+        }
+
+        fun getFinalCallLogsList(map: Map<String, List<CallLogs>>): ArrayList<CallLogsListItemType> {
+            val consolidatedList: ArrayList<CallLogsListItemType> = ArrayList()
+            for (date in map.keys) {
+                val dateItem = DateItem()
+                date.let { dateItem.setDate(it) }
+                map.getValue(date)[0].dateTime?.let { dateItem.setDateTime(it) }
+                consolidatedList.add(dateItem)
+
+                for (callLogs in map.getValue(date)) {
+                    val callLogsItem = CallLogsItem()
+                    callLogsItem.setCallLogs(callLogs)
+                    consolidatedList.add(callLogsItem)
+                }
+            }
+            return consolidatedList
         }
 
     }

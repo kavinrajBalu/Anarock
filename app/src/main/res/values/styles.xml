@@ -125,5 +125,16 @@
         <item name="android:textSize">@dimen/_13dp</item>
     </style>
 
+    <style name="events_bar">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fontFamily">@font/muli_regular</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">@dimen/_14dp</item>
+    </style>
+    
+    <style name="ToolBarTheme" parent="@style/Theme.AppCompat.Light">
+        <item name="android:fontFamily">@font/muli_bold</item>
+    </style>
 
 </resources>

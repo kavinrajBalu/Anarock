@@ -4,12 +4,8 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
-import android.content.pm.ActivityInfo
 import android.os.Bundle
-import android.os.PowerManager
 import android.view.View
-import android.view.WindowManager
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.get
@@ -32,6 +28,7 @@ import com.anarock.cpsourcing.viewModel.SharedUtilityViewModel
 import com.google.android.libraries.places.api.Places
 import com.google.android.material.badge.BadgeDrawable
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import java.util.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -42,8 +39,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+        binding  = DataBindingUtil.setContentView(this,R.layout.activity_main)
         setSupportActionBar(binding.toolbar)
         val host: NavHostFragment = supportFragmentManager
             .findFragmentById(R.id.nav_host_fragment_container) as NavHostFragment? ?: return
@@ -82,7 +78,8 @@ class MainActivity : AppCompatActivity() {
         })
 
         sharedViewModel.getCustomToolBar().observe(this, Observer {
-            binding.toolbar.background = ContextCompat.getDrawable(this, it.background)
+            binding.toolbar.setNavigationIcon(R.drawable.ic_back)
+            binding.toolbar.background = ContextCompat.getDrawable(this,it.background)
             binding.toolbar.setTitleTextColor(ContextCompat.getColor(this, it.titleColor))
         })
 
@@ -109,6 +106,19 @@ class MainActivity : AppCompatActivity() {
             this,
             apiKey
         )
+        fetchCallLogs()
+    }
+
+    private fun fetchCallLogs() {
+        val calendar = Calendar.getInstance()
+        calendar.add(Calendar.SECOND,-10)
+        val intent = Intent()
+        intent.setClassName(getString(R.string.connect_app_package), getString(R.string.connect_app_broadcast_receiver))
+        intent.action = getString(R.string.call_details_event_action)
+        intent.putExtra(getString(R.string.since), 0)
+        intent.putExtra(getString(R.string.delay_in_sec), 1000)
+        intent.putExtra(getString(R.string.source_id), getString(R.string.app_package_name))
+        sendBroadcast(intent)
     }
 
     private fun eventCreationListenerImpl() {
@@ -117,8 +127,10 @@ class MainActivity : AppCompatActivity() {
         eventCreationListener = object : BroadcastReceiver() {
             override fun onReceive(context: Context?, intent: Intent?) {
                 //UI update here
-                if (intent != null) {
-                    if (intent.getStringExtra("screen") == "proposed") {
+                if (intent != null)
+                {
+                    if(intent.getStringExtra(getString(R.string.screen)) == getString(R.string.screen_proposed_name))
+                    {
 
                         findNavController(R.id.nav_host_fragment_container).navigate(R.id.addNewEventProposedFragment)
                     }

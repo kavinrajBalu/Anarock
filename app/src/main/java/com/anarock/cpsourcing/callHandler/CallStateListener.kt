@@ -5,6 +5,7 @@ import android.telephony.TelephonyManager
 import android.util.Log
 import com.anarock.cpsourcing.interfaces.PhoneCallStatusCallBack
 import com.anarock.cpsourcing.utilities.CommonUtilities
+import com.anarock.cpsourcing.utilities.DateTimeUtils.getSecondsDifference
 import java.util.*
 
 class CallStateListener(private val phoneCallStatusCallBack: PhoneCallStatusCallBack) : PhoneStateListener() {
@@ -30,7 +31,7 @@ class CallStateListener(private val phoneCallStatusCallBack: PhoneCallStatusCall
         if (state == TelephonyManager.CALL_STATE_IDLE) {
             startTime?.let {
                 //Log.d(CLASS_NAME,"Duration of the call ${CommonUtilities.getSecondsDifference(startTime!!,endtime = Calendar.getInstance().time)}")
-                if(CommonUtilities.getSecondsDifference(startTime!!,endtime = Calendar.getInstance().time) > 5)
+                if(getSecondsDifference(startTime!!,endtime = Calendar.getInstance().time) > 5)
                 {
                     phoneCallStatusCallBack.onCallSuccess()
                 }

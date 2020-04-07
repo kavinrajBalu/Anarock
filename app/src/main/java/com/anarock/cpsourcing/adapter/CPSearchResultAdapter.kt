@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.anarock.cpsourcing.R
 import com.anarock.cpsourcing.model.LeadSearchData
 
-class LeadSearchResultAdapter : RecyclerView.Adapter<LeadSearchResultAdapter.ViewHolder>()
+class CPSearchResultAdapter : RecyclerView.Adapter<CPSearchResultAdapter.ViewHolder>()
 {
     var data =  listOf<LeadSearchData>()
         set(value) {
@@ -30,7 +30,7 @@ class LeadSearchResultAdapter : RecyclerView.Adapter<LeadSearchResultAdapter.Vie
         companion object {
             fun from(parent: ViewGroup): ViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
-                val view = layoutInflater.inflate(R.layout.lead_search_item, parent, false)
+                val view = layoutInflater.inflate(R.layout.cp_search_item, parent, false)
                 return ViewHolder(view)
             }
         }

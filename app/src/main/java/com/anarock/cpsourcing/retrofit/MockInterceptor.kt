@@ -10,6 +10,7 @@ class MockInterceptor : Interceptor
             val uri = chain.request().url().uri().toString()
             val responseString = when {
                 uri.contains("create") -> CreateEventResponse
+                uri.contains("predict") -> searchCpResult
                 else -> ""
             }
 
@@ -50,3 +51,20 @@ const val CreateEventResponse = "{\n" +
         "    \"updated_at\": \"2020-03-26T05:36:40.278Z\",\n" +
         "    \"project_id\": 1\n" +
         "}"
+
+const val searchCpResult = "{\n" +
+        "      \"status\": \"OK\",\n" +
+        "      \"message\": \"Success\",\n" +
+        "      \"response\": [\n" +
+        "        {\n" +
+        "          \"id\": 9,\n" +
+        "          \"rera_id\": \"A123456\",\n" +
+        "          \"name\": \"sai consultant\"\n" +
+        "        },\n" +
+        "        {\n" +
+        "          \"id\": 10,\n" +
+        "          \"rera_id\": \"RERA123\",\n" +
+        "          \"name\": \"Sai consultant\"\n" +
+        "        }\n" +
+        "      ]\n" +
+        "  }"

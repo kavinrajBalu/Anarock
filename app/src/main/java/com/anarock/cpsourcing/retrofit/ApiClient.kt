@@ -13,9 +13,10 @@ class ApiClient {
         var DOMAIN_ANAROCK ="anarock.com"
         private val BASE_URL = "https://"
         private val API_VERSION = "/api/v0/"
-        var META_DOMAIN = "meta"
-        var EMPLOYEE_DOMAIN = "employee"
-        var DOMAIN_NAME = "$META_DOMAIN.$DOMAIN_ANAROCK"
+        var META_DOMAIN = "meta.staging"
+        var EMPLOYEE_DOMAIN = "employee.staging"
+        var EMPLOYEE = "employee"
+        var DOMAIN_NAME = "$EMPLOYEE_DOMAIN.$DOMAIN_ANAROCK"
         private  var retrofit: Retrofit? = null
         fun getClient(): Retrofit? {
             if (retrofit == null) {
@@ -31,7 +32,8 @@ class ApiClient {
                 retrofit = Retrofit.Builder().baseUrl(BASE_URL+ DOMAIN_NAME + API_VERSION)
                     .addConverterFactory(GsonConverterFactory.create(GsonBuilder().setLenient().create()))
                     .client(OkHttpClient().newBuilder().addInterceptor(interceptor).build())
-//                    .client(client)
+                   /* .client(OkHttpClient().newBuilder().addInterceptor(MockInterceptor()).build())*/
+					//.client(client)
                     .build()
             }
             return retrofit

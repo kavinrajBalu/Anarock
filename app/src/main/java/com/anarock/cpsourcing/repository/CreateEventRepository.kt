@@ -5,10 +5,14 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.anarock.cpsourcing.R
+import com.anarock.cpsourcing.model.CPSearchPayload
+import com.anarock.cpsourcing.model.CPSearchResponse
 import com.anarock.cpsourcing.model.EventCreationPayload
 import com.anarock.cpsourcing.model.EventCreationResponse
 import com.anarock.cpsourcing.retrofit.ApiClient
 import com.anarock.cpsourcing.retrofit.EventAPIService
+import com.anarock.cpsourcing.utilities.Constants
+import com.anarock.cpsourcing.utilities.SharedPreferenceUtil
 import com.google.gson.Gson
 import okhttp3.RequestBody
 import retrofit2.Call
@@ -52,6 +56,43 @@ class CreateEventRepository {
             })
           return result
         }
+
+        fun searchCP(context: Context,hint: String):MutableLiveData<CPSearchResponse>
+        {
+            ApiClient.setDomainName(ApiClient.EMPLOYEE_DOMAIN, ApiClient.DOMAIN_ANAROCK)
+
+            var result : MutableLiveData<CPSearchResponse> = MutableLiveData()
+           /* val bodyJson: String = Gson().toJson(payload)
+
+            val requestBody: RequestBody = RequestBody.create(
+                okhttp3.MediaType.parse(
+                    context.getString(
+                        R.string.request_type
+                    )
+                ), bodyJson
+            )*/
+            val call = eventAPIService.searchCP(hint,SharedPreferenceUtil.getInstance(context).getString(Constants.PreferenceKeys.TOKEN, "")!!)
+
+            call.enqueue(object :Callback<CPSearchResponse>{
+                override fun onFailure(call: Call<CPSearchResponse>, t: Throwable) {
+                    Log.d("failed",t.localizedMessage)
+                   // SharedPreferenceUtil.getInstance(context).putString(Constants.PreferenceKeys.TOKEN,"")
+                }
+
+                override fun onResponse(
+                    call: Call<CPSearchResponse>,
+                    response: Response<CPSearchResponse>
+                ) {
+                    if(response.isSuccessful) {
+                        result.value = response.body()
+                    }
+                }
+
+            })
+            return  result
+        }
+
+
     }
 
 }

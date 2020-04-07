@@ -19,8 +19,8 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <AutoCompleteTextView
-            android:id="@+id/spinner"
             android:layout_width="match_parent"
+            android:id="@+id/spinner"
             android:fontFamily="@font/muli_regular"
             android:textColor="@color/dark_blue_back"
             android:layout_height="wrap_content"

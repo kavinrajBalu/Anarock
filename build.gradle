@@ -8,6 +8,8 @@ buildscript {
         glide_version = '4.11.0'
         retrofit_version = '2.6.2'
         gson_version = '2.3.0'
+        room_version = '2.2.1'
+        archLifecycleVersion = '2.2.0'
     }
     repositories {
         google()

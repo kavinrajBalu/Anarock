@@ -5,7 +5,9 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.media.MediaRecorder
+import android.net.Uri
 import android.os.Bundle
+import android.provider.Settings
 import android.telephony.PhoneStateListener
 import android.telephony.TelephonyManager
 import android.util.Log
@@ -19,12 +21,14 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import com.anarock.callrecord.CallRecord
 import com.anarock.cpsourcing.R
 import com.anarock.cpsourcing.callHandler.CallStateListener
 import com.anarock.cpsourcing.callHandler.EventSuccessCallOverlay
 import com.anarock.cpsourcing.databinding.FragementEventBinding
 import com.anarock.cpsourcing.interfaces.PhoneCallStatusCallBack
 import com.anarock.cpsourcing.utilities.CommonUtilities
+import com.anarock.cpsourcing.utilities.CommonUtilities.Companion.playCall
 //import com.anarock.cpsourcing.utilities.CommonUtilities.Companion.playCall
 import com.anarock.cpsourcing.utilities.Constants
 import com.anarock.cpsourcing.utilities.SharedPreferenceUtil
@@ -67,35 +71,38 @@ class EventFragment : Fragment() {
             findNavController().navigate(R.id.action_eventFragement_to_addNewEvent)
         }
 
-      /*  binding.callCp.setOnClickListener {
-            CommonUtilities.makeCall(requireContext(),"8903653203")
-
+       binding.callCp.setOnClickListener {
+            CommonUtilities.makeCall(requireContext(),"9080773231")
             val callRecord = CallRecord.Builder(requireContext())
                 .setLogEnable(true)
                 .setRecordFileName("sample")
-                .setRecordDirName("8903653203")
+                .setRecordDirName("9080773231")
                 .setRecordDirPath(requireContext().getExternalFilesDir(null)?.absolutePath)
                 .setAudioSource(MediaRecorder.AudioSource.VOICE_COMMUNICATION)
+                .setShowSeed(true)
                 .build()
             callRecord.startCallReceiver()
-
              callStateListener = CallStateListener(object :PhoneCallStatusCallBack{
                 override fun onCallSuccess() {
-                    telephonyManager.listen(callStateListener,PhoneStateListener.LISTEN_NONE)
+                    telephonyManager.listen(callStateListener, PhoneStateListener.LISTEN_NONE)
                     Log.d(CLASS_NAME,"Call success")
                     callRecord.stopCallReceiver()
-                    playCall(callRecord)
+                    sharedUtilityViewModel.setCallRecordPath(CommonUtilities.getCallRecordingFilePath(callRecord))
+                    playCall(CommonUtilities.getCallRecordingFilePath(callRecord))
                 }
 
                 override fun onCallFailed() {
+                    callRecord.stopCallReceiver()
                     telephonyManager.listen(callStateListener,PhoneStateListener.LISTEN_NONE)
                     Log.d(CLASS_NAME,"Call failed")
+                    sharedUtilityViewModel.setCallRecordPath(CommonUtilities.getCallRecordingFilePath(callRecord))
+                    playCall(CommonUtilities.getCallRecordingFilePath(callRecord))
                     requireActivity().startService(Intent(requireContext(), EventSuccessCallOverlay::class.java))
                 }
 
             })
             telephonyManager.listen(callStateListener, PhoneStateListener.LISTEN_CALL_STATE)
-        }*/
+        }
 
         binding.addCp.setOnClickListener {
             findNavController().navigate(R.id.action_eventFragement_to_addCpFragment, bundleOf("editMode" to false))
@@ -108,6 +115,7 @@ class EventFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         getAllRequiredPermission()
+        SharedPreferenceUtil.getInstance(requireContext()).putString(Constants.PreferenceKeys.TOKEN,"sdvsdvs")
         val token = SharedPreferenceUtil.getInstance(requireContext()).getString(Constants.PreferenceKeys.TOKEN, "")
        if(CommonUtilities.notnull(token)){
            if (permissions.isNotEmpty() || !CommonUtilities.isPackageInstalled(
@@ -190,7 +198,15 @@ class EventFragment : Fragment() {
 
         }
 
-    }
+        if(!Settings.canDrawOverlays(requireContext()))
+        {
+            val intent = Intent(
+                Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                Uri.parse("package:${requireContext().packageName}")
+            )
+            startActivityForResult(intent, CODE_DRAW_OVER_OTHER_APP_PERMISSION)
+        }
 
+    }
 
 }
