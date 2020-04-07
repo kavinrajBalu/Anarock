@@ -105,14 +105,14 @@
                     android:text="Ranking"
                     android:layoutDirection="rtl"
                     android:textColor="@color/light_blue_black"
-                    app:chipIcon="@drawable/ic_down_arrow" />
+                    app:chipIcon="@drawable/ic_ellipse_down_arrow" />
 
                 <com.google.android.material.chip.Chip
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="false"
                     android:layoutDirection="rtl"
-                    app:chipIcon="@drawable/ic_down_arrow"
+                    app:chipIcon="@drawable/ic_ellipse_down_arrow"
                     android:textColor="@color/light_blue_black"
                     android:text="F2F Done" />
 
@@ -120,7 +120,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layoutDirection="rtl"
-                    app:chipIcon="@drawable/ic_down_arrow"
+                    app:chipIcon="@drawable/ic_ellipse_down_arrow"
                     android:textColor="@color/light_blue_black"
                     android:text="Visits Done" />
 
@@ -129,7 +129,7 @@
                     android:layoutDirection="rtl"
                     android:textColor="@color/light_blue_black"
                     android:layout_height="wrap_content"
-                    app:chipIcon="@drawable/ic_down_arrow"
+                    app:chipIcon="@drawable/ic_ellipse_down_arrow"
                     android:text="Booking Done" />
             </com.google.android.material.chip.ChipGroup>
         </HorizontalScrollView>
